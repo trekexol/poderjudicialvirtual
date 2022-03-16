@@ -16,7 +16,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_country');
-            $table->unsignedBigInteger('id_city_received');
+            $table->unsignedBigInteger('id_state_received');
             $table->unsignedBigInteger('id_agency');
 
             $table->unsignedBigInteger('id_code_room');
@@ -47,7 +47,7 @@ class CreateClientsTable extends Migration
             $table->string('rif',20)->nullable();
 
             $table->foreign('id_country')->references('id')->on('countries');
-            $table->foreign('id_city_received')->references('id')->on('cities');
+            $table->foreign('id_state_received')->references('id')->on('states');
             $table->foreign('id_agency')->references('id')->on('agencies');
             
             $table->foreign('id_code_room')->references('id')->on('making_codes');

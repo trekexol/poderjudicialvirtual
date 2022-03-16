@@ -15,7 +15,7 @@ class CreateAgenciesTable extends Migration
     {
         Schema::create('agencies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_city');
+            $table->unsignedBigInteger('id_state');
           
             $table->string('code',30);
             $table->string('name',50);
@@ -26,7 +26,7 @@ class CreateAgenciesTable extends Migration
             $table->decimal('rate',64,2);
             $table->string('virtual_payment',15)->default('no');
 
-            $table->foreign('id_city')->references('id')->on('cities');
+            $table->foreign('id_state')->references('id')->on('states');
             $table->timestamps();
         });
     }

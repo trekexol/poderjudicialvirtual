@@ -105,8 +105,7 @@
      
     </div>
     
-    @yield('country')
-    
+  
     <!-- jQuery -->
     <script src="{{asset('vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
@@ -148,7 +147,7 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('build/js/custom.min.js')}}"></script>
 
-    
+   
     <script src="{{asset('vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
 	
      <!-- Datatables -->
@@ -167,6 +166,9 @@
      <script src="{{asset('vendors/jszip/dist/jszip.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
- 
+     
+     @yield('country')
+     @yield('validation')
+
   </body>
 </html>

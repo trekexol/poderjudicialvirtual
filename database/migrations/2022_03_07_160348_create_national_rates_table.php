@@ -15,11 +15,12 @@ class CreateNationalRatesTable extends Migration
     {
         Schema::create('national_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_wharehouse_origin');
-            $table->unsignedBigInteger('id_wharehouse_destination');
+            $table->unsignedBigInteger('id_wharehouse_origin')->nullable();
+            $table->unsignedBigInteger('id_wharehouse_destination')->nullable();
 
             $table->string('weight_type',10);
-            $table->decimal('weight',64,10);
+            $table->decimal('minimum_weight',64,10);
+            $table->decimal('maximum_weight',64,10);
             $table->decimal('price',64,10);
             $table->decimal('rate',64,10);
 
