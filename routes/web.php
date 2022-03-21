@@ -7,6 +7,7 @@ use App\Http\Controllers\Traking\TrakingController;
 use App\Http\Controllers\Package\PackageController;
 use App\Http\Controllers\Administration\Agency\AgencyController;
 use App\Http\Controllers\Administration\Airline\AirlineController;
+use App\Http\Controllers\Administration\Carrier\CarrierController;
 use App\Http\Controllers\Whatsapp\WhatsappController;
 use App\Http\Controllers\Administration\Country\CountryController;
 use App\Http\Controllers\Administration\Country\CityController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Administration\Wharehouse\WharehouseController;
 use App\Http\Controllers\Administration\Rate\NationalRateController;
 use App\Http\Controllers\Administration\Rate\InternationalRateController;
 use App\Http\Controllers\Administration\DeliveryCompany\DeliveryCompanyController;
+use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 
 Route::get('/', function () {
     
@@ -61,7 +63,7 @@ Route::group(["prefix"=>'airlines'],function(){
     Route::get('create', [AirlineController::class, 'create'])->name('airlines.create');
     Route::post('store', [AirlineController::class, 'store'])->name('airlines.store');
     Route::get('edit/{id}', [AirlineController::class, 'edit'])->name('airlines.edit');
-    Route::patch('update', [AirlineController::class, 'update'])->name('airlines.update');
+    Route::patch('update/{id}', [AirlineController::class, 'update'])->name('airlines.update');
     Route::delete('delete', [AirlineController::class, 'destroy'])->name('airlines.delete');
 });
 
@@ -76,7 +78,7 @@ Route::group(["prefix"=>'countries'],function(){
     Route::get('create', [CountryController::class, 'create'])->name('countries.create');
     Route::post('store', [CountryController::class, 'store'])->name('countries.store');
     Route::get('edit/{id}', [CountryController::class, 'edit'])->name('countries.edit');
-    Route::patch('update', [CountryController::class, 'update'])->name('countries.update');
+    Route::patch('update/{id}', [CountryController::class, 'update'])->name('countries.update');
     Route::delete('delete', [CountryController::class, 'destroy'])->name('countries.delete');
 });
 
@@ -85,7 +87,7 @@ Route::group(["prefix"=>'cities'],function(){
     Route::get('create', [CityController::class, 'create'])->name('cities.create');
     Route::post('store', [CityController::class, 'store'])->name('cities.store');
     Route::get('edit/{id}', [CityController::class, 'edit'])->name('cities.edit');
-    Route::patch('update', [CityController::class, 'update'])->name('cities.update');
+    Route::patch('update/{id}', [CityController::class, 'update'])->name('cities.update');
     Route::delete('delete', [CityController::class, 'destroy'])->name('cities.delete');
 });
 
@@ -94,7 +96,7 @@ Route::group(["prefix"=>'wharehouses'],function(){
     Route::get('create', [WharehouseController::class, 'create'])->name('wharehouses.create');
     Route::post('store', [WharehouseController::class, 'store'])->name('wharehouses.store');
     Route::get('edit/{id}', [WharehouseController::class, 'edit'])->name('wharehouses.edit');
-    Route::patch('update', [WharehouseController::class, 'update'])->name('wharehouses.update');
+    Route::patch('update/{id}', [WharehouseController::class, 'update'])->name('wharehouses.update');
     Route::delete('delete', [WharehouseController::class, 'destroy'])->name('wharehouses.delete');
 });
 
@@ -103,7 +105,7 @@ Route::group(["prefix"=>'national_rates'],function(){
     Route::get('create',[NationalRateController::class, 'create'])->name('national_rates.create');
     Route::post('store', [NationalRateController::class, 'store'])->name('national_rates.store');
     Route::get('edit/{id}', [NationalRateController::class, 'edit'])->name('national_rates.edit');
-    Route::patch('update', [NationalRateController::class, 'update'])->name('national_rates.update');
+    Route::patch('update/{id}', [NationalRateController::class, 'update'])->name('national_rates.update');
     Route::delete('delete', [NationalRateController::class, 'destroy'])->name('national_rates.delete');
 });
 
@@ -112,7 +114,7 @@ Route::group(["prefix"=>'international_rates'],function(){
     Route::get('create',[InternationalRateController::class, 'create'])->name('international_rates.create');
     Route::post('store', [InternationalRateController::class, 'store'])->name('international_rates.store');
     Route::get('edit/{id}', [InternationalRateController::class, 'edit'])->name('international_rates.edit');
-    Route::patch('update', [InternationalRateController::class, 'update'])->name('international_rates.update');
+    Route::patch('update/{id}', [InternationalRateController::class, 'update'])->name('international_rates.update');
     Route::delete('delete', [InternationalRateController::class, 'destroy'])->name('international_rates.delete');
 });
 
@@ -124,4 +126,22 @@ Route::group(["prefix"=>'delivery_companies'],function(){
     Route::get('edit/{id}', [DeliveryCompanyController::class, 'edit'])->name('delivery_companies.edit');
     Route::patch('update/{id}', [DeliveryCompanyController::class, 'update'])->name('delivery_companies.update');
     Route::delete('delete', [DeliveryCompanyController::class, 'destroy'])->name('delivery_companies.delete');
+});
+
+Route::group(["prefix"=>'carriers'],function(){
+    Route::get('/', [CarrierController::class, 'index'])->name('carriers.index');
+    Route::get('create',[CarrierController::class, 'create'])->name('carriers.create');
+    Route::post('store', [CarrierController::class, 'store'])->name('carriers.store');
+    Route::get('edit/{id}', [CarrierController::class, 'edit'])->name('carriers.edit');
+    Route::patch('update/{id}', [CarrierController::class, 'update'])->name('carriers.update');
+    Route::delete('delete', [CarrierController::class, 'destroy'])->name('carriers.delete');
+});
+
+Route::group(["prefix"=>'type_of_goods'],function(){
+    Route::get('/', [TypeOfGoodsController::class, 'index'])->name('type_of_goods.index');
+    Route::get('create',[TypeOfGoodsController::class, 'create'])->name('type_of_goods.create');
+    Route::post('store', [TypeOfGoodsController::class, 'store'])->name('type_of_goods.store');
+    Route::get('edit/{id}', [TypeOfGoodsController::class, 'edit'])->name('type_of_goods.edit');
+    Route::patch('update/{id}', [TypeOfGoodsController::class, 'update'])->name('type_of_goods.update');
+    Route::delete('delete', [TypeOfGoodsController::class, 'destroy'])->name('type_of_goods.delete');
 });

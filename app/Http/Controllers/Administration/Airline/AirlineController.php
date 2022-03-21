@@ -46,4 +46,31 @@ class AirlineController extends Controller
 
         return view('admin.administrations.airlines.edit',compact('airline'));
     }
+
+    public function update(Request $request, $id)
+    {
+       
+        $airline = Airline::findOrFail($id);
+
+        $airline->code = $request->code;
+        $airline->name = $request->name;
+        $airline->type = $request->type;
+        $airline->save();
+
+        return redirect('/airlines')->withSuccess('Se ha actualizado exitosamente!');
+
+    }
+
+    public function destroy(Request $request)
+    {
+         $airline = Airline::find($request->id_airline_modal); 
+ 
+         if(isset($airline)){
+             
+             $airline->delete();
+     
+             return redirect('/airlines')->withSuccess('Se ha Eliminado Correctamente!!');
+         }
+    }
+
 }
