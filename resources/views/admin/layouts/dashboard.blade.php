@@ -105,7 +105,7 @@
      
     </div>
     
-  
+    
     <!-- jQuery -->
     <script src="{{asset('vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
@@ -166,7 +166,7 @@
      <script src="{{asset('vendors/jszip/dist/jszip.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-     
+     @yield('eo')
      @yield('country')
      @yield('validation')
 

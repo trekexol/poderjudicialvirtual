@@ -32,6 +32,8 @@
             <li><a href="{{ route('countries.index') }}">Paises</a></li>
             <li><a href="{{ route('national_rates.index') }}">Tarifas Nacionales</a></li>
             <li><a href="{{ route('international_rates.index') }}">Tarifas Internacionales</a></li>
+            <li><a href="{{ route('type_of_goods.index') }}">Tipos de Mercancia</a></li>
+            <li><a href="{{ route('carriers.index') }}">Transportistas</a></li>
           </ul>
         </li>
       </ul>

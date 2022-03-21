@@ -8,7 +8,9 @@
 @include('admin.layouts.delete')    {{-- DELELTE --}}
 {{-- VALIDACIONES-RESPUESTA --}}
 <div class="right_col" role="main">
-
+    <div class="col-sm-7 h2">
+        Editar Aerolinea
+      </div>
     <div class="x_content">
         <br />
         <form  method="POST"   action="{{ route('airlines.update',$airline->id) }}" enctype="multipart/form-data" >
@@ -29,11 +31,11 @@
             <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tipo de Guia:</label>
                 <div class="col-md-1 col-sm-1 ">
-                    <p>Peso: <input type="radio" class="flat" name="type" id="typeNo" value="peso" />
+                    <p>Peso: <input type="radio" class="flat" name="type" id="typePeso" value="Peso" />
                 </p>
                 </div>
                 <div class="col-md-3 col-sm-3 ">
-                    <p> Peso Cargable: <input type="radio" class="flat" name="type" id="typeYes" value="peso_cargable" required /> </p>
+                    <p> Peso Cargable: <input type="radio" class="flat" name="type" id="typePesoCargable" value="Peso Cargable" required /> </p>
                     </div>
             </div>
          
@@ -48,4 +50,14 @@
         </form>
     </div>
 </div>
+@endsection
+@section('validation')
+    <script>
+       
+        if("{{$airline->type}}" == "peso"){
+            $('#typePeso').prop('checked', true);
+        }else{
+            $('#typePesoCargable').prop('checked', true);
+        }
+    </script>
 @endsection

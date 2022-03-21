@@ -15,57 +15,59 @@ class CarrierController extends Controller
 
     public function index(){
 
-        $delivery_companies = Carrier::all();
+        $carriers = Carrier::all();
 
-        return view('admin.administrations.delivery_companies.index',compact('delivery_companies'));
+        return view('admin.administrations.carriers.index',compact('carriers'));
     }
 
     public function create(){
        
-        return view('admin.administrations.delivery_companies.create');
+        return view('admin.administrations.carriers.create');
     }
 
     public function store(Request $request)
     {
-        $delivery_company = new Carrier();
+        $carrier = new Carrier();
 
-        $delivery_company->code = $request->code;
-        $delivery_company->description = $request->description;
-        $delivery_company->save();
+        $carrier->code = $request->code;
+        $carrier->name = $request->name;
+        $carrier->type = $request->type;
+        $carrier->save();
 
-        return redirect('/delivery_companies/create')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/carriers/create')->withSuccess('Se ha registrado exitosamente!');
        
      }
  
     public function edit($id)
     {
-        $delivery_company = Carrier::find($id);
+        $carrier = Carrier::find($id);
  
-        return view('admin.administrations.delivery_companies.edit',compact('delivery_company'));
+        return view('admin.administrations.carriers.edit',compact('carrier'));
     }
 
     public function update(Request $request, $id)
     {
   
-        $delivery_company = Carrier::findOrFail($id);
+        $carrier = Carrier::findOrFail($id);
 
-        $delivery_company->code = $request->code;
-        $delivery_company->description = $request->description;
-        $delivery_company->save();
+        $carrier->code = $request->code;
+        $carrier->name = $request->name;
+        $carrier->type = $request->type;
+        $carrier->save();
 
-        return redirect('/delivery_companies')->withSuccess('Se ha actualizado exitosamente!');
+        return redirect('/carriers')->withSuccess('Se ha actualizado exitosamente!');
 
     }
 
     public function destroy(Request $request)
     {
-         $delivery_company = Carrier::find($request->id_delivery_company_modal); 
+         $carrier = Carrier::find($request->id_carrier_modal); 
  
-         if(isset($delivery_company)){
+         if(isset($carrier)){
              
-             $delivery_company->delete();
+             $carrier->delete();
      
-             return redirect('/delivery_companies')->withSuccess('Se ha Eliminado Correctamente!!');
+             return redirect('/carriers')->withSuccess('Se ha Eliminado Correctamente!!');
          }
     }
 

@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carriers', function (Blueprint $table) {
+        Schema::create('type_of_goods', function (Blueprint $table) {
             $table->id();
             $table->string('code',30);
-            $table->string('name',100);
-            $table->string('type',30);
+            $table->string('description',100);
+            $table->decimal('tariff_rate',64,10)->default(0);
+            $table->decimal('tax_percentage',64,10)->default(0);
+            $table->decimal('additional_charge',64,10)->default(0);
+            
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carriers');
+        Schema::dropIfExists('type_of_goods');
     }
 };

@@ -11,7 +11,7 @@
 
     <div class="x_content">
         <br />
-        <form method="POST" action="{{ route('airlines.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="POST" action="{{ route('carriers.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
                 
             <div class="item form-group">
@@ -21,27 +21,34 @@
                 </div>
             </div>
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nombre:</label>
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nombre Transportista:</label>
                 <div class="col-md-4 col-sm-4 ">
                     <input type="text" id="name" name="name" required="required" class="form-control ">
                 </div>
             </div>
+         
+         
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align">Tipo de Guia:</label>
-                <div class="col-md-1 col-sm-1 ">
-                    <p>Peso: <input type="radio" class="flat" name="type" id="typeNo" value="Peso" />
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Tipo de Envío:</label>
+                <div class="col-md-2 col-sm-2">
+                <p> Maritimo: <input type="radio" class="flat" name="type" id="typeMaritimo" value="Maritimo"  required /> 
+                </div>
+                <div class="col-md-2 col-sm-2 ">
+                    Aéreo: <input type="radio" class="flat" name="type" id="typeAereo" value="Aereo" checked=""/>
                 </p>
                 </div>
-                <div class="col-md-3 col-sm-3 ">
-                    <p> Peso Cargable: <input type="radio" class="flat" name="type" id="typeYes" value="Peso Cargable" checked="" required /> </p>
-                    </div>
+                <div class="col-md-2 col-sm-2 ">
+                    Terrestre: <input type="radio" class="flat" name="type" id="typeTerrestre" value="Terrestre" checked=""/>
+                </p>
+                </div>
             </div>
-         
+
+
             <div class="ln_solid"></div>
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
                     <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="{{ route('airlines.index') }}" class="btn btn-danger" type="button">Cancel</a>
+                    <a href="{{ route('carriers.index') }}" class="btn btn-danger" type="button">Cancel</a>
                 </div>
             </div>
 
@@ -50,3 +57,11 @@
 </div>
 
 @endsection
+
+
+@section('country')
+    <script>
+      
+    
+    </script> 
+@endsection   
