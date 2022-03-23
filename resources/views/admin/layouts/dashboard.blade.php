@@ -166,6 +166,8 @@
      <script src="{{asset('vendors/jszip/dist/jszip.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+
+     
      @yield('eo')
      @yield('country')
      @yield('validation')

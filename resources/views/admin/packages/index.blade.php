@@ -13,22 +13,8 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Form Design <small>different form elements</small></h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a class="dropdown-item" href="#">Settings 1</a>
-                  </li>
-                  <li><a class="dropdown-item" href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
+            <h2>Ingresar Paquetes</h2>
+           
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
@@ -50,33 +36,17 @@
                 <div class="col-sm-4">
                   <input type="text" id="first-name" required="required" class="form-control ">
                 </div>
-               
+                <div class="form-group col-md-1">
+                  <a href="#" title="Seleccionar Cliente"><i class="fa fa-magnifying-glass"></i></a> 
+              </div>
               </div>
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Agente Vendedor:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
-                        <option value="WY">Wyoming</option>
-                      </optgroup>
+                      @foreach ($agents as $agent)
+                        <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
+                      @endforeach
                     </select>
                 </div>
               </div>
@@ -84,27 +54,9 @@
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Vendedor Externo:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
               </div>
@@ -138,53 +90,17 @@
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="first-name">Almacen:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
               </div>
@@ -202,53 +118,17 @@
                 <label class="col-form-label col-sm-1 label-align " for="first-name">País de Origen:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="first-name">País de Destino:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
               </div>
@@ -256,27 +136,9 @@
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Entregado por:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="last-name">N° Guía Transporte:</label>
@@ -289,53 +151,17 @@
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Tipo Servicio:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="first-name">Instrucciones:</label>
                 <div class="col-sm-2">
                     <select class="select2_group form-control">
-                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                      </optgroup>
-                      <optgroup label="Pacific Time Zone">
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                      </optgroup>
-                      <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
+                      
                         <option value="WY">Wyoming</option>
-                      </optgroup>
+                      
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -343,13 +169,13 @@
                     <optgroup label="Alaskan/Hawaiian Time Zone">
                       <option value="AK">Alaska</option>
                       <option value="HI">Hawaii</option>
-                    </optgroup>
+                    
                     <optgroup label="Pacific Time Zone">
                       <option value="CA">California</option>
                       <option value="NV">Nevada</option>
                       <option value="OR">Oregon</option>
                       <option value="WA">Washington</option>
-                    </optgroup>
+                    
                     <optgroup label="Mountain Time Zone">
                       <option value="AZ">Arizona</option>
                       <option value="CO">Colorado</option>
@@ -360,7 +186,7 @@
                       <option value="ND">North Dakota</option>
                       <option value="UT">Utah</option>
                       <option value="WY">Wyoming</option>
-                    </optgroup>
+                    
                   </select>
                 </div>
               </div>

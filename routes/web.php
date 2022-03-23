@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Traking\TrakingController;
 use App\Http\Controllers\Package\PackageController;
 use App\Http\Controllers\Administration\Agency\AgencyController;
+use App\Http\Controllers\Administration\Agent\AgentController;
 use App\Http\Controllers\Administration\Airline\AirlineController;
 use App\Http\Controllers\Administration\Carrier\CarrierController;
 use App\Http\Controllers\Whatsapp\WhatsappController;
@@ -15,7 +16,9 @@ use App\Http\Controllers\Administration\Wharehouse\WharehouseController;
 use App\Http\Controllers\Administration\Rate\NationalRateController;
 use App\Http\Controllers\Administration\Rate\InternationalRateController;
 use App\Http\Controllers\Administration\DeliveryCompany\DeliveryCompanyController;
+use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
+use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
 
 Route::get('/', function () {
     
@@ -144,4 +147,32 @@ Route::group(["prefix"=>'type_of_goods'],function(){
     Route::get('edit/{id}', [TypeOfGoodsController::class, 'edit'])->name('type_of_goods.edit');
     Route::patch('update/{id}', [TypeOfGoodsController::class, 'update'])->name('type_of_goods.update');
     Route::delete('delete', [TypeOfGoodsController::class, 'destroy'])->name('type_of_goods.delete');
+});
+
+Route::group(["prefix"=>'type_of_packagings'],function(){
+    Route::get('/', [TypeOfPackagingsController::class, 'index'])->name('type_of_packagings.index');
+    Route::get('create', [TypeOfPackagingsController::class, 'create'])->name('type_of_packagings.create');
+    Route::post('store', [TypeOfPackagingsController::class, 'store'])->name('type_of_packagings.store');
+    Route::get('edit/{id}', [TypeOfPackagingsController::class, 'edit'])->name('type_of_packagings.edit');
+    Route::patch('update/{id}', [TypeOfPackagingsController::class, 'update'])->name('type_of_packagings.update');
+    Route::delete('delete', [TypeOfPackagingsController::class, 'destroy'])->name('type_of_packagings.delete');
+});
+
+Route::group(["prefix"=>'package_status'],function(){
+    Route::get('/', [PackageStatusController::class, 'index'])->name('package_status.index');
+    Route::get('create', [PackageStatusController::class, 'create'])->name('package_status.create');
+    Route::post('store', [PackageStatusController::class, 'store'])->name('package_status.store');
+    Route::get('edit/{id}', [PackageStatusController::class, 'edit'])->name('package_status.edit');
+    Route::patch('update/{id}', [PackageStatusController::class, 'update'])->name('package_status.update');
+    Route::delete('delete', [PackageStatusController::class, 'destroy'])->name('package_status.delete');
+});
+
+
+Route::group(["prefix"=>'agents'],function(){
+    Route::get('/', [AgentController::class, 'index'])->name('agents.index');
+    Route::get('create', [AgentController::class, 'create'])->name('agents.create');
+    Route::post('store', [AgentController::class, 'store'])->name('agents.store');
+    Route::get('edit/{id}', [AgentController::class, 'edit'])->name('agents.edit');
+    Route::patch('update/{id}', [AgentController::class, 'update'])->name('agents.update');
+    Route::delete('delete', [AgentController::class, 'destroy'])->name('agents.delete');
 });

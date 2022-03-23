@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Administration\TypeOfGoods;
 
 use App\Http\Controllers\Controller;
-use App\Models\TypeOfGood;
+use App\Models\Administration\TypeOfGood;
 use Illuminate\Http\Request;
 
 class TypeOfGoodsController extends Controller
