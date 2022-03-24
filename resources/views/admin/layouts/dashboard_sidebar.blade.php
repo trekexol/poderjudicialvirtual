@@ -27,18 +27,30 @@
             <li><a href="{{ route('airlines.index') }}">Aerolineas</a></li>
             <li><a href="{{ route('wharehouses.index') }}">Almacenes</a></li>
             <li><a href="{{ route('agencies.index') }}">Agencias</a></li>
+            <li><a href="{{ route('agents.index') }}">Agentes</a></li>
             <li><a href="{{ route('cities.index') }}">Ciudades</a></li>
             <li><a href="{{ route('delivery_companies.index') }}">Empresas Entrega</a></li>
             <li><a href="{{ route('countries.index') }}">Paises</a></li>
             <li><a href="{{ route('national_rates.index') }}">Tarifas Nacionales</a></li>
             <li><a href="{{ route('international_rates.index') }}">Tarifas Internacionales</a></li>
+            <li><a href="{{ route('type_of_packagings.index') }}">Tipos de Empaques</a></li>
             <li><a href="{{ route('type_of_goods.index') }}">Tipos de Mercancia</a></li>
             <li><a href="{{ route('carriers.index') }}">Transportistas</a></li>
+            <li><a href="{{ route('package_status.index') }}">Status Paquetes</a></li>
+          </ul>
+        </li>
+
+        <li><a><i class="fa fa-user"></i> Origen<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{{ route('packages.index') }}">Paquetes</a></li>
+           
           </ul>
         </li>
       </ul>
     </div>
 
   </div>
+
+  
   <!-- /sidebar menu -->
 </div>

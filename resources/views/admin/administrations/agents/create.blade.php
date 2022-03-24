@@ -27,24 +27,42 @@
                 </div>
             </div>
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Arancel (%):</label>
-                <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="tariff_rate" name="tariff_rate" required="required" class="form-control ">
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Tipo de Agente:</label>
+                <div class="col-md-4 col-sm-4">
+                    <select id="type" name="type" class="select2_single form-control" >
+                        <option value="Transportista">Transportista</option>
+                        <option value="Consignatario">Consignatario</option>
+                        <option value="Emisor">Emisor</option>
+                        <option value="Cargo">Cargo</option>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="Shipper">Shipper</option>
+                    </select>
                 </div>
             </div>
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Impuesto (%):</label>
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Dirección:</label>
                 <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="tax_percentage" name="tax_percentage" required="required" class="form-control ">
+                    <textarea type="text" id="direction" name="direction" rows="5" cols="20" required="required" class="form-control "></textarea>
                 </div>
             </div>
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Cargo Adicional:</label>
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Teléfonos:</label>
                 <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="additional_charge" name="additional_charge" required="required" class="form-control ">
+                    <input type="text" id="phone" name="phone" required="required" class="form-control ">
                 </div>
             </div>
-
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Email:</label>
+                <div class="col-md-4 col-sm-4 ">
+                    <input type="text" id="email" name="email" required="required" class="form-control ">
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Persona Contacto:</label>
+                <div class="col-md-4 col-sm-4 ">
+                    <input type="text" id="contact_person" name="contact_person" required="required" class="form-control ">
+                </div>
+            </div>
             <div class="ln_solid"></div>
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
