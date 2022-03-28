@@ -70,13 +70,13 @@
          
         <!-- /page content -->
 
-        <!-- footer content -->
+        <!-- footer content 
         <footer>
           <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
           <div class="clearfix"></div>
-        </footer>
+        </footer>-->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -145,7 +145,7 @@
     <script src="{{asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('build/js/custom.min.js')}}"></script>
+    <script src="{{asset('build/js/custom.js')}}"></script>
 
    
     <script src="{{asset('vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
@@ -167,7 +167,15 @@
      <script src="{{asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
      <script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 
-     
+      <script>
+       var $MENU_TOGGLE = $('#menu_toggle');
+       
+          
+          $BODY.toggleClass('nav-md nav-sm');
+
+          setContentHeight();
+      </script>
+
      @yield('eo')
      @yield('country')
      @yield('validation')

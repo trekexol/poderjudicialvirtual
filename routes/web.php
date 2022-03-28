@@ -48,11 +48,6 @@ Route::group(["prefix"=>'trakings'],function(){
 
 });
 
-Route::group(["prefix"=>'packages'],function(){
-    Route::get('/', [PackageController::class, 'index'])->name('packages.index');
-
-});
-
 Route::group(["prefix"=>'agencies'],function(){
     Route::get('/', [AgencyController::class, 'index'])->name('agencies.index');
     Route::get('create', [AgencyController::class, 'create'])->name('agencies.create');
@@ -175,4 +170,10 @@ Route::group(["prefix"=>'agents'],function(){
     Route::get('edit/{id}', [AgentController::class, 'edit'])->name('agents.edit');
     Route::patch('update/{id}', [AgentController::class, 'update'])->name('agents.update');
     Route::delete('delete', [AgentController::class, 'destroy'])->name('agents.delete');
+});
+
+Route::group(["prefix"=>'packages'],function(){
+    Route::get('/', [PackageController::class, 'index'])->name('packages.index');
+    Route::post('store', [PackageController::class, 'store'])->name('packages.store');
+
 });
