@@ -54,7 +54,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Agente Vendedor:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_agent_vendor">
+                    <select class="select2_group form-control" name="id_agent_vendor" required>
                       <option value="">Seleccione una Opción</option>
                       @foreach ($agents as $agent)
                         <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
@@ -73,14 +73,8 @@
                 <label class="col-form-label col-sm-1 label-align">Fecha Llegada:
                 </label>
                 <div class="col-sm-4">
-                  <input id="arrival_date" name="arrival_date" class="date-picker form-control" placeholder="dd-mm-yyyy"  required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-                  <script>
-                    function timeFunctionLong(input) {
-                      setTimeout(function() {
-                        input.type = 'text';
-                      }, 60000);
-                    }
-                  </script>
+                  <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" >
+                  
                 </div>
                 <label class="col-form-label col-sm-3 label-align">Hora Llegada:
                 </label>
@@ -158,7 +152,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="service_type">Tipo Servicio:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="service_type">
+                    <select class="select2_group form-control" name="service_type" required>
                       <option value="">Seleccione una Opción</option>
                       <option value="Pre-Pagado">Pre-Pagado</option>
                       <option value="Collected">Collected</option>
@@ -166,7 +160,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="instruction">Instrucciones:</label>
                 <div class="col-sm-2">
-                    <select class="select2_group form-control" name="instruction">
+                    <select class="select2_group form-control" name="instruction" required>
                       <option value="">Seleccione</option>
                       <option value="Aéreo">Aéreo</option>
                       <option value="Marítimo">Marítimo</option>
@@ -175,7 +169,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                  <select class="select2_group form-control" name="instruction_type">
+                  <select class="select2_group form-control" name="instruction_type" required>
                      <option value="">Seleccione</option>
                       <option value="Directo">Directo</option>
                       <option value="Consolidado">Consolidado</option>
@@ -192,19 +186,19 @@
               <br>
               <div class="form-group row">
                 <div class="col-sm-2 offset-sm-1">
-                  <input type="checkbox" name="checks[]" id="check1" value="ski" data-parsley-mincheck="2" required class="flat" /> Alto Valor: 
+                  <input type="checkbox" name="checks[]" id="check1" value="high_value" data-parsley-mincheck="2"  class="flat" /> Alto Valor: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="check2" value="run" data-parsley-mincheck="2" class="flat" /> Merc. Peligrosa: 
+                  <input type="checkbox" name="checks[]" id="check2" value="dangerous_goods" data-parsley-mincheck="2" class="flat" /> Merc. Peligrosa: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="check3" value="eat" data-parsley-mincheck="2" class="flat" /> SED: 
+                  <input type="checkbox" name="checks[]" id="check3" value="sed" data-parsley-mincheck="2" class="flat" /> SED: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="check4" value="eat" data-parsley-mincheck="2" class="flat" /> Documento: 
+                  <input type="checkbox" name="checks[]" id="check4" value="document" data-parsley-mincheck="2" class="flat" /> Documento: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="check5" value="eat" data-parsley-mincheck="2" class="flat" /> Fragil: 
+                  <input type="checkbox" name="checks[]" id="check5" value="fragile" data-parsley-mincheck="2" class="flat" /> Fragil: 
                 </div> 
               </div>
 
@@ -237,7 +231,7 @@
                
                 <div class="item form-group">
                   <div class="col-sm-3">
-                      <select class="select2_group form-control" name="service_type">
+                      <select class="select2_group form-control" name="service_type_type_of_good">
                         <option value="">Seleccione ...</option>
                         @foreach ($type_of_goods as $type_of_good)
                           <option value="{{ $type_of_good->id }}">{{ $type_of_good->description ?? '' }}</option>
@@ -246,19 +240,19 @@
                   </div>
                   
                   <div class="col-sm-1">
-                    <input type="text" id="unit_type_of_good" name="unit_type_of_good" placeholder="Unid." required="required" class="form-control">
+                    <input type="text" id="unit_type_of_good" name="unit_type_of_good" placeholder="Unid." class="form-control">
                   </div>
                   <div class="col-sm-2">
-                    <input type="text" id="description_type_of_good" name="description_type_of_good"  placeholder="Descripción." required="required" class="form-control">
+                    <input type="text" id="description_type_of_good" name="description_type_of_good"  placeholder="Descripción." class="form-control">
                   </div>
                   <div class="col-sm-2">
-                    <input type="text" id="value_type_of_good" name="value_type_of_good" placeholder="Valor." required="required" class="form-control">
+                    <input type="text" id="value_type_of_good" name="value_type_of_good" placeholder="Valor." class="form-control">
                   </div>
                   <div class="col-sm-2">
-                    <input type="text" id="tariff_type_of_good" name="tariff_type_of_good" placeholder="Arancel." required="required" class="form-control">
+                    <input type="text" id="tariff_type_of_good" name="tariff_type_of_good" placeholder="Arancel." class="form-control">
                   </div>
                   <div class="col-sm-1">
-                    <input type="text" id="charge_type_of_good" name="charge_type_of_good" placeholder="Cargo." required="required" class="form-control">
+                    <input type="text" id="charge_type_of_good" name="charge_type_of_good" placeholder="Cargo." class="form-control">
                   </div>
                   <button type="button" onclick="nuevo();" class="btn btn-round btn-info fa fa-plus"></button>
                 </div>
@@ -287,11 +281,11 @@
           <div class="x_content">
             <br />
               <!--FORMULARIO TIPO DE MERCANCIA-->
-              <div id="type_of_packagings_form" class="inputs">
+              <div id="type_of_packagings_form" class="inputs_type_of_packaging">
                
                 <div class="item form-group">
                   <div class="col-sm-3">
-                      <select class="select2_group form-control" name="service_type">
+                      <select class="select2_group form-control" name="type_of_packaging">
                         <option value="">Seleccione ...</option>
                         @foreach ($type_of_packagings as $type_of_packaging)
                           <option value="{{ $type_of_packaging->id }}">{{ $type_of_packaging->description ?? '' }}</option>
@@ -300,22 +294,22 @@
                   </div>
                   
                   <div class="col-sm-1">
-                    <input type="text" id="amount_type_of_packaging" name="amount_type_of_packaging" placeholder="Cant." required="required" class="form-control">
+                    <input type="text" id="amount_type_of_packaging" name="amount_type_of_packaging" placeholder="Cant." class="form-control">
                   </div>
                   <div class="col-sm-2">
-                    <input type="text" id="bulk_weight_type_of_packaging" name="bulk_weight_type_of_packaging"  placeholder="Peso Bulto." required="required" class="form-control">
+                    <input type="text" id="bulk_weight_type_of_packaging" name="bulk_weight_type_of_packaging"  placeholder="Peso Bulto." class="form-control">
                   </div>
                   <div class="col-sm-1">
-                    <input type="text" id="length_type_of_packaging" name="length_type_of_packaging" placeholder="Largo." required="required" class="form-control">
+                    <input type="text" id="length_type_of_packaging" name="length_type_of_packaging" placeholder="Largo." class="form-control">
                   </div>
                   <div class="col-sm-1">
-                    <input type="text" id="width_type_of_packaging" name="width_type_of_packaging" placeholder="Ancho." required="required" class="form-control">
+                    <input type="text" id="width_type_of_packaging" name="width_type_of_packaging" placeholder="Ancho." class="form-control">
                   </div>
                   <div class="col-sm-1">
-                    <input type="text" id="high_type_of_packaging" name="high_type_of_packaging" placeholder="Alto." required="required" class="form-control">
+                    <input type="text" id="high_type_of_packaging" name="high_type_of_packaging" placeholder="Alto." class="form-control">
                   </div>
                   <div class="col-sm-2">
-                    <input type="text" id="description_type_of_packaging" name="description_type_of_packaging"  placeholder="Descripción." required="required" class="form-control">
+                    <input type="text" id="description_type_of_packaging" name="description_type_of_packaging"  placeholder="Descripción." class="form-control">
                   </div>
                   <button type="button" onclick="nuevo_packagings();" class="btn btn-round btn-info fa fa-plus"></button>
                 </div>
@@ -335,15 +329,20 @@
                 </div>
               </div>
 
-            </form>
+           
+
+              </form>
           </div>
     </div>
   </div>
 </div>
+
 @endsection
 
 
 @section('validation')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+
 
 <script>
       let nuevo = function() {
@@ -354,7 +353,9 @@
                     .removeClass("btn-info")
                     .addClass("btn-danger")
                     .removeClass("fa-plus")
-                    .addClass("fa-minus")
+                    .addClass("fa-minus");
+
+       
     }
 
     let eliminar = function(obj) {
@@ -363,7 +364,7 @@
 
     let nuevo_packagings = function() {
       $("<section/>").insertBefore("[name='end_type_of_packagings_form']")
-                    .append($(".inputs").html())
+                    .append($(".inputs_type_of_packaging").html())
                     .find("button")
                     .attr("onclick", "eliminar_packagings(this)")
                     .removeClass("btn-info")

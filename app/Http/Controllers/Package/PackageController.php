@@ -44,15 +44,51 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         dd($request);
-
         $package = new Package();
 
-        $package->code = $request->code;
-        $package->name = $request->name;
-        $package->type = $request->type;
-        $package->save();
+        $package->id_client = $request->id_client;
+        $package->tracking = $request->tracking;
+        $package->id_agent_shipper = $request->id_agent_shipper;
+        $package->id_agent_vendor = $request->id_agent_vendor;
+        $package->arrival_date = $request->arrival_date;//+" "+$request->check_in;
+        $package->id_agent_office_location = $request->id_agent_office_location;
+        $package->id_wharehouse = $request->id_wharehouse;
+        $package->content = $request->content;
+        $package->value = $request->value;
+        $package->id_origin_country = $request->id_origin_country;
+        $package->id_destination_country = $request->id_destination_country;
+        $package->id_delivery_company = $request->id_delivery_company;
+        $package->number_transport_guide = $request->number_transport_guide;
+        $package->service_type = $request->service_type;
+        $package->instruction = $request->instruction;
+        $package->instruction_type = $request->instruction_type;
+        $package->description = $request->description;
 
-        return redirect('/packages/create')->withSuccess('Se ha registrado exitosamente!');
+       
+        if(isset($request->checks)){
+            foreach($request->checks as $check){
+                if($check == "high_value"){
+                    $package->high_value = true;
+                }
+                if($check == "dangerous_goods"){
+                    $package->dangerous_goods = true;
+                }
+                if($check == "sed"){
+                    $package->sed = true;
+                }
+                if($check == "document"){
+                    $package->document = true;
+                }
+                if($check == "fragile"){
+                    $package->fragile = true;
+                }
+            }
+        }
+       
+        $package->save();
+       
+
+        return redirect('/packages')->withSuccess('Se ha registrado exitosamente!');
        
      }
  
