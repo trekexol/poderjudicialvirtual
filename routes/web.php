@@ -175,5 +175,6 @@ Route::group(["prefix"=>'agents'],function(){
 Route::group(["prefix"=>'packages'],function(){
     Route::get('/', [PackageController::class, 'index'])->name('packages.index');
     Route::post('store', [PackageController::class, 'store'])->name('packages.store');
+    Route::post('store/packages', [PackageController::class, 'store_packages'])->name('packages.store_packages');
 
 });

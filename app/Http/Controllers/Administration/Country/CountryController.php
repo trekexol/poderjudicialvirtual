@@ -29,7 +29,7 @@ class CountryController extends Controller
 
     public function store(Request $request){
 
-       
+       dd($request);
         $country = new Country();
 
         $country->abbreviation = $request->abbreviation;
