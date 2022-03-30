@@ -11,6 +11,7 @@ use App\Models\Administration\TypeOfGood;
 use App\Models\Administration\TypeOfPackaging;
 use App\Models\Administration\Wharehouse;
 use App\Models\Package\Package;
+use App\Models\Package\PackageLump;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -20,8 +21,16 @@ class PackageController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index($id_package = null)
     {
+        if(isset($id_package)){
+            $package = Package::find($id_package);
+
+            $package_lumps = PackageLump::where('id_package',$package->id)->orderBy('id','asc')->get();
+
+        }else{
+            $package = null;
+        }
         
         $agents = Agent::orderBy('name','asc')->get();
 
@@ -37,13 +46,14 @@ class PackageController extends Controller
 
         $client = Client::find(1);
 
-        return view('admin.packages.index',compact('client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+
+        return view('admin.packages.index',compact('package_lumps','package','client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }
 
     public function store(Request $request)
     {
-        dd($request);
+       
         $package = new Package();
 
         $package->id_client = $request->id_client;
@@ -88,8 +98,8 @@ class PackageController extends Controller
         $package->save();
        
 
-        return redirect('/packages')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/packages/'.$package->id.'')->withSuccess('Se ha registrado exitosamente!');
        
-     }
+    }
  
 }

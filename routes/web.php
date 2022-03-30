@@ -19,6 +19,8 @@ use App\Http\Controllers\Administration\DeliveryCompany\DeliveryCompanyControlle
 use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
+use App\Http\Controllers\PackageLump\PackageLumpController;
+use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 
 Route::get('/', function () {
     
@@ -173,8 +175,16 @@ Route::group(["prefix"=>'agents'],function(){
 });
 
 Route::group(["prefix"=>'packages'],function(){
-    Route::get('/', [PackageController::class, 'index'])->name('packages.index');
+    Route::get('/{id?}', [PackageController::class, 'index'])->name('packages.index');
     Route::post('store', [PackageController::class, 'store'])->name('packages.store');
-    Route::post('store/packages', [PackageController::class, 'store_packages'])->name('packages.store_packages');
+   
+});
 
+Route::group(["prefix"=>'packages_lumps'],function(){
+    Route::post('store', [PackageLumpController::class, 'store'])->name('packages_lumps.store');
+});
+
+Route::group(["prefix"=>'packages_type_of_goods'],function(){
+    Route::post('store', [PackageTypeOfGoodController::class, 'store'])->name('packages_type_of_goods.store');
+   
 });
