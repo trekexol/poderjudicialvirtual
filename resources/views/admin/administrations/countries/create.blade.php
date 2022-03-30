@@ -11,38 +11,89 @@
 
     <div class="x_content">
         <br />
-        <form method="POST" action="{{ route('countries.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="POST" action="{{ route('countries.store') }}" id="form_contacto" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
                 
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="abbreviation">Abreviación:</label>
-                <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="abbreviation" name="abbreviation" required="required" class="form-control ">
-                </div>
-            </div>
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nombre:</label>
-                <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="name" name="name" required="required" class="form-control ">
-                </div>
-            </div>
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="code_phone">Código de Telefono:</label>
-                <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="code_phone" name="code_phone" required="required" class="form-control ">
-                </div>
-            </div>
-         
-            <div class="ln_solid"></div>
-            <div class="item form-group">
-                <div class="col-md-6 col-sm-6 offset-md-3">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="{{ route('countries.index') }}" class="btn btn-danger" type="button">Cancel</a>
-                </div>
-            </div>
+             <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">Contacto</label>
+                                <input type="text" class="form-control" name="nombre_contacto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Número</label>
+                                <input type="text" class="form-control" name="numero">
+                            </div>
+                        </div>
 
+                        <div class="form-row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary" id="agregar">Agregar campo +</button>
+                            </div>
+                        </div>
+                        <div class="form-row clonar">
+                            <div class="form-group col-md-12">
+                                <label for="">Nombres</label>
+                                <input type="text" class="form-control" name="nombres[]">
+                                <span class="badge badge-pill badge-danger puntero ocultar">Eliminar</span>
+                            </div>
+                        </div>
+                        <div id="contenedor"></div>
+
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" id="enviar_contacto">Enviar</button>
+                            </div>
+                        </div>
         </form>
     </div>
 </div>
 
+@endsection
+
+@section('validation')
+<script>
+    
+        let agregar = document.getElementById('agregar');
+        let contenido = document.getElementById('contenedor');
+
+        let boton_enviar = document.querySelector('#enviar_contacto')
+
+        agregar.addEventListener('click', e =>{
+            e.preventDefault();
+            let clonado = document.querySelector('.clonar');
+            let clon = clonado.cloneNode(true);
+
+            contenido.appendChild(clon).classList.remove('clonar');
+
+            let remover_ocutar = contenido.lastChild.childNodes[1].querySelectorAll('span');
+            remover_ocutar[0].classList.remove('ocultar');
+        });
+
+        contenido.addEventListener('click', e =>{
+            e.preventDefault();
+            if(e.target.classList.contains('puntero')){
+                let contenedor  = e.target.parentNode.parentNode;
+            
+                contenedor.parentNode.removeChild(contenedor);
+            }
+        });
+
+
+        boton_enviar.addEventListener('click', e => {
+            e.preventDefault();
+
+            const formulario = document.querySelector('#form_contacto');
+            const form = new FormData(formulario);
+
+            const peticion = {
+                body:form,
+                method:'POST'
+            };
+       
+            document.getElementById("form_contacto").submit();
+
+        });
+
+
+    </script>
 @endsection

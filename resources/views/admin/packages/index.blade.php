@@ -22,7 +22,7 @@
           </div>
           <div class="x_content">
             <br />
-            <form method="POST" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
               
               <input type="hidden" id="id_client" name="id_client" value="{{ $client->id ?? null }}" >
@@ -231,7 +231,7 @@
                
                 <div class="item form-group">
                   <div class="col-sm-3">
-                      <select class="select2_group form-control" name="service_type_type_of_good">
+                      <select class="select2_group form-control " name="service_type_type_of_good">
                         <option value="">Seleccione ...</option>
                         @foreach ($type_of_goods as $type_of_good)
                           <option value="{{ $type_of_good->id }}">{{ $type_of_good->description ?? '' }}</option>
@@ -254,19 +254,21 @@
                   <div class="col-sm-1">
                     <input type="text" id="charge_type_of_good" name="charge_type_of_good" placeholder="Cargo." class="form-control">
                   </div>
-                  <button type="button" onclick="nuevo();" class="btn btn-round btn-info fa fa-plus"></button>
+                  <button type="button" onclick="AgregarCampos();" class="btn btn-round btn-info fa fa-plus"></button>
                 </div>
               </div>
 
               <div class="ln_solid" name="end_type_of_goods_form"></div>
               <!-- FIN DE FORMULARIO-->
-
+              <div id="campos"></div>
+              </form>
+            
       </div>
     </div>
   </div>
 </div>
 
-  <div class="clearfix"></div>
+   <div class="clearfix"></div>
   <div class="row">
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
@@ -284,67 +286,141 @@
               <div id="type_of_packagings_form" class="inputs_type_of_packaging">
                
                 <div class="item form-group">
-                  <div class="col-sm-3">
-                      <select class="select2_group form-control" name="type_of_packaging">
-                        <option value="">Seleccione ...</option>
-                        @foreach ($type_of_packagings as $type_of_packaging)
-                          <option value="{{ $type_of_packaging->id }}">{{ $type_of_packaging->description ?? '' }}</option>
-                        @endforeach
-                      </select>
-                  </div>
-                  
-                  <div class="col-sm-1">
-                    <input type="text" id="amount_type_of_packaging" name="amount_type_of_packaging" placeholder="Cant." class="form-control">
-                  </div>
-                  <div class="col-sm-2">
-                    <input type="text" id="bulk_weight_type_of_packaging" name="bulk_weight_type_of_packaging"  placeholder="Peso Bulto." class="form-control">
-                  </div>
-                  <div class="col-sm-1">
-                    <input type="text" id="length_type_of_packaging" name="length_type_of_packaging" placeholder="Largo." class="form-control">
-                  </div>
-                  <div class="col-sm-1">
-                    <input type="text" id="width_type_of_packaging" name="width_type_of_packaging" placeholder="Ancho." class="form-control">
-                  </div>
-                  <div class="col-sm-1">
-                    <input type="text" id="high_type_of_packaging" name="high_type_of_packaging" placeholder="Alto." class="form-control">
-                  </div>
-                  <div class="col-sm-2">
-                    <input type="text" id="description_type_of_packaging" name="description_type_of_packaging"  placeholder="Descripción." class="form-control">
-                  </div>
-                  <button type="button" onclick="nuevo_packagings();" class="btn btn-round btn-info fa fa-plus"></button>
+
+                <form method="POST" action="{{ route('countries.store') }}" id="form_contacto" data-parsley-validate class="form-horizontal form-label-left">
+                  @csrf
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">Contacto</label>
+                                <input type="text" class="form-control" name="nombre_contacto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Número</label>
+                                <input type="text" class="form-control" name="numero">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary" id="agregar">Agregar campo +</button>
+                            </div>
+                        </div>
+                        <div class="form-row clonar">
+                            <div class="form-group col-md-12">
+                                <label for="">Nombres</label>
+                                <input type="text" class="form-control" name="nombres[]">
+                                <span class="badge badge-pill badge-danger puntero ocultar">Eliminar</span>
+                            </div>
+                        </div>
+                        <div id="contenedor"></div>
+
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" id="enviar_contacto">Enviar</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
               </div>
 
-              <div class="ln_solid" name="end_type_of_packagings_form"></div>
-              <!-- FIN DE FORMULARIO-->
-
+            
 
               
-              <div class="item form-group">
-               <div class="col-md-2 col-sm-2 offset-md-3">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                  <button class="btn btn-danger" type="button">Cancel</button>
-                </div>
-              </div>
-
-           
-
-              </form>
           </div>
     </div>
   </div>
 </div>
 
+
+
+
 @endsection
 
 
 @section('validation')
+
+ <script>
+    
+        let agregar = document.getElementById('agregar');
+        let contenido = document.getElementById('contenedor');
+
+        let boton_enviar = document.querySelector('#enviar_contacto')
+
+        agregar.addEventListener('click', e =>{
+            e.preventDefault();
+            let clonado = document.querySelector('.clonar');
+            let clon = clonado.cloneNode(true);
+
+            contenido.appendChild(clon).classList.remove('clonar');
+
+            let remover_ocutar = contenido.lastChild.childNodes[1].querySelectorAll('span');
+            remover_ocutar[0].classList.remove('ocultar');
+        });
+
+        contenido.addEventListener('click', e =>{
+            e.preventDefault();
+            if(e.target.classList.contains('puntero')){
+                let contenedor  = e.target.parentNode.parentNode;
+            
+                contenedor.parentNode.removeChild(contenedor);
+            }
+        });
+
+
+        boton_enviar.addEventListener('click', e => {
+            e.preventDefault();
+
+            const formulario = document.querySelector('#form_contacto');
+            const form = new FormData(formulario);
+
+            const peticion = {
+                body:form,
+                method:'POST'
+            };
+          
+          document.getElementById("form_contacto").submit();
+
+        });
+
+
+    </script>
+<script type="text/javascript">
+    var nextinput = 0;
+   // Create a form synamically
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "{{ route('packages.store') }}");
+
+    function AgregarCampos(){
+    nextinput++;
+    campo_inicial = '<div class="item form-group">'+'<div class="col-sm-1"><input type="text" id="unit_type_of_good'+nextinput+'" name="unit_type_of_good'+nextinput+'" placeholder="Unid." class="form-control"></div>'+' <div class="col-sm-2"><input type="text" id="description_type_of_good'+nextinput+'" name="description_type_of_good'+nextinput+'"  placeholder="Descripción." class="form-control"></div>';
+    +'</div><div class="ln_solid" name="end_type_of_goods_form"></div>';
+
+    $("#campos").append(campo_inicial).html();
+    $("#campos").append(form);
+
+    var s = document.createElement("input");
+    s.setAttribute("type", "submit");
+    s.setAttribute("value", "Submit");
+
+    $("#campos").append(s);
+    
+      
+    // Append the full name input to the form
+    form.appendChild(campo_inicial); 
+    form.appendChild(s); 
+    document.getElementsByTagName("body")[0]
+               .appendChild(form);
+
+}
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 
 
 <script>
+    
       let nuevo = function() {
       $("<section/>").insertBefore("[name='end_type_of_goods_form']")
                     .append($(".inputs").html())
@@ -355,7 +431,8 @@
                     .removeClass("fa-plus")
                     .addClass("fa-minus");
 
-       
+      var group = $('input[name="unit_type_of_good"]');
+
     }
 
     let eliminar = function(obj) {
