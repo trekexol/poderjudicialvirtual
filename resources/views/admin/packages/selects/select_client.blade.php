@@ -13,8 +13,9 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="col-sm-8">
-          <h2>Listado de Paquetes</h2>
+          <h2>Seleccionar Cliente</h2>
         </div>
+        
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -29,29 +30,23 @@
         <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-              <th>N°</th>
-              <th>Tracking</th>
-              <th>Cliente</th>
-              <th>Casillero</th>
-              <th>Descripcion</th>
-              <th>Tipo</th>
-              <th>Agente</th>
-              <th>Oficina</th>
+              <th style="width: 5%;"></th>
+              <th>Cédula</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
             </tr>
           </thead>
-          @isset($packages)
-            @foreach ($packages as $package)
+          @isset($clients)
+            @foreach ($clients as $client)
             <tr>
               <td class="text-center">
-                <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
+                <a href="{{ route('packages.createWithClient',[$client->id,$id_package ?? null]) }}"  title="Seleccionar"><i class="fa fa-check"></i></a>
               </td>
-              <td>{{$package->tracking ?? ''}}</td>
-              <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
-              <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
-              <td>{{$package->description ?? ''}}</td>
-              <td>{{$package->instruction ?? ''}}</td>
-              <td>{{$package->vendors['name'] ?? ''}}</td>
-              <td>{{$package->vendors['direction'] ?? ''}}</td>
+              <td>{{$client->type_cedula ?? ''}} {{$client->cedula ?? ''}}</td>
+              <td>{{$client->firstname ?? ''}} {{$client->firstlastname ?? ''}}</td>
+              <td>{{$client->direction ?? ''}}</td>
+              <td>{{$client->phone_room ?? ''}}</td>
             </tr>
             @endforeach
           @endisset
