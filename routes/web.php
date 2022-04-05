@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Client\ClientController;
-use App\Http\Controllers\Traking\TrakingController;
 use App\Http\Controllers\Package\PackageController;
 use App\Http\Controllers\Administration\Agency\AgencyController;
 use App\Http\Controllers\Administration\Agent\AgentController;
@@ -17,8 +16,12 @@ use App\Http\Controllers\Administration\Rate\NationalRateController;
 use App\Http\Controllers\Administration\Rate\InternationalRateController;
 use App\Http\Controllers\Administration\DeliveryCompany\DeliveryCompanyController;
 use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
+use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
+use App\Http\Controllers\Package\PackageSelectController;
+use App\Http\Controllers\PackageLump\PackageLumpController;
+use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 
 Route::get('/', function () {
     
@@ -45,6 +48,7 @@ Route::group(["prefix"=>'countries'],function(){
 
 Route::group(["prefix"=>'trakings'],function(){
     Route::get('/', [TrakingController::class, 'index'])->name('trakings.index');
+    Route::post('package', [TrakingController::class, 'packageWithTracking'])->name('trakings.packageWithTracking');
 
 });
 
@@ -173,8 +177,24 @@ Route::group(["prefix"=>'agents'],function(){
 });
 
 Route::group(["prefix"=>'packages'],function(){
-    Route::get('/', [PackageController::class, 'index'])->name('packages.index');
+    Route::get('create/{id?}', [PackageController::class, 'create'])->name('packages.create');
     Route::post('store', [PackageController::class, 'store'])->name('packages.store');
-    Route::post('store/packages', [PackageController::class, 'store_packages'])->name('packages.store_packages');
+    Route::get('tracking/{tracking?}', [PackageController::class, 'createByTracking'])->name('packages.createByTracking');
+    
+    Route::get('client/{id_client}/{id_package?}', [PackageController::class, 'createWithClient'])->name('packages.createWithClient');
+    Route::get('select/client/{id_package?}', [PackageSelectController::class, 'selectClient'])->name('packages.selectClient');
+});
 
+Route::group(["prefix"=>'packages_lumps'],function(){
+    Route::post('store', [PackageLumpController::class, 'store'])->name('packages_lumps.store');
+    Route::get('edit/{id}', [PackageLumpController::class, 'edit'])->name('packages_lumps.edit');
+    Route::patch('update/{id}', [PackageLumpController::class, 'update'])->name('packages_lumps.update');
+    Route::delete('delete', [PackageLumpController::class, 'destroy'])->name('packages_lumps.delete');
+});
+
+Route::group(["prefix"=>'packages_type_of_goods'],function(){
+    Route::post('store', [PackageTypeOfGoodController::class, 'store'])->name('packages_type_of_goods.store');
+    Route::get('edit/{id}', [PackageTypeOfGoodController::class, 'edit'])->name('packages_type_of_goods.edit');
+    Route::patch('update/{id}', [PackageTypeOfGoodController::class, 'update'])->name('packages_type_of_goods.update');
+    Route::delete('delete', [PackageTypeOfGoodController::class, 'destroy'])->name('packages_type_of_goods.delete');
 });

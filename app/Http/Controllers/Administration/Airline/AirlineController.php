@@ -22,12 +22,12 @@ class AirlineController extends Controller
 
     public function create(){
 
-       
+        
         return view('admin.administrations.airlines.create');
     }
 
     public function store(Request $request){
-
+      
         $airline = new Airline();
 
         $airline->code = $request->code;
