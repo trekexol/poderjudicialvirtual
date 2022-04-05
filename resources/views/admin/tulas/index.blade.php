@@ -13,7 +13,7 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="col-sm-8">
-          <h2>Listado de Paquetes</h2>
+          <h2>Listado de Tulas</h2>
         </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -30,28 +30,29 @@
           <thead>
             <tr>
               <th>N°</th>
-              <th>Tracking</th>
-              <th>Cliente</th>
-              <th>Casillero</th>
-              <th>Descripcion</th>
-              <th>Tipo</th>
               <th>Agente</th>
-              <th>Oficina</th>
+              <th>Destino</th>
+              <th>Referencia</th>
+              <th>Peso</th>
+              <th>PV</th>
+              <th>Guía</th>
+              <th>Status</th>
+              <th></th>
             </tr>
           </thead>
-          @isset($packages)
-            @foreach ($packages as $package)
+          @isset($tulas)
+            @foreach ($tulas as $tula)
             <tr>
               <td class="text-center">
-                <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
+                <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
               </td>
-              <td>{{$package->tracking ?? ''}}</td>
-              <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
-              <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
-              <td>{{$package->description ?? ''}}</td>
-              <td>{{$package->instruction ?? ''}}</td>
-              <td>{{$package->vendors['name'] ?? ''}}</td>
-              <td>{{$package->office_locations['direction'] ?? ''}}</td>
+              <td>{{$tula->agents['name'] ?? ''}}</td>
+              <td>{{$tula->states['name'] ?? ''}}</td>
+              <td>{{$tula->reference ?? ''}}</td>
+              <td>{{$tula->weight ?? ''}}</td>
+              <td>{{$tula->volume ?? ''}}</td>
+              <td></td>
+              <td>{{$tula->status ?? ''}}</td>
             </tr>
             @endforeach
           @endisset

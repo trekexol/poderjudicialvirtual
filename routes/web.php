@@ -22,6 +22,7 @@ use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsControl
 use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
+use App\Http\Controllers\Tula\TulaController;
 
 Route::get('/', function () {
     
@@ -177,6 +178,7 @@ Route::group(["prefix"=>'agents'],function(){
 });
 
 Route::group(["prefix"=>'packages'],function(){
+    Route::get('index', [PackageController::class, 'index'])->name('packages.index');
     Route::get('create/{id?}', [PackageController::class, 'create'])->name('packages.create');
     Route::post('store', [PackageController::class, 'store'])->name('packages.store');
     Route::get('tracking/{tracking?}', [PackageController::class, 'createByTracking'])->name('packages.createByTracking');
@@ -198,3 +200,7 @@ Route::group(["prefix"=>'packages_type_of_goods'],function(){
     Route::patch('update/{id}', [PackageTypeOfGoodController::class, 'update'])->name('packages_type_of_goods.update');
     Route::delete('delete', [PackageTypeOfGoodController::class, 'destroy'])->name('packages_type_of_goods.delete');
 });
+
+Route::group(["prefix"=>'tulas'],function(){
+    Route::get('index', [TulaController::class, 'index'])->name('tulas.index');
+  });
