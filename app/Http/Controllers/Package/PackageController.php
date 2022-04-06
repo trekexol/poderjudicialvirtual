@@ -116,15 +116,13 @@ class PackageController extends Controller
             }
         }
 
-
-        dd($request->arrival_date.' '.$request->check_in);
         $package = new Package();
 
         $package->id_client = $request->id_client;
         $package->tracking = $request->tracking;
         $package->id_agent_shipper = $request->id_agent_shipper;
         $package->id_agent_vendor = $request->id_agent_vendor;
-        $package->arrival_date = $request->arrival_date;//+" "+$request->check_in;
+        $package->arrival_date = $request->arrival_date.' '.$request->check_in;
         $package->id_agent_office_location = $request->id_agent_office_location;
         $package->id_wharehouse = $request->id_wharehouse;
         $package->content = $request->content;
@@ -162,7 +160,7 @@ class PackageController extends Controller
         $package->save();
        
 
-        return redirect('/packages/'.$package->id.'')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/packages/create/'.$package->id.'')->withSuccess('Se ha registrado exitosamente!');
        
     }
 
@@ -209,4 +207,56 @@ class PackageController extends Controller
     
     }
  
+    public function update(Request $request,$id)
+    {
+        //VALIDACION PARA SABER SI EL TRACKING YA EXISTE, SI EXISTE SE ENVIA UN MENSAJE DE ALERTA
+        if(isset($id)){
+            $package = Package::findOrFail($id);
+        }
+
+        $package->id_client = $request->id_client;
+        $package->tracking = $request->tracking;
+        $package->id_agent_shipper = $request->id_agent_shipper;
+        $package->id_agent_vendor = $request->id_agent_vendor;
+        $package->arrival_date = $request->arrival_date.' '.$request->check_in;
+        $package->id_agent_office_location = $request->id_agent_office_location;
+        $package->id_wharehouse = $request->id_wharehouse;
+        $package->content = $request->content;
+        $package->value = $request->value;
+        $package->id_origin_country = $request->id_origin_country;
+        $package->id_destination_country = $request->id_destination_country;
+        $package->id_delivery_company = $request->id_delivery_company;
+        $package->number_transport_guide = $request->number_transport_guide;
+        $package->service_type = $request->service_type;
+        $package->instruction = $request->instruction;
+        $package->instruction_type = $request->instruction_type;
+        $package->description = $request->description;
+
+       
+        if(isset($request->checks)){
+            foreach($request->checks as $check){
+                if($check == "high_value"){
+                    $package->high_value = true;
+                }
+                if($check == "dangerous_goods"){
+                    $package->dangerous_goods = true;
+                }
+                if($check == "sed"){
+                    $package->sed = true;
+                }
+                if($check == "document"){
+                    $package->document = true;
+                }
+                if($check == "fragile"){
+                    $package->fragile = true;
+                }
+            }
+        }
+       
+        $package->save();
+       
+
+        return redirect('/packages/create/'.$package->id.'')->withSuccess('Se ha Actualizado exitosamente!');
+       
+    }
 }

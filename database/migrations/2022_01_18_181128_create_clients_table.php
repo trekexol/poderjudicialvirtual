@@ -46,6 +46,8 @@ class CreateClientsTable extends Migration
             $table->string('company',50)->nullable();
             $table->string('rif',20)->nullable();
 
+            $table->string('status',40)->nullable();
+
             $table->foreign('id_country')->references('id')->on('countries');
             $table->foreign('id_state_received')->references('id')->on('states');
             $table->foreign('id_agency')->references('id')->on('agencies');

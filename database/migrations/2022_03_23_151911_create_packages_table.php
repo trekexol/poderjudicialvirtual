@@ -25,9 +25,10 @@ return new class extends Migration
             $table->unsignedBigInteger('id_destination_country');
             $table->unsignedBigInteger('id_delivery_company');
 
+            $table->unsignedBigInteger('id_tula')->nullable();
 
             $table->string('tracking',250);
-            $table->date('arrival_date');
+            $table->timestamp('arrival_date');
             $table->string('content',250);
             $table->string('value',250);
             $table->string('number_transport_guide',50);
@@ -41,6 +42,8 @@ return new class extends Migration
             $table->boolean('sed')->default(false);
             $table->boolean('document')->default(false);
             $table->boolean('fragile')->default(false);
+
+            $table->string('status',40)->nullable();
             
            
             $table->foreign('id_agent_shipper')->references('id')->on('agents');
@@ -52,6 +55,7 @@ return new class extends Migration
             $table->foreign('id_origin_country')->references('id')->on('countries');
             $table->foreign('id_destination_country')->references('id')->on('countries');
             $table->foreign('id_delivery_company')->references('id')->on('delivery_companies');
+            $table->foreign('id_tula')->references('id')->on('tulas');
             $table->timestamps();
         });
     }

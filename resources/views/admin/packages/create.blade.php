@@ -26,8 +26,6 @@
             <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
               
-              <input type="hidden" id="id_client" name="id_client" value="{{ $client->id ?? null }}" >
-                
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
                 <div class="col-sm-4">
@@ -95,15 +93,17 @@
                 <label class="col-form-label col-sm-1 label-align">Fecha Llegada:
                 </label>
                 <div class="col-sm-4">
-                  <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ $package->arrival_date ?? null }}">
-                  
+                  <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ date_format(date_create($package->arrival_date ?? null),"Y-m-d") }}">
                 </div>
                 <label class="col-form-label col-sm-3 label-align">Hora Llegada:
                 </label>
                 <div class="col-sm-3 ">
-                  <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" value="{{ $package->id ?? null }}">
-                 
-                </div>
+                  @if (isset($package->arrival_date))
+                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" value="{{ date_format(date_create($package->arrival_date ?? null),"H:i") }}">        
+                  @else
+                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" >                   
+                  @endif
+                  </div>
               </div>
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
@@ -272,7 +272,7 @@
                   </div>
                 @else
                   <div class="col-sm-3 offset-sm-1">
-                    <button  class="btn btn-success offset-sm-1" id="BtnPackage">Actualizar Paquete</button>
+                    <button onclick="update();" class="btn btn-success offset-sm-1" id="BtnPackage">Actualizar Paquete</button>
                   </div>
                 @endif
                 
@@ -672,6 +672,11 @@
         document.getElementById("fragile").checked = true;
 
       }
+    }
+
+    function update(){
+      document.getElementById("form").action = "{{ route('packages.update',$package->id) }}";
+      document.getElementById("form").submit();
     }
   </script>
 

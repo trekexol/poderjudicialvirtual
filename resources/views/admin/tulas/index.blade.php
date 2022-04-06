@@ -12,9 +12,12 @@
   <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
       <div class="x_title">
-        <div class="col-sm-8">
-          <h2>Listado de Tulas</h2>
-        </div>
+          <div class="col-sm-8 h5">
+            Listado de Tulas
+          </div>
+          <div class="col-sm-3">
+            <a href="{{ route('tulas.index') }}" class="btn btn-primary" type="button">Registrar</a>
+          </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -47,12 +50,13 @@
                 <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
               </td>
               <td>{{$tula->agents['name'] ?? ''}}</td>
-              <td>{{$tula->states['name'] ?? ''}}</td>
+              <td>{{$tula->destination_states['name'] ?? ''}}</td>
               <td>{{$tula->reference ?? ''}}</td>
               <td>{{$tula->weight ?? ''}}</td>
               <td>{{$tula->volume ?? ''}}</td>
-              <td></td>
+              <td>{{$tula->id_guide ?? ''}}</td>
               <td>{{$tula->status ?? ''}}</td>
+              <td></td>
             </tr>
             @endforeach
           @endisset
@@ -66,12 +70,4 @@
     </div>
   </div>
 </div>
-
-@endsection
-
-@section('validation')
-
-<script>
-   
-</script>
 @endsection
