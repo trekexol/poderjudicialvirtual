@@ -43,7 +43,7 @@
         <li><a><i class="fa fa-user"></i> Origen<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{{ route('trakings.index') }}">Paquetes</a></li>
-           
+           <li><a href="{{ route('packages.index') }}">Listar Paquetes</a></li>
           </ul>
         </li>
       </ul>
