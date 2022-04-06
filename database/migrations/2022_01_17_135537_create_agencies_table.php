@@ -25,7 +25,8 @@ class CreateAgenciesTable extends Migration
             $table->string('contact_person',50);
             $table->decimal('rate',64,2);
             $table->string('virtual_payment',15)->default('no');
-
+            $table->string('status',40)->nullable();
+            
             $table->foreign('id_state')->references('id')->on('states');
             $table->timestamps();
         });

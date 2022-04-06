@@ -20,6 +20,7 @@ class CreateAirlinesTable extends Migration
             $table->string('name',100);
 
             $table->string('type',20);
+            $table->string('status',40)->nullable();
 
             $table->timestamps();
         });

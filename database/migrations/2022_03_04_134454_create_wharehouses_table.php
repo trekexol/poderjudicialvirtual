@@ -19,6 +19,7 @@ class CreateWharehousesTable extends Migration
 
             $table->string('code',30);
             $table->string('name',100);
+            $table->string('status',40)->nullable();
 
             $table->foreign('id_agency')->references('id')->on('agencies');
             $table->timestamps();

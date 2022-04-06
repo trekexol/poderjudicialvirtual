@@ -25,6 +25,8 @@ return new class extends Migration
             $table->decimal('high_weight',64,2);
             $table->string('description',100)->nullable();
 
+            $table->string('status',40)->nullable();
+            
             $table->foreign('id_package')->references('id')->on('packages');
             $table->foreign('id_type_of_packaging')->references('id')->on('type_of_packagings');
             $table->timestamps();

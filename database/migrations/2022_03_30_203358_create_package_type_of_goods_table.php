@@ -24,6 +24,8 @@ return new class extends Migration
             $table->decimal('tariff',64,2);
             $table->decimal('charge',64,2);
 
+            $table->string('status',40)->nullable();
+
             $table->foreign('id_package')->references('id')->on('packages');
             $table->foreign('id_type_of_good')->references('id')->on('type_of_goods');
             

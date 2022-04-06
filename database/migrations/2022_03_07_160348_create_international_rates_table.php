@@ -29,6 +29,8 @@ class CreateInternationalRatesTable extends Migration
             $table->decimal('price',64,10);
             $table->decimal('rate',64,10);
 
+            $table->string('status',40)->nullable();
+            
             $table->foreign('id_wharehouse_origin')->references('id')->on('wharehouses');
             $table->foreign('id_wharehouse_destination')->references('id')->on('wharehouses');
             $table->foreign('id_state_origin')->references('id')->on('states');

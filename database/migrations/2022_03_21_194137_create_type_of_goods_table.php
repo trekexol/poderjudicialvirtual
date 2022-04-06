@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('tax_percentage',64,10)->default(0);
             $table->decimal('additional_charge',64,10)->default(0);
             
+            $table->string('status',40)->nullable();
             $table->timestamps();
         });
     }

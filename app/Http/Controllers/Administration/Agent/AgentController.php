@@ -41,7 +41,7 @@ class AgentController extends Controller
 
         return redirect('/agents/create')->withSuccess('Se ha registrado exitosamente!');
        
-     }
+    }
  
     public function edit($id)
     {

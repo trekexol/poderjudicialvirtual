@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone',30);
             $table->string('email',100);
             $table->string('contact_person',50)->nullable();
+            $table->string('status',40)->nullable();
             $table->timestamps();
         });
     }

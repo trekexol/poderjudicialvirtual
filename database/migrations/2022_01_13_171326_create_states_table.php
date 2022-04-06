@@ -19,6 +19,8 @@ class CreatestatesTable extends Migration
 
             $table->string('name',50);
 
+            $table->string('status',40)->nullable();
+
             $table->foreign('id_country')->references('id')->on('countries');
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('code',30);
             $table->string('name',100);
             $table->string('type',30);
+            $table->string('status',40)->nullable();
             $table->timestamps();
         });
     }

@@ -185,6 +185,8 @@ Route::group(["prefix"=>'packages'],function(){
     
     Route::get('client/{id_client}/{id_package?}', [PackageController::class, 'createWithClient'])->name('packages.createWithClient');
     Route::get('select/client/{id_package?}', [PackageSelectController::class, 'selectClient'])->name('packages.selectClient');
+
+    Route::post('update/{id}', [PackageController::class, 'update'])->name('packages.update');
 });
 
 Route::group(["prefix"=>'packages_lumps'],function(){
@@ -203,4 +205,7 @@ Route::group(["prefix"=>'packages_type_of_goods'],function(){
 
 Route::group(["prefix"=>'tulas'],function(){
     Route::get('index', [TulaController::class, 'index'])->name('tulas.index');
-  });
+    Route::get('create/{id?}', [TulaController::class, 'create'])->name('tulas.create');
+    Route::post('store', [TulaController::class, 'store'])->name('tulas.store');
+    Route::post('update/{id}', [TulaController::class, 'update'])->name('tulas.update');
+});
