@@ -31,6 +31,9 @@ return new class extends Migration
             $table->decimal('loadable_weight');
             $table->boolean('contains_dangerous_goods');
 
+            $table->string('flight');
+            $table->date('flight_date');
+
 
             $table->foreign('id_agency')->references('id')->on('agencies');
             $table->foreign('id_airline')->references('id')->on('airlines');
