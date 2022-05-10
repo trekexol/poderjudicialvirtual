@@ -46,6 +46,8 @@
             <li><a href="{{ route('packages.index') }}">Listar Paquetes</a></li>
             <li><a href="{{ route('tulas.create') }}">Tulas</a></li>
             <li><a href="{{ route('tulas.index') }}">Listar Tulas</a></li>
+            <li><a href="{{ route('master_guides.create') }}">Guias</a></li>
+            <li><a href="{{ route('master_guides.index') }}">Listar Guias</a></li>
           </ul>
         </li>
       </ul>

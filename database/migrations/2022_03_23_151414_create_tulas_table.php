@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('reference',50)->nullable();
             $table->integer('number_of_packages')->nullable();
 
-            $table->string('status',40)->nullable();
+            $table->string('status',20)->nullable();
 
             $table->foreign('id_office_agency')->references('id')->on('agencies');
             $table->foreign('id_agent')->references('id')->on('agents');

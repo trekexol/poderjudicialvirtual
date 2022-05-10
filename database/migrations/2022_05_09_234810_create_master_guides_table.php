@@ -22,11 +22,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_airline_destiny');
             $table->unsignedBigInteger('id_consignee_agent')->nullable();
 
-            $table->string('reference');
-            $table->string('knowledge_number');
+            $table->string('reference',40)->nullable();
+            $table->string('knowledge_number',40);
             
             $table->decimal('amount');
-            $table->string('weight_unit');
+            $table->string('weight_unit',15);
             $table->decimal('net_weight');
             $table->decimal('loadable_weight');
             $table->boolean('contains_dangerous_goods');
@@ -34,6 +34,12 @@ return new class extends Migration
             $table->string('flight');
             $table->date('flight_date');
 
+            $table->string('handing_information')->nullable();
+            $table->string('nature_and_quanty_of_goods')->nullable();
+            $table->string('extra_information')->nullable();
+            $table->string('extra_information2')->nullable();
+
+            $table->string('status',20);
 
             $table->foreign('id_agency')->references('id')->on('agencies');
             $table->foreign('id_airline')->references('id')->on('airlines');

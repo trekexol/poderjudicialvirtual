@@ -23,6 +23,7 @@ use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 use App\Http\Controllers\Tula\TulaController;
+use App\Http\Controllers\MasterGuide\MasterGuideController;
 
 Route::get('/', function () {
     
@@ -208,4 +209,11 @@ Route::group(["prefix"=>'tulas'],function(){
     Route::get('create/{id?}', [TulaController::class, 'create'])->name('tulas.create');
     Route::post('store', [TulaController::class, 'store'])->name('tulas.store');
     Route::post('update/{id}', [TulaController::class, 'update'])->name('tulas.update');
+});
+
+Route::group(["prefix"=>'master_guides'],function(){
+    Route::get('index', [MasterGuideController::class, 'index'])->name('master_guides.index');
+    Route::get('create/{id?}', [MasterGuideController::class, 'create'])->name('master_guides.create');
+    Route::post('store', [MasterGuideController::class, 'store'])->name('master_guides.store');
+    Route::post('update/{id}', [MasterGuideController::class, 'update'])->name('master_guides.update');
 });
