@@ -34,6 +34,7 @@ class PackageController extends Controller
     public function create($id_package = null)
     {
         if(isset($id_package)){
+
             $package = Package::find($id_package);
 
             $package_lumps = PackageLump::where('id_package',$package->id)->orderBy('id','asc')->get();
@@ -41,6 +42,7 @@ class PackageController extends Controller
             $package_type_of_goods = PackageTypeOfGood::where('id_package',$package->id)->orderBy('id','asc')->get();
 
         }else{
+           
             $package = null;
 
             $package_lumps = null;
@@ -61,6 +63,8 @@ class PackageController extends Controller
         $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
 
         $clients = Client::orderBy('firstname','asc')->get();
+
+        
        
         return view('admin.packages.create',compact('package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
@@ -169,7 +173,7 @@ class PackageController extends Controller
         
         if(isset($tracking)){
             $package = Package::where('tracking',$tracking)->first();
-
+           
             if(isset($package)){
 
                 $package_lumps = PackageLump::where('id_package',$package->id)->orderBy('id','asc')->get();
@@ -202,7 +206,7 @@ class PackageController extends Controller
         $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
 
         $clients = Client::orderBy('firstname','asc')->get();
-
+       
         return view('admin.packages.create',compact('tracking','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }

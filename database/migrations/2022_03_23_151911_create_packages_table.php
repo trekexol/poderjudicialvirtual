@@ -43,7 +43,7 @@ return new class extends Migration
             $table->boolean('document')->default(false);
             $table->boolean('fragile')->default(false);
 
-            $table->string('status',40)->nullable();
+            $table->string('status',20)->nullable();
             
            
             $table->foreign('id_agent_shipper')->references('id')->on('agents');

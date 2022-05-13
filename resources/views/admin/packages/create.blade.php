@@ -40,9 +40,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($agents as $agent)
-                        <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
-                      @endforeach
+                      @if (isset($agents))
+                        @foreach ($agents as $agent)
+                          <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
               </div>
@@ -75,10 +77,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      
-                      @foreach ($agents as $agent)
-                        <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
-                      @endforeach
+                      @if (isset($agents))
+                        @foreach ($agents as $agent)
+                          <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="first-name">Vendedor Externo:</label>
@@ -115,9 +118,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($agents as $agent)
-                        <option value="{{ $agent->id }}">{{ $agent->name ?? '' }} - {{ $agent->direction ?? '' }}</option>
-                      @endforeach
+                      @if (isset($agents))
+                        @foreach ($agents as $agent)
+                          <option value="{{ $agent->id }}">{{ $agent->name ?? '' }} - {{ $agent->direction ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="id_wharehouse">Almacen:</label>
@@ -129,9 +134,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($wharehouses as $wharehouse)
-                        <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
-                      @endforeach
+                      @if (isset($wharehouses))
+                        @foreach ($wharehouses as $wharehouse)
+                          <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
               </div>
@@ -155,9 +162,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
-                      @endforeach
+                      @if (isset($countries))
+                        @foreach ($countries as $country)
+                          <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="id_destination_country">País de Destino:</label>
@@ -169,9 +178,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
-                      @endforeach
+                      @if (isset($countries))
+                        @foreach ($countries as $country)
+                          <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
               </div>
@@ -185,9 +196,11 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($delivery_companies as $delivery_company)
-                        <option value="{{ $delivery_company->id }}">{{ $delivery_company->description ?? '' }}</option>
-                      @endforeach
+                      @if (isset($delivery_companies))
+                        @foreach ($delivery_companies as $delivery_company)
+                          <option value="{{ $delivery_company->id }}">{{ $delivery_company->description ?? '' }}</option>
+                        @endforeach
+                      @endif
                     </select>
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="number_transport_guide">N° Guía Transporte:</label>
@@ -508,7 +521,7 @@
               </div>
           </div>
     </div>
-  </div>
+</div>
 
 @endif
 
@@ -648,7 +661,12 @@
      });
 
      
-    if("{{isset($package)}}"){
+ 
+
+  </script>
+@isset($package)
+  <script>  
+     if("{{isset($package)}}"){
       if("{{(isset($package->high_value) && $package->high_value == true)}}"){
 
         document.getElementById("high_value").checked = true;
@@ -673,11 +691,10 @@
 
       }
     }
-
     function update(){
       document.getElementById("form").action = "{{ route('packages.update',$package->id) }}";
       document.getElementById("form").submit();
     }
   </script>
-
+@endisset
 @endsection

@@ -35,6 +35,39 @@ class DemoSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+        DB::/*connection('logins')->*/table('agents')->insert([
+            'code' => '1',
+            'name' => 'Carlos Cargo',
+            'type' => 'Cargo',
+            'direction' => 'Ejemplo',
+            'phone' => '0424-1514152',
+            'email' => 'cefreitas.16@gmail.com',
+            'contact_person' => 'Ejemplo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::/*connection('logins')->*/table('agents')->insert([
+            'code' => '1',
+            'name' => 'Carlos Emisor',
+            'type' => 'Emisor',
+            'direction' => 'Ejemplo',
+            'phone' => '0424-1514152',
+            'email' => 'cefreitas.16@gmail.com',
+            'contact_person' => 'Ejemplo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::/*connection('logins')->*/table('agents')->insert([
+            'code' => '1',
+            'name' => 'Carlos Consignatario',
+            'type' => 'Consignatario',
+            'direction' => 'Ejemplo',
+            'phone' => '0424-1514152',
+            'email' => 'cefreitas.16@gmail.com',
+            'contact_person' => 'Ejemplo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         DB::/*connection('logins')->*/table('airlines')->insert([
             'code' => '1',
             'name' => 'Carlos',

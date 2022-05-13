@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_agent');
             $table->unsignedBigInteger('id_destination_state');
 
-            $table->unsignedBigInteger('id_guide')->nullable();
+            $table->unsignedBigInteger('id_master_guide')->nullable();
            
             $table->decimal('dimension_width',64,2);
             $table->decimal('dimension_length',64,2);
@@ -36,12 +36,12 @@ return new class extends Migration
             $table->string('reference',50)->nullable();
             $table->integer('number_of_packages')->nullable();
 
-            $table->string('status',40)->nullable();
+            $table->string('status',20)->nullable();
 
             $table->foreign('id_office_agency')->references('id')->on('agencies');
             $table->foreign('id_agent')->references('id')->on('agents');
             $table->foreign('id_destination_state')->references('id')->on('states');
-            $table->foreign('id_guide')->references('id')->on('guides');
+            $table->foreign('id_master_guide')->references('id')->on('master_guides');
             $table->timestamps();
         });
     }
