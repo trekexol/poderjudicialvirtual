@@ -216,4 +216,6 @@ Route::group(["prefix"=>'master_guides'],function(){
     Route::get('create/{id?}', [MasterGuideController::class, 'create'])->name('master_guides.create');
     Route::post('store', [MasterGuideController::class, 'store'])->name('master_guides.store');
     Route::post('update/{id}', [MasterGuideController::class, 'update'])->name('master_guides.update');
+    
+    Route::post('storeTula', [MasterGuideController::class, 'storeTula'])->name('master_guides.storeTula');
 });
