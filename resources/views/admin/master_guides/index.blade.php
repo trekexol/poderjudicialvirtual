@@ -45,14 +45,19 @@
             <tr>
               <td>{{$master_guide->id ?? ''}}</td>
               <td>
+                {{$master_guide->airlines['name'] ?? ''}}
               </td>
               <td>
+                {{$master_guide->flight ?? ''}}
               </td>
               <td>
+                {{$master_guide->knowledge_number ?? ''}}
               </td>
               <td>
+                {{$master_guide->status ?? ''}}
               </td>
               <td>
+                <a href="{{ route('master_guides.create',$master_guide->id) }}" title="Ver Guia" class="text-center text-success font-weight-bold"><i class="fa fa-search" style="color: orange;"></i></a>                         
               </td>
             </tr>
             @endforeach

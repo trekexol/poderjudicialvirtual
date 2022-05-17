@@ -43,7 +43,7 @@ return new class extends Migration
 
             $table->string('status',20);
 
-            $table->foreign('id_agency')->references('id')->on('agencies');
+            $table->foreign('id_office_agency')->references('id')->on('agencies');
             $table->foreign('id_airline')->references('id')->on('airlines');
             $table->foreign('id_carrier_agent')->references('id')->on('agents');
             $table->foreign('id_transmitter_agent')->references('id')->on('agents');

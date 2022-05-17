@@ -265,6 +265,47 @@
     </div>
 </div>
 
+@isset($master_guide)
+
+<div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="col-md-4 col-sm-4 h5">
+              Tulas Incluidas
+            </div>
+          
+            <ul class="col-sm-1 nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form method="POST" enctype="multipart/form-data" action="{{ route('master_guides.storeTula') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+              @csrf 
+              <input id="id_master_guide" name="id_master_guide" value="{{ $master_guide->id }}" class="date-picker form-control"  type="hidden" >
+                  
+                <div class="item form-group">
+                  <label class="col-form-label col-sm-2 label-align " for="tula_reference">Ingresar una Tula a la Guía:</label>
+                  <div class="col-sm-3">
+                    <input id="tula_reference" name="tula_reference"  class="date-picker form-control"  type="text" >
+                  </div>
+                  <div class="col-sm-3 ">
+                    <button type="submit" class="btn btn-primary" id="Btnmaster_guide">Registrar Tula</button>
+                  </div>
+                </div>
+              
+                    </form>
+              </div>
+          </div>
+    </div>
+</div>
+
+    
+@endisset
 @endsection
 
 @section('validation')
