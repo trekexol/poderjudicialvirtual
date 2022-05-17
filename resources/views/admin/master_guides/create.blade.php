@@ -297,8 +297,45 @@
                     <button type="submit" class="btn btn-primary" id="Btnmaster_guide">Registrar Tula</button>
                   </div>
                 </div>
-              
-                    </form>
+                </form>
+                @isset($tulas)
+                <div class="card-box table-responsive">
+      
+                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>N°</th>
+                        <th>Agente</th>
+                        <th>Destino</th>
+                        <th>Referencia</th>
+                        <th>Peso</th>
+                        <th>PV</th>
+                        <th>Guía</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    
+                      @foreach ($tulas as $tula)
+                      <tr>
+                        <td class="text-center">
+                          <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
+                        </td>
+                        <td>{{$tula->agents['name'] ?? ''}}</td>
+                        <td>{{$tula->destination_states['name'] ?? ''}}</td>
+                        <td>{{$tula->reference ?? ''}}</td>
+                        <td>{{$tula->weight ?? ''}}</td>
+                        <td>{{$tula->volume ?? ''}}</td>
+                        <td>{{$tula->id_master_guide ?? ''}}</td>
+                        <td>{{$tula->status ?? ''}}</td>
+                        <td></td>
+                      </tr>
+                      @endforeach
+                    @endisset
+                    
+          
+                    </table>
+                  </div>
               </div>
           </div>
     </div>

@@ -31,8 +31,10 @@ class MasterGuideController extends Controller
     {
         if(isset($id)){
             $master_guide = MasterGuide::findOrFail($id);
+            $tulas = Tula::where('id_master_guide',$id)->get();
         }else{
             $master_guide = null;
+            $tulas = null;
         }
 
         $date = Carbon::now();
@@ -50,7 +52,7 @@ class MasterGuideController extends Controller
 
         $position_agents = Agent::where('type','Cargo')->orderBy('name','desc')->get();
 
-        return view('admin.master_guides.create',compact('datenow','master_guide','agencies','airlines','carrier_agents','consignee_agents','transmitter_agents','position_agents'));
+        return view('admin.master_guides.create',compact('tulas','datenow','master_guide','agencies','airlines','carrier_agents','consignee_agents','transmitter_agents','position_agents'));
     
     }
 
@@ -69,7 +71,7 @@ class MasterGuideController extends Controller
         $master_guide->id_transmitter_agent = $request->id_transmitter_agent;
         $master_guide->weight_unit = $request->weight_unit;
         $master_guide->id_position_agent = $request->id_position_agent;
-        $master_guide->net_weight = $request->net_weight;
+        $master_guide->net_weight = str_replace(',', '.', str_replace('.', '',$request->net_weight));
         $master_guide->loadable_weight =str_replace(',', '.', str_replace('.', '',$request->loadable_weight));
         
         if($request->contains_dangerous_goods == 'Yes'){

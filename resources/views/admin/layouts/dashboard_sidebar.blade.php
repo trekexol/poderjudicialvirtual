@@ -48,6 +48,8 @@
             <li><a href="{{ route('tulas.index') }}">Listar Tulas</a></li>
             <li><a href="{{ route('master_guides.create') }}">Guias</a></li>
             <li><a href="{{ route('master_guides.index') }}">Listar Guias</a></li>
+            <li><a href="{{ route('paddles.create') }}">Paletas</a></li>
+            <li><a href="{{ route('paddles.index') }}">Listar Paletas</a></li>
           </ul>
         </li>
       </ul>
