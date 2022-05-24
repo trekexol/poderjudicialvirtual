@@ -42,8 +42,9 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
-      
+        <main class="py-4">
+            @yield('content')
+        </main>
         
         <!-- Footer-->
        <!-- <footer class="bg-black text-center py-5">

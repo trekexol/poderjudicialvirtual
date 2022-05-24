@@ -33,7 +33,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="id_agent_shipper">Shipper: </label>
                 <div class="col-sm-3">
-                  <select class="select2_group form-control" name="id_agent_shipper">
+                  <select class="select2_group form-control" name="id_agent_shipper" required>
                       @if (isset($package))
                         <option value="{{ $package->id_agent_shipper ?? null }}">{{ $package->shippers['name'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -51,7 +51,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_client">
+                    <select class="select2_group form-control" name="id_client" required>
                       @if (isset($package))
                         <option value="{{ $package->id_client ?? null }}">{{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -60,7 +60,7 @@
                       @endif
                       @if (isset($clients)) 
                         @foreach ($clients as $client)
-                          <option value="{{ $client->id }}">{{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
+                          <option value="{{ $client->id }}">{{$clients->type_cedula ?? ''}}{{$clients->cedula ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
                         @endforeach
                       @endif
                      
@@ -111,7 +111,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_agent_office_location">
+                    <select class="select2_group form-control" name="id_agent_office_location" required>
                       @if (isset($package))
                         <option value="{{ $package->id_agent_office_location ?? null }}">{{ $package->office_locations['name'] ?? null }} - {{ $package->office_locations['direction'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -127,7 +127,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="id_wharehouse">Almacen:</label>
                 <div class="col-sm-3">
-                    <select class="select2_group form-control" name="id_wharehouse">
+                    <select class="select2_group form-control" name="id_wharehouse" required>
                       @if (isset($package))
                         <option value="{{ $package->id_wharehouse ?? null }}">{{ $package->wharehouses['name'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -155,7 +155,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_origin_country">País de Origen:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_origin_country">
+                    <select class="select2_group form-control" name="id_origin_country" required>
                       @if (isset($package))
                         <option value="{{ $package->id_origin_country ?? null }}">{{ $package->origin_countries['name'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -171,7 +171,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="id_destination_country">País de Destino:</label>
                 <div class="col-sm-3">
-                    <select class="select2_group form-control" name="id_destination_country">
+                    <select class="select2_group form-control" name="id_destination_country" required>
                       @if (isset($package))
                         <option value="{{ $package->id_destination_country ?? null }}">{{ $package->destination_countries['name'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -189,7 +189,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_delivery_company">Entregado por:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_delivery_company">
+                    <select class="select2_group form-control" name="id_delivery_company" required>
                       @if (isset($package))
                         <option value="{{ $package->id_delivery_company ?? null }}">{{ $package->delivery_companies['description'] ?? null }}</option>
                         <option value="">---------------------</option>

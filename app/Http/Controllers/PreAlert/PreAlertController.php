@@ -51,10 +51,12 @@ class PreAlertController extends Controller
         $pre_alert->transport_company = $request->transport_company;
         $pre_alert->package_content = $request->package_content;
         $pre_alert->package_remarks = $request->package_remarks;
+
+        $pre_alert->status = 'Activo';
       
         $pre_alert->save();
 
-        return redirect('/pre_alerts')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/pre_alerts/index')->withSuccess('Se ha registrado exitosamente!');
        
     }
     public function update(Request $request, $id)

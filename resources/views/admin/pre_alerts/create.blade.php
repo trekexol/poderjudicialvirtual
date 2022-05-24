@@ -27,7 +27,7 @@
               @csrf 
                          
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente:</label>
+                <label class="col-form-label col-sm-3 label-align " for="id_client">Cliente:</label>
                 <div class="col-sm-4">
                   <select class="select2_group form-control" name="id_client" required>
                       @if (isset($pre_alert))
@@ -44,7 +44,7 @@
               </div>
            
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Tracking:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Tracking:</label>
                 <div class="col-sm-3">
                   <input id="tracking" name="tracking"  class="date-picker form-control"  type="text" required="required" value="{{ $pre_alert->tracking ?? '' }}">
                 </div>
@@ -52,7 +52,7 @@
 
              
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="shipping_type">Tipo de Envío:</label>
+                <label class="col-form-label col-sm-3 label-align " for="shipping_type">Tipo de Envío:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="shipping_type" required>
                       @if (isset($pre_alert))
@@ -69,28 +69,28 @@
               </div>
               
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Sitio Web Origen:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Sitio Web Origen:</label>
                 <div class="col-sm-3">
                   <input id="origin_web" name="origin_web"  class="date-picker form-control"  type="text" required="required" value="{{ $pre_alert->origin_web ?? '' }}">
                 </div>
               </div>
 
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="transport_company">Empresa de Transporte:</label>
+                <label class="col-form-label col-sm-3 label-align " for="transport_company">Empresa de Transporte:</label>
                 <div class="col-sm-3">
                   <input id="transport_company" name="transport_company"  class="date-picker form-control"  type="text" required="required" value="{{ $pre_alert->transport_company ?? '' }}">
                 </div>
               </div>
 
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Contenido del Paquete:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Contenido del Paquete:</label>
                 <div class="col-sm-3">
                   <input id="package_content" name="package_content"  class="date-picker form-control"  type="text" required="required" value="{{ $pre_alert->package_content ?? '' }}">
                 </div>
               </div>
 
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="package_remarks">Observaciones del Paquete:</label>
+                <label class="col-form-label col-sm-3 label-align " for="package_remarks">Observaciones del Paquete:</label>
                 <div class="col-sm-3">
                   <input id="package_remarks" name="package_remarks"  class="date-picker form-control"  type="text" required="required" value="{{ $pre_alert->package_remarks ?? '' }}">
                 </div>
@@ -99,7 +99,7 @@
               <br>
               <div class="form-row">
                 @if (empty($pre_alert))
-                  <div class="col-sm-3 offset-sm-1">
+                  <div class="col-sm-3 offset-sm-2">
                     <button type="submit" class="btn btn-primary" id="Btnpre_alert">Registrar Pre Alerta</button>
                   </div>
                 @else

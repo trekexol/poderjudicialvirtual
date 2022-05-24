@@ -58,9 +58,9 @@
               <td>{{$pre_alert->transport_company ?? ''}}</td>
               <td>{{$pre_alert->created_at ?? ''}}</td>
               <td>{{$pre_alert->package_content ?? ''}}</td>
-              <td></td>
-              <td></td>
-              <td> </td>
+              <td>{{$pre_alert->package_remarks ?? ''}}</td>
+              <td>{{$pre_alert->clients->agencies['name'] ?? '' }}</td>
+              <td>{{$pre_alert->clients->agents['name'] ?? '' }}</td>
               <td>{{$pre_alert->status ?? ''}}</td>
               <td></td>
             </tr>

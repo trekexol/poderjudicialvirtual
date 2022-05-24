@@ -2,7 +2,7 @@
 
 @section('content')
 <br><br>
-<div class="container mt-5" style="">
+<div class="container mt-5 " style="">
     <div class="row d-flex justify-content-center align-items-center ">
         <div class="col-md-12">
             <form id="regForm" method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">

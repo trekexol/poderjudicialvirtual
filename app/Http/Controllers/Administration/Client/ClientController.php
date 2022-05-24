@@ -25,7 +25,7 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+       
         $data = request()->validate([
             'email'                 =>'required|max:40',
             'type_cedula'           =>'required',

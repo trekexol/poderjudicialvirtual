@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Administration\Client\ClientController;
 use App\Http\Controllers\Package\PackageController;
 use App\Http\Controllers\Administration\Agency\AgencyController;
 use App\Http\Controllers\Administration\Agent\AgentController;
