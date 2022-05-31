@@ -14,7 +14,7 @@
     <div class="col-md-12 col-sm-12 ">
       <div class="x_panel">
           <div class="x_title">
-            <h2>Ingresar Tulas</h2>
+            <h2>Ingresar Paletas</h2>
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -23,15 +23,15 @@
           </div>
           <div class="x_content">
             <br />
-            <form method="POST" enctype="multipart/form-data" action="{{ route('tulas.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('paddles.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
                          
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_office_agency">Oficina:</label>
                 <div class="col-sm-4">
                   <select class="select2_group form-control" name="id_office_agency">
-                      @if (isset($tula))
-                        <option value="{{ $tula->id_office_agency ?? null }}">{{ $tula->office_agencies['name'] ?? null }}</option>
+                      @if (isset($paddle))
+                        <option value="{{ $paddle->id_office_agency ?? null }}">{{ $paddle->office_agencies['name'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -46,8 +46,8 @@
                 <label class="col-form-label col-sm-1 label-align " for="id_agent">Agente:</label>
                 <div class="col-sm-4">
                     <select class="select2_group form-control" name="id_agent">
-                      @if (isset($tula))
-                        <option value="{{ $tula->id_agent ?? null }}">{{ $tula->agents['name'] ?? null }}</option>
+                      @if (isset($paddle))
+                        <option value="{{ $paddle->id_agent ?? null }}">{{ $paddle->agents['name'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -65,8 +65,8 @@
                 <label class="col-form-label col-sm-1 label-align " for="id_destination_state">Destino:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="id_destination_state" required>
-                      @if (isset($tula))
-                        <option value="{{ $tula->id_destination_state ?? null }}">{{ $tula->destination_states['name'] ?? null }}</option>
+                      @if (isset($paddle))
+                        <option value="{{ $paddle->id_destination_state ?? null }}">{{ $paddle->destination_states['name'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -77,38 +77,35 @@
                       @endforeach
                     </select>
                 </div>
-                <label class="col-form-label col-sm-4 label-align " for="cubic_foot">Pié Cúbico:</label>
-                <div class="col-sm-3">
-                  <input id="cubic_foot" name="cubic_foot" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->cubic_foot ?? 0), '1', 2), 2, ',', '.') ?? null }}">
-                </div>
+             
               </div>
            
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="dimension">Dimensiones:</label>
                 <div class="col-sm-2">
-                  <input id="dimension_width" name="dimension_width" placeholder="Ancho" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_width ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="dimension_width" name="dimension_width" placeholder="Ancho" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->dimension_width ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
                 <div class="col-sm-2">
-                  <input id="dimension_length" name="dimension_length" placeholder="Largo" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_length ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="dimension_length" name="dimension_length" placeholder="Largo" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->dimension_length ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
                 <div class="col-sm-2">
-                  <input id="dimension_high" name="dimension_high" placeholder="Alto" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_high ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="dimension_high" name="dimension_high" placeholder="Alto" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->dimension_high ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
 
                 <label class="col-form-label col-sm-1 label-align " for="dimension">Volumen:</label>
                 <div class="col-sm-3">
-                  <input id="volume" name="volume"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->volume ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="volume" name="volume"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->volume ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
               </div>
 
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="dimension">Peso en lbs:</label>
                 <div class="col-sm-3">
-                  <input id="weight" name="weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="weight" name="weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
                 <label class="col-form-label col-sm-4 label-align " for="dimension">Peso Cargable:</label>
                 <div class="col-sm-3">
-                  <input id="loadable_weight" name="loadable_weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->loadable_weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
+                  <input id="loadable_weight" name="loadable_weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($paddle->loadable_weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
               </div>
 
@@ -117,8 +114,8 @@
                 <label class="col-form-label col-sm-1 label-align " for="type_of_service">Servicio:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="type_of_service" required>
-                      @if (isset($tula))
-                        <option value="{{ $tula->type_of_service ?? null }}">{{ $tula->type_of_service ?? null }}</option>
+                      @if (isset($paddle))
+                        <option value="{{ $paddle->type_of_service ?? null }}">{{ $paddle->type_of_service ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione</option>
@@ -132,8 +129,8 @@
                 <label class="col-form-label col-sm-4 label-align " for="class">Clase:</label>
                 <div class="col-sm-2">
                     <select class="select2_group form-control" name="class" required>
-                      @if (isset($tula))
-                        <option value="{{ $tula->class ?? null }}">{{ $tula->class ?? null }}</option>
+                      @if (isset($paddle))
+                        <option value="{{ $paddle->class ?? null }}">{{ $paddle->class ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione</option>
@@ -155,35 +152,35 @@
                   </div>
                   <label class="col-form-label col-sm-5 label-align " for="reference">Referencia:</label>
                   <div class="col-sm-3">
-                    <input id="reference" name="reference"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->reference ?? '' }}">
+                    <input id="reference" name="reference"  class="date-picker form-control"  type="text" required="required" value="{{ $paddle->reference ?? '' }}">
                   </div>
               </div>
 
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="dimension">Expediente:</label>
                 <div class="col-sm-3">
-                  <input id="record" name="record"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->record ?? '' }}">
+                  <input id="record" name="record"  class="date-picker form-control"  type="text" required="required" value="{{ $paddle->record ?? '' }}">
                 </div>
                 <label class="col-form-label col-sm-4 label-align " for="dimension">Número de Paquetes:</label>
                 <div class="col-sm-3">
-                  <input id="number_of_packages" name="number_of_packages"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->number_of_packages ?? '' }}">
+                  <input id="number_of_packages" name="number_of_packages"  class="date-picker form-control"  type="text" required="required" value="{{ $paddle->number_of_packages ?? '' }}">
                 </div>
               </div>
 
               <br>
               <br>
               <div class="form-row">
-                @if (empty($tula))
+                @if (empty($paddle))
                   <div class="col-sm-3 offset-sm-1">
-                    <button type="submit" class="btn btn-primary" id="Btntula">Registrar Tula</button>
+                    <button type="submit" class="btn btn-primary" id="Btnpaddle">Registrar Paleta</button>
                   </div>
                 @else
                   <div class="col-sm-3 offset-sm-1">
-                    <button onclick="update();" class="btn btn-success" id="Btntula">Actualizar Tula</button>
+                    <button onclick="update();" class="btn btn-success" id="Btnpaddle">Actualizar Paleta</button>
                   </div>
                 @endif
                 <div class="col-sm-2 ">
-                  <a href="{{ route('tulas.index') }}" class="btn btn-danger" type="button">Ver Listado</a>
+                  <a href="{{ route('paddles.index') }}" class="btn btn-danger" type="button">Ver Listado</a>
                 </div>
             </div>
           </form>
@@ -192,13 +189,87 @@
   </div>
 </div>
 
+@isset($paddle)
+<div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="col-md-4 col-sm-4 h5">
+              Paquetes Incluidos
+            </div>
+          
+            <ul class="col-sm-1 nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form method="POST" enctype="multipart/form-data" action="{{ route('paddles.storePackage') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+              @csrf 
+              <input id="id_paddle" name="id_paddle" value="{{ $paddle->id }}" class="date-picker form-control"  type="hidden" >
+                  
+                <div class="item form-group">
+                  <label class="col-form-label col-sm-3 label-align " for="package_reference">Ingresar un Paquete en la Paleta:</label>
+                  <div class="col-sm-3">
+                    <input id="package_reference" name="package_reference"  class="date-picker form-control"  type="text" >
+                  </div>
+                  <div class="col-sm-3 ">
+                    <button type="submit" class="btn btn-primary" id="Btnpaddle">Registrar Paquete</button>
+                  </div>
+                </div>
+              </form>
+              @isset($packages)
+              <div class="card-box table-responsive">
+      
+                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Tracking</th>
+                      <th>Cliente</th>
+                      <th>Casillero</th>
+                      <th>Descripcion</th>
+                      <th>Tipo</th>
+                      <th>Agente</th>
+                      <th>Oficina</th>
+                    </tr>
+                  </thead>
+                 
+                    @foreach ($packages as $package)
+                    <tr>
+                      <td class="text-center">
+                        <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
+                      </td>
+                      <td>{{$package->tracking ?? ''}}</td>
+                      <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
+                      <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
+                      <td>{{$package->description ?? ''}}</td>
+                      <td>{{$package->instruction ?? ''}}</td>
+                      <td>{{$package->vendors['name'] ?? ''}}</td>
+                      <td>{{$package->office_locations['direction'] ?? ''}}</td>
+                    </tr>
+                    @endforeach
+                  @endisset
+                  
+        
+                  </table>
+                </div>
+              </div>
+          </div>
+    </div>
+</div>
+@endisset
+
 @endsection
 
 @section('validation')
 
-  @isset($tula)
+  @isset($paddle)
     <script>
-      if("{{$tula->loose_packages}}" == "Yes"){
+      if("{{$paddle->loose_packages}}" == "Yes"){
           $('#loose_packagesYes').prop('checked', true);
       }else{
           $('#loose_packagesNo').prop('checked', true);
@@ -206,7 +277,7 @@
 
       
     function update(){
-      document.getElementById("form").action = "{{ route('tulas.update',$tula->id) }}";
+      document.getElementById("form").action = "{{ route('paddles.update',$paddle->id) }}";
       document.getElementById("form").submit();
     }
     </script>

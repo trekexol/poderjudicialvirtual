@@ -17,7 +17,8 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_country');
             $table->unsignedBigInteger('id_state_received');
-            $table->unsignedBigInteger('id_agency');
+            $table->unsignedBigInteger('id_agency')->nullable();
+            $table->unsignedBigInteger('id_agent')->nullable();
 
             $table->unsignedBigInteger('id_code_room');
             $table->unsignedBigInteger('id_code_work');
@@ -51,6 +52,7 @@ class CreateClientsTable extends Migration
             $table->foreign('id_country')->references('id')->on('countries');
             $table->foreign('id_state_received')->references('id')->on('states');
             $table->foreign('id_agency')->references('id')->on('agencies');
+            $table->foreign('id_agent')->references('id')->on('agents');
             
             $table->foreign('id_code_room')->references('id')->on('making_codes');
             $table->foreign('id_code_work')->references('id')->on('making_codes');

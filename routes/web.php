@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Administration\Client\ClientController;
 use App\Http\Controllers\Package\PackageController;
 use App\Http\Controllers\Administration\Agency\AgencyController;
 use App\Http\Controllers\Administration\Agent\AgentController;
@@ -24,6 +24,8 @@ use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 use App\Http\Controllers\Tula\TulaController;
 use App\Http\Controllers\MasterGuide\MasterGuideController;
+use App\Http\Controllers\Paddle\PaddleController;
+use App\Http\Controllers\PreAlert\PreAlertController;
 
 Route::get('/', function () {
     
@@ -218,4 +220,19 @@ Route::group(["prefix"=>'master_guides'],function(){
     Route::post('update/{id}', [MasterGuideController::class, 'update'])->name('master_guides.update');
     
     Route::post('storeTula', [MasterGuideController::class, 'storeTula'])->name('master_guides.storeTula');
+});
+
+Route::group(["prefix"=>'paddles'],function(){
+    Route::get('index', [PaddleController::class, 'index'])->name('paddles.index');
+    Route::get('create/{id?}', [PaddleController::class, 'create'])->name('paddles.create');
+    Route::post('store', [PaddleController::class, 'store'])->name('paddles.store');
+    Route::post('update/{id}', [PaddleController::class, 'update'])->name('paddles.update');
+    Route::post('storePackage', [PaddleController::class, 'storePackage'])->name('paddles.storePackage');
+});
+
+Route::group(["prefix"=>'pre_alerts'],function(){
+    Route::get('index', [PreAlertController::class, 'index'])->name('pre_alerts.index');
+    Route::get('create/{id?}', [PreAlertController::class, 'create'])->name('pre_alerts.create');
+    Route::post('store', [PreAlertController::class, 'store'])->name('pre_alerts.store');
+    Route::post('update/{id}', [PreAlertController::class, 'update'])->name('pre_alerts.update');
 });

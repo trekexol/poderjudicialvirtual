@@ -13,10 +13,10 @@
     <div class="x_panel">
       <div class="x_title">
           <div class="col-sm-8 h5">
-            Listado de Tulas
+            Listado de Pre Alertas
           </div>
           <div class="col-sm-3">
-            <a href="{{ route('tulas.create') }}" class="btn btn-primary" type="button">Registrar</a>
+            <a href="{{ route('pre_alerts.create') }}" class="btn btn-primary" type="button">Registrar</a>
           </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -32,30 +32,36 @@
         <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-              <th>N°</th>
+              <th>Tracking</th>
+              <th>Casillero</th>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Transportista</th>
+              <th>Fecha_Rg.</th>
+              <th>Contenido</th>
+              <th>Nota</th>
+              <th>Ofic.</th>
               <th>Agente</th>
-              <th>Destino</th>
-              <th>Referencia</th>
-              <th>Peso</th>
-              <th>PV</th>
-              <th>Guía</th>
               <th>Status</th>
               <th></th>
             </tr>
           </thead>
-          @isset($tulas)
-            @foreach ($tulas as $tula)
+          @isset($pre_alerts)
+            @foreach ($pre_alerts as $pre_alert)
             <tr>
               <td class="text-center">
-                <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
+                <a href="{{ route('pre_alerts.create',$pre_alert->id) }}"  title="Seleccionar">{{$pre_alert->tracking}}</a>
               </td>
-              <td>{{$tula->agents['name'] ?? ''}}</td>
-              <td>{{$tula->destination_states['name'] ?? ''}}</td>
-              <td>{{$tula->reference ?? ''}}</td>
-              <td>{{$tula->weight ?? ''}}</td>
-              <td>{{$tula->volume ?? ''}}</td>
-              <td>{{$tula->id_master_guide ?? ''}}</td>
-              <td>{{$tula->status ?? ''}}</td>
+              <td>{{$pre_alert->clients->countries['abbreviation'] ?? ''}}{{$pre_alert->id_client}}</td>
+              <td>{{$pre_alert->clients['firstname'] ?? '' }} {{ $pre_alert->clients['firstlastname'] ?? ''}}</td>
+              <td>{{$pre_alert->shipping_type ?? ''}}</td>
+              <td>{{$pre_alert->transport_company ?? ''}}</td>
+              <td>{{$pre_alert->created_at ?? ''}}</td>
+              <td>{{$pre_alert->package_content ?? ''}}</td>
+              <td>{{$pre_alert->package_remarks ?? ''}}</td>
+              <td>{{$pre_alert->clients->agencies['name'] ?? '' }}</td>
+              <td>{{$pre_alert->clients->agents['name'] ?? '' }}</td>
+              <td>{{$pre_alert->status ?? ''}}</td>
               <td></td>
             </tr>
             @endforeach

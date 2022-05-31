@@ -13,10 +13,10 @@
     <div class="x_panel">
       <div class="x_title">
           <div class="col-sm-8 h5">
-            Listado de Tulas
+            Listado de Paletas
           </div>
           <div class="col-sm-3">
-            <a href="{{ route('tulas.create') }}" class="btn btn-primary" type="button">Registrar</a>
+            <a href="{{ route('paddles.index') }}" class="btn btn-primary" type="button">Registrar</a>
           </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -38,24 +38,22 @@
               <th>Referencia</th>
               <th>Peso</th>
               <th>PV</th>
-              <th>Guía</th>
               <th>Status</th>
               <th></th>
             </tr>
           </thead>
-          @isset($tulas)
-            @foreach ($tulas as $tula)
+          @isset($paddles)
+            @foreach ($paddles as $paddle)
             <tr>
               <td class="text-center">
-                <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
+                <a href="{{ route('paddles.create',$paddle->id) }}"  title="Seleccionar">{{$paddle->id}}</a>
               </td>
-              <td>{{$tula->agents['name'] ?? ''}}</td>
-              <td>{{$tula->destination_states['name'] ?? ''}}</td>
-              <td>{{$tula->reference ?? ''}}</td>
-              <td>{{$tula->weight ?? ''}}</td>
-              <td>{{$tula->volume ?? ''}}</td>
-              <td>{{$tula->id_master_guide ?? ''}}</td>
-              <td>{{$tula->status ?? ''}}</td>
+              <td>{{$paddle->agents['name'] ?? ''}}</td>
+              <td>{{$paddle->destination_states['name'] ?? ''}}</td>
+              <td>{{$paddle->reference ?? ''}}</td>
+              <td>{{$paddle->weight ?? ''}}</td>
+              <td>{{$paddle->volume ?? ''}}</td>
+              <td>{{$paddle->status ?? ''}}</td>
               <td></td>
             </tr>
             @endforeach
