@@ -6,6 +6,7 @@ use App\Models\Administration\Client;
 use App\Models\Administration\Countries\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
+use App\Models\Package\Package;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+
+    public function index(){
+
+        $clients = Client::all();
+
+        return view('admin.administrations.clients.index',compact('clients'));
+    }
+
     public function register()
     {
         $countries = Country::orderBy('name','asc')->get();
@@ -21,6 +30,13 @@ class ClientController extends Controller
 
         return view('clients.register.client_register',compact('countries','agencies'));
     
+    }
+
+    public function consult($id_client){
+
+        $packages = Package::where('id_client',$id_client)->get();
+
+        return view('admin.administrations.clients.consult',compact('packages'));
     }
 
     public function store(Request $request)

@@ -41,17 +41,25 @@
           </ul>
         </li>
 
-        <li><a><i class="fa fa-user"></i> Origen<span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-paper-plane"></i> Origen<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{{ route('pre_alerts.index') }}">Pre-Alertas</a></li>
             <li><a href="{{ route('trakings.index') }}">Paquetes</a></li>
             <li><a href="{{ route('packages.index') }}">Listar Paquetes</a></li>
+            <li><a href="{{ route('consolidados.index') }}">Listar Consolidados</a></li>
             <li><a href="{{ route('tulas.create') }}">Tulas</a></li>
             <li><a href="{{ route('tulas.index') }}">Listar Tulas</a></li>
             <li><a href="{{ route('master_guides.create') }}">Guias</a></li>
             <li><a href="{{ route('master_guides.index') }}">Listar Guias</a></li>
             <li><a href="{{ route('paddles.create') }}">Paletas</a></li>
             <li><a href="{{ route('paddles.index') }}">Listar Paletas</a></li>
+          </ul>
+        </li>
+
+        <li><a><i class="fa fa-search"></i>Consultas<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{{ route('clients.index') }}">Clientes</a></li>
+           
           </ul>
         </li>
       </ul>

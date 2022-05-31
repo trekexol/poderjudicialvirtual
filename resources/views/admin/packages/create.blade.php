@@ -60,7 +60,7 @@
                       @endif
                       @if (isset($clients)) 
                         @foreach ($clients as $client)
-                          <option value="{{ $client->id }}">{{$clients->type_cedula ?? ''}}{{$clients->cedula ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
+                          <option value="{{ $client->id }}">{{$client->type_cedula ?? ''}}{{$client->cedula ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
                         @endforeach
                       @endif
                      
