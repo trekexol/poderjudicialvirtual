@@ -19,6 +19,7 @@ use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
 use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
+use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
@@ -39,8 +40,10 @@ Auth::routes();
 Route::get('/home',  [BackendController::class, 'index'])->name('home');
 
 Route::group(["prefix"=>'clients'],function(){
+    Route::get('/index', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/register', [ClientController::class, 'register'])->name('clients.create');
     Route::post('/store', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('/consult/{id_client}', [ClientController::class, 'consult'])->name('clients.consult');
 });
 
 Route::group(["prefix"=>'countries'],function(){
@@ -235,4 +238,10 @@ Route::group(["prefix"=>'pre_alerts'],function(){
     Route::get('create/{id?}', [PreAlertController::class, 'create'])->name('pre_alerts.create');
     Route::post('store', [PreAlertController::class, 'store'])->name('pre_alerts.store');
     Route::post('update/{id}', [PreAlertController::class, 'update'])->name('pre_alerts.update');
+});
+
+
+Route::group(["prefix"=>'consolidados'],function(){
+    Route::get('index', [ConsolidadoController::class, 'index'])->name('consolidados.index');
+    Route::post('aerial', [ConsolidadoController::class, 'aerial'])->name('consolidados.aerial');
 });
