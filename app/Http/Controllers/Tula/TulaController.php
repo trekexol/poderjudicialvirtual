@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
 use App\Models\Administration\Agent;
 use App\Models\Administration\Countries\State;
+use App\Models\Administration\Wharehouse;
 use App\Models\Tula\Tula;
 use Illuminate\Http\Request;
 
@@ -38,8 +39,10 @@ class TulaController extends Controller
         $agents = Agent::orderBy('id','desc')->get();
 
         $states = State::orderBy('id','desc')->get();
+        
+        $wharehouses = Wharehouse::all();
        
-        return view('admin.tulas.create',compact('tula','agencies','agents','states'));
+        return view('admin.tulas.create',compact('wharehouses','tula','agencies','agents','states'));
     
     }
 

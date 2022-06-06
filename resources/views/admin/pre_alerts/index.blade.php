@@ -40,8 +40,6 @@
               <th>Fecha_Rg.</th>
               <th>Contenido</th>
               <th>Nota</th>
-              <th>Ofic.</th>
-              <th>Agente</th>
               <th>Status</th>
               <th></th>
             </tr>
@@ -59,8 +57,6 @@
               <td>{{$pre_alert->created_at ?? ''}}</td>
               <td>{{$pre_alert->package_content ?? ''}}</td>
               <td>{{$pre_alert->package_remarks ?? ''}}</td>
-              <td>{{$pre_alert->clients->agencies['name'] ?? '' }}</td>
-              <td>{{$pre_alert->clients->agents['name'] ?? '' }}</td>
               <td>{{$pre_alert->status ?? ''}}</td>
               <td></td>
             </tr>

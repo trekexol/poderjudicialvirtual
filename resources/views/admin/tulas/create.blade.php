@@ -27,8 +27,8 @@
               @csrf 
                          
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="id_office_agency">Oficina:</label>
-                <div class="col-sm-4">
+                <label class="col-form-label col-sm-2 label-align " for="id_office_agency">Almacén de Origen:</label>
+                <div class="col-sm-3">
                   <select class="select2_group form-control" name="id_office_agency">
                       @if (isset($tula))
                         <option value="{{ $tula->id_office_agency ?? null }}">{{ $tula->office_agencies['name'] ?? null }}</option>
@@ -36,15 +36,15 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @foreach ($agencies as $agency)
-                        <option value="{{ $agency->id }}">{{ $agency->name ?? '' }}</option>
+                      @foreach ($wharehouses as $wharehouse)
+                        <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
                       @endforeach
                     </select>
                 </div>
               </div>
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="id_agent">Agente:</label>
-                <div class="col-sm-4">
+                <label class="col-form-label col-sm-2 label-align " for="id_agent">Almacén de Destino:</label>
+                <div class="col-sm-3">
                     <select class="select2_group form-control" name="id_agent">
                       @if (isset($tula))
                         <option value="{{ $tula->id_agent ?? null }}">{{ $tula->agents['name'] ?? null }}</option>
@@ -52,17 +52,17 @@
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @if (isset($agents)) 
-                        @foreach ($agents as $agent)
-                          <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
-                        @endforeach
+                      @if (isset($wharehouses)) 
+                      @foreach ($wharehouses as $wharehouse)
+                      <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
+                    @endforeach
                       @endif
                      
                     </select>
                 </div>
               </div>
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="id_destination_state">Destino:</label>
+                <label class="col-form-label col-sm-2 label-align " for="id_destination_state">Destino:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="id_destination_state" required>
                       @if (isset($tula))
@@ -77,36 +77,36 @@
                       @endforeach
                     </select>
                 </div>
-                <label class="col-form-label col-sm-4 label-align " for="cubic_foot">Pié Cúbico:</label>
+                <label class="col-form-label col-sm-3 label-align " for="cubic_foot">Pié Cúbico:</label>
                 <div class="col-sm-3">
                   <input id="cubic_foot" name="cubic_foot" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->cubic_foot ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
               </div>
            
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Dimensiones:</label>
-                <div class="col-sm-2">
+                <label class="col-form-label col-sm-2 label-align " for="dimension">Dimensiones:</label>
+                <div class="col-sm-1">
                   <input id="dimension_width" name="dimension_width" placeholder="Ancho" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_width ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                   <input id="dimension_length" name="dimension_length" placeholder="Largo" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_length ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                   <input id="dimension_high" name="dimension_high" placeholder="Alto" class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->dimension_high ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
 
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Volumen:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Volumen:</label>
                 <div class="col-sm-3">
                   <input id="volume" name="volume"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->volume ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
               </div>
 
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Peso en lbs:</label>
+                <label class="col-form-label col-sm-2 label-align " for="dimension">Peso en lbs:</label>
                 <div class="col-sm-3">
                   <input id="weight" name="weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
-                <label class="col-form-label col-sm-4 label-align " for="dimension">Peso Cargable:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Peso Cargable:</label>
                 <div class="col-sm-3">
                   <input id="loadable_weight" name="loadable_weight"  class="date-picker form-control"  type="text" required="required" value="{{ number_format(bcdiv(($tula->loadable_weight ?? 0), '1', 2), 2, ',', '.') ?? null }}">
                 </div>
@@ -114,7 +114,7 @@
 
              
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="type_of_service">Servicio:</label>
+                <label class="col-form-label col-sm-2 label-align " for="type_of_service">Servicio:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="type_of_service" required>
                       @if (isset($tula))
@@ -129,7 +129,7 @@
                       <option value="Marítimo Express">Marítimo Express</option>
                     </select>
                 </div>
-                <label class="col-form-label col-sm-4 label-align " for="class">Clase:</label>
+                <label class="col-form-label col-sm-3 label-align " for="class">Clase:</label>
                 <div class="col-sm-2">
                     <select class="select2_group form-control" name="class" required>
                       @if (isset($tula))
@@ -145,7 +145,7 @@
                 </div>
               </div>
               <div class="item form-group">
-                  <label class="col-form-label col-sm-1 label-align " for="loose_packages">Bultos sueltos:</label>
+                  <label class="col-form-label col-sm-2 label-align " for="loose_packages">Bultos sueltos:</label>
                   <div class="col-md-1 col-sm-1 ">
                   <p> Si: <input type="radio" class="flat" name="loose_packages" id="loose_packagesYes" value="Yes"  required /> 
                   </div>
@@ -153,18 +153,18 @@
                       No: <input type="radio" class="flat" name="loose_packages" id="loose_packagesNo" value="No" checked=""/>
                   </p>
                   </div>
-                  <label class="col-form-label col-sm-5 label-align " for="reference">Referencia:</label>
+                  <label class="col-form-label col-sm-4 label-align " for="reference">Referencia:</label>
                   <div class="col-sm-3">
                     <input id="reference" name="reference"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->reference ?? '' }}">
                   </div>
               </div>
 
               <div class="item form-group">
-                <label class="col-form-label col-sm-1 label-align " for="dimension">Expediente:</label>
+                <label class="col-form-label col-sm-2 label-align " for="dimension">Expediente:</label>
                 <div class="col-sm-3">
                   <input id="record" name="record"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->record ?? '' }}">
                 </div>
-                <label class="col-form-label col-sm-4 label-align " for="dimension">Número de Paquetes:</label>
+                <label class="col-form-label col-sm-3 label-align " for="dimension">Número de Paquetes:</label>
                 <div class="col-sm-3">
                   <input id="number_of_packages" name="number_of_packages"  class="date-picker form-control"  type="text" required="required" value="{{ $tula->number_of_packages ?? '' }}">
                 </div>

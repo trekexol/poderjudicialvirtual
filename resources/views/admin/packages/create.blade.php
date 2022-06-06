@@ -84,25 +84,20 @@
                       @endif
                     </select>
                 </div>
-                <label class="col-form-label col-sm-3 label-align " for="first-name">Vendedor Externo:</label>
-                <div class="col-sm-3">
-                    <select class="select2_group form-control">
-                      
-                    </select>
-                </div>
+              
               </div>
            
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align">Fecha Llegada:
                 </label>
                 <div class="col-sm-4">
-                  <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ date_format(date_create($package->arrival_date ?? null),"Y-m-d") }}">
+                  <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}">
                 </div>
                 <label class="col-form-label col-sm-3 label-align">Hora Llegada:
                 </label>
                 <div class="col-sm-3 ">
                   @if (isset($package->arrival_date))
-                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" value="{{ date_format(date_create($package->arrival_date ?? null),"H:i") }}">        
+                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" value="{{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}">        
                   @else
                     <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" >                   
                   @endif
