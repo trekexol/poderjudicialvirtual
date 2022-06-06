@@ -33,7 +33,7 @@
           <thead>
             <tr>
               <th>N°</th>
-              <th>Agente</th>
+              <th>Origen</th>
               <th>Destino</th>
               <th>Referencia</th>
               <th>Peso</th>
@@ -49,8 +49,8 @@
               <td class="text-center">
                 <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
               </td>
-              <td>{{$tula->agents['name'] ?? ''}}</td>
-              <td>{{$tula->destination_states['name'] ?? ''}}</td>
+              <td>{{$tula->wharehouse_origin['name'] ?? ''}}</td>
+              <td>{{$tula->wharehouse_destination['name'] ?? ''}}</td>
               <td>{{$tula->reference ?? ''}}</td>
               <td>{{$tula->weight ?? ''}}</td>
               <td>{{$tula->volume ?? ''}}</td>
