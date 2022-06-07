@@ -14,11 +14,15 @@
         <div class="col-sm-8">
           <h2>Listado de Paquetes del Cliente Aéreo</h2>
         </div>
-      <form method="POST" action="{{ route('consolidados.aerial') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+      <form method="POST" action="{{ route('consolidados.aerial') }}" id="form" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
         @csrf 
+        <input id="id_packages" type="hidden" class="form-control @error('id_packages') is-invalid @enderror" name="id_packages[]"  readonly required autocomplete="id_packages">
+    
         <div class="col-sm-3">
           <button type="submit" class="btn btn-round btn-primary">Consolidar Aéreo</button>
         </div>
+
+      </form>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -51,7 +55,7 @@
               @if ($package->instruction == 'Aéreo')
                 <tr>
                   <td class="a-center ">
-                    <input type="checkbox" class="flat" name="table_records" id="{{$package->id}}" value="{{$package->id}}">
+                    <input onclick="addIdPackages();" type="checkbox" id="flexCheckChecked{{$package->id}}">                        
                   </td>
                   <td class="text-center">
                     <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
@@ -68,13 +72,13 @@
             @endforeach
           @endisset
         </table>
-      </form>
+     
         </div>
+     
       </div>
     </div>
 </div>
     </div>
-
 
 
 
@@ -118,7 +122,7 @@
             @if ($package->instruction == 'Marítimo')
               <tr>
                 <td class="a-center ">
-                  <input type="checkbox" class="flat" name="table_records2">
+                  <input  type="checkbox" class="flat" name="table_records2">
                 </td>
                 <td class="text-center">
                   <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
@@ -166,25 +170,30 @@ $('.bulk_action input#check-all2').on('ifUnchecked', function () {
     countChecked2();
 });
 
-function countChecked2() {
-    if (checkState === 'all') {
-        $(".bulk_action input[name='table_records2']").iCheck('check');
-    }
-    if (checkState === 'none') {
-        $(".bulk_action input[name='table_records2']").iCheck('uncheck');
-    }
+  function countChecked2() {
+      if (checkState === 'all') {
+          $(".bulk_action input[name='table_records2']").iCheck('check');
+      }
+      if (checkState === 'none') {
+          $(".bulk_action input[name='table_records2']").iCheck('uncheck');
+      }
 
-    var checkCount = $(".bulk_action input[name='table_records2']:checked").length;
+      var checkCount = $(".bulk_action input[name='table_records2']:checked").length;
 
-    if (checkCount) {
-        $('.column-title').hide();
-        $('.bulk-actions').show();
-        $('.action-cnt').html(checkCount + ' Records Selected');
-    } else {
-        $('.column-title').show();
-        $('.bulk-actions').hide();
-    }
-}
+      if (checkCount) {
+          $('.column-title').hide();
+          $('.bulk-actions').show();
+          $('.action-cnt').html(checkCount + ' Records Selected');
+      } else {
+          $('.column-title').show();
+          $('.bulk-actions').hide();
+      }
+  }
+
+
+  function addIdPackages(){
+   alert("hola");
+  }
 
 </script>
 @endsection

@@ -214,6 +214,7 @@ Route::group(["prefix"=>'tulas'],function(){
     Route::get('create/{id?}', [TulaController::class, 'create'])->name('tulas.create');
     Route::post('store', [TulaController::class, 'store'])->name('tulas.store');
     Route::post('update/{id}', [TulaController::class, 'update'])->name('tulas.update');
+    Route::post('storePackage', [TulaController::class, 'storePackage'])->name('tulas.storePackage');
 });
 
 Route::group(["prefix"=>'master_guides'],function(){

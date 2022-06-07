@@ -464,7 +464,7 @@
                               </div>
                               <div class="col-sm-1">
                                 <a href="{{ route('packages_lumps.edit',$package_lump->id)}}" title="Editar"><i class="fa fa-edit"></i></a> 
-                                <a href="#" class="delete_packages_lump" title="Eliminar" data-id-package_lump={{$package_lump->id}} data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash text-danger"></i></a> 
+                                <a href="#" class="delete_packages_lump" title="Eliminar" data-id-package_lump={{$package_lump->id}} data-toggle="modal" data-target="#deletePackagesLumpsModal"><i class="fa fa-trash text-danger"></i></a> 
                               </div>
                             </div>
                             @endforeach
@@ -536,6 +536,37 @@
               @csrf
               @method('DELETE')
               <input id="id_packages_type_of_good_modal" type="hidden" class="form-control @error('id_packages_type_of_good_modal') is-invalid @enderror" name="id_packages_type_of_good_modal" readonly required autocomplete="id_packages_type_of_good_modal">
+              <input id="id_package_modal" type="hidden" class="form-control @error('id_package_modal') is-invalid @enderror" value="{{$package->id}}" name="id_package_modal" readonly required autocomplete="id_package_modal">
+                
+              <h5 class="text-center">Seguro que desea eliminar?</h5>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+<!-- Delete Warning Modal -->
+<div class="modal modal-danger fade" id="deletePackagesLumpsModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+          <form action="{{ route('packages_lumps.delete')}}" method="post">
+              @csrf
+              @method('DELETE')
+              <input id="id_packages_lump_modal" type="hidden" class="form-control @error('id_packages_lump_modal') is-invalid @enderror" name="id_packages_lump_modal" readonly required autocomplete="id_packages_lump_modal">
+              <input id="id_package_modal" type="hidden" class="form-control @error('id_package_modal') is-invalid @enderror" value="{{$package->id}}" name="id_package_modal" readonly required autocomplete="id_package_modal">
                      
               <h5 class="text-center">Seguro que desea eliminar?</h5>
               
@@ -554,7 +585,22 @@
 
 @section('validation')
 <script>
-      
+
+    $(document).on('click','.delete_packages_type_of_good',function(){
+        
+        let id_packages_type_of_good = $(this).attr('data-id-packages_type_of_good');
+
+        $('#id_packages_type_of_good_modal').val(id_packages_type_of_good);
+    });
+
+    $(document).on('click','.delete_packages_lump',function(){
+        
+        let id_packages_lump = $(this).attr('data-id-package_lump');
+
+        $('#id_packages_lump_modal').val(id_packages_lump);
+    });
+
+
   let agregar2 = document.getElementById('agregar2');
   let contenido2 = document.getElementById('contenedor2');
 
@@ -646,19 +692,6 @@
   </script>
  
 
-
-  <script>
-      $(document).on('click','.delete_packages_type_of_good',function(){
-         
-         let id_packages_type_of_good = $(this).attr('data-id-packages_type_of_good');
- 
-         $('#id_packages_type_of_good_modal').val(id_packages_type_of_good);
-     });
-
-     
- 
-
-  </script>
 @isset($package)
   <script>  
      if("{{isset($package)}}"){

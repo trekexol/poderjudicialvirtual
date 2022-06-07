@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tulas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_office_agency');
-            $table->unsignedBigInteger('id_agent');
+            $table->unsignedBigInteger('id_wharehouse_origin');
+            $table->unsignedBigInteger('id_wharehouse_destiny');
             $table->unsignedBigInteger('id_destination_state');
 
             $table->unsignedBigInteger('id_master_guide')->nullable();
@@ -38,8 +38,8 @@ return new class extends Migration
 
             $table->string('status',20)->nullable();
 
-            $table->foreign('id_office_agency')->references('id')->on('agencies');
-            $table->foreign('id_agent')->references('id')->on('agents');
+            $table->foreign('id_wharehouse_origin')->references('id')->on('wharehouses');
+            $table->foreign('id_wharehouse_destiny')->references('id')->on('wharehouses');
             $table->foreign('id_destination_state')->references('id')->on('states');
             $table->foreign('id_master_guide')->references('id')->on('master_guides');
             $table->timestamps();

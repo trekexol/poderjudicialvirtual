@@ -16,7 +16,7 @@ class PackageLumpController extends Controller
 
     public function store(Request $request)
     {
-      
+     
         if(isset($request->id_package_lump)){
 
             for($count = 0;$count < count($request->type_of_packaging); $count ++){
@@ -34,12 +34,12 @@ class PackageLumpController extends Controller
         
                 $package->save();
             }
-
+            
         }else{
             return redirect('/packages')->withDanger('Debe Registrar el Paquete Primero !!');
         }
 
-        return redirect('/packages/'.$request->id_package_lump.'')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/packages/create/'.$request->id_package_lump.'')->withSuccess('Se ha registrado exitosamente!');
        
     }
 
@@ -74,20 +74,22 @@ class PackageLumpController extends Controller
         $package_lump->description = $request->description;
         $package_lump->save();
 
-        return redirect('/packages/'.$package_lump->id_package_lump.'')->withSuccess('Se ha actualizado el tipo de paquete exitosamente!');
+        return redirect('/packages/create/'.$package_lump->id_package_lump.'')->withSuccess('Se ha actualizado el tipo de paquete exitosamente!');
 
     }
 
     public function destroy(Request $request)
     {
-        
-        $package_lump = PackageLump::find($request->id_package_lump_modal); 
+       
+        $package_lump = PackageLump::find($request->id_packages_lump_modal); 
 
         if(isset($package_lump)){
             
             $package_lump->delete();
     
-            return redirect('/packages/'.$request->id_package_lump_modal.'')->withSuccess('Se ha Eliminado Correctamente!!');
+            return redirect('/packages/create/'.$request->id_package_modal.'')->withSuccess('Se ha Eliminado Correctamente!!');
+        }else{
+
         }
     }
 }

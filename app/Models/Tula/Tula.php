@@ -9,11 +9,11 @@ class Tula extends Model
 {
     use HasFactory;
 
-    public function office_agencies(){
-        return $this->belongsTo('App\Models\Administration\Agency','id_office_agency');
+    public function wharehouse_origin(){
+        return $this->belongsTo('App\Models\Administration\Wharehouse','id_wharehouse_origin');
     }
-    public function agents(){
-        return $this->belongsTo('App\Models\Administration\Agent','id_agent');
+    public function wharehouse_destiny(){
+        return $this->belongsTo('App\Models\Administration\Wharehouse','id_wharehouse_destiny');
     }
     public function destination_states(){
         return $this->belongsTo('App\Models\Administration\Countries\State','id_destination_state');

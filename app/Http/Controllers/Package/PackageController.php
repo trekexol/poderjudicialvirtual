@@ -25,7 +25,10 @@ class PackageController extends Controller
     public function index()
     {
       
-        $packages = Package::orderBy('id','desc')->get();
+        $packages = Package::orderBy('id','desc')
+                            ->where('id_tula',null)
+                            ->where('id_paddle',null)
+                            ->get();
        
         return view('admin.packages.index',compact('packages'));
     

@@ -120,7 +120,6 @@
                       @else
                         <option value="">Seleccione</option>
                       @endif
-                      <option value="Aéreo">Aéreo</option>
                       <option value="Marítimo">Marítimo</option>
                       <option value="Terrestre">Terrestre</option>
                       <option value="Marítimo Express">Marítimo Express</option>
