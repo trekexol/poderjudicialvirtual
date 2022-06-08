@@ -27,11 +27,11 @@
               @csrf 
                          
               <div class="item form-group">
-                <label class="col-form-label col-sm-2 label-align " for="id_office_agency">Almacén de Origen:</label>
+                <label class="col-form-label col-sm-2 label-align " for="id_wharehouse_origin">Almacén de Origen:</label>
                 <div class="col-sm-3">
-                  <select class="select2_group form-control" name="id_office_agency">
+                  <select class="select2_group form-control" name="id_wharehouse_origin">
                       @if (isset($tula))
-                        <option value="{{ $tula->id_office_agency ?? null }}">{{ $tula->office_agencies['name'] ?? null }}</option>
+                        <option value="{{ $tula->id_wharehouse_origin ?? null }}">{{ $tula->wharehouse_origin['name'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -43,11 +43,11 @@
                 </div>
               </div>
               <div class="item form-group">
-                <label class="col-form-label col-sm-2 label-align " for="id_agent">Almacén de Destino:</label>
+                <label class="col-form-label col-sm-2 label-align " for="id_wharehouse_destiny">Almacén de Destino:</label>
                 <div class="col-sm-3">
-                    <select class="select2_group form-control" name="id_agent">
+                    <select class="select2_group form-control" name="id_wharehouse_destiny">
                       @if (isset($tula))
-                        <option value="{{ $tula->id_agent ?? null }}">{{ $tula->agents['name'] ?? null }}</option>
+                        <option value="{{ $tula->id_wharehouse_destiny ?? null }}">{{ $tula->wharehouse_destiny['name'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -114,22 +114,8 @@
 
              
               <div class="item form-group">
-                <label class="col-form-label col-sm-2 label-align " for="type_of_service">Servicio:</label>
-                <div class="col-sm-3">
-                    <select class="select2_group form-control" name="type_of_service" required>
-                      @if (isset($tula))
-                        <option value="{{ $tula->type_of_service ?? null }}">{{ $tula->type_of_service ?? null }}</option>
-                        <option value="">---------------------</option>
-                      @else
-                        <option value="">Seleccione</option>
-                      @endif
-                      <option value="Aéreo">Aéreo</option>
-                      <option value="Marítimo">Marítimo</option>
-                      <option value="Terrestre">Terrestre</option>
-                      <option value="Marítimo Express">Marítimo Express</option>
-                    </select>
-                </div>
-                <label class="col-form-label col-sm-3 label-align " for="class">Clase:</label>
+               
+                <label class="col-form-label col-sm-4 label-align " for="class">Clase:</label>
                 <div class="col-sm-2">
                     <select class="select2_group form-control" name="class" required>
                       @if (isset($tula))
@@ -191,6 +177,80 @@
     </div>
   </div>
 </div>
+
+@isset($tula)
+<div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="col-md-4 col-sm-4 h5">
+              Paquetes Incluidos
+            </div>
+          
+            <ul class="col-sm-1 nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form method="POST" enctype="multipart/form-data" action="{{ route('tulas.storePackage') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+              @csrf 
+              <input id="id_tula" name="id_tula" value="{{ $tula->id }}" class="date-picker form-control"  type="hidden" >
+                  
+                <div class="item form-group">
+                  <label class="col-form-label col-sm-3 label-align " for="package_reference">Ingresar un Paquete en la Tula:</label>
+                  <div class="col-sm-3">
+                    <input id="package_reference" name="package_reference"  class="date-picker form-control"  type="text" >
+                  </div>
+                  <div class="col-sm-3 ">
+                    <button type="submit" class="btn btn-primary" id="Btntula">Registrar Paquete</button>
+                  </div>
+                </div>
+              </form>
+              @isset($packages)
+              <div class="card-box table-responsive">
+      
+                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Tracking</th>
+                      <th>Cliente</th>
+                      <th>Casillero</th>
+                      <th>Descripcion</th>
+                      <th>Tipo</th>
+                      <th>Agente</th>
+                      <th>Oficina</th>
+                    </tr>
+                  </thead>
+                 
+                    @foreach ($packages as $package)
+                    <tr>
+                      <td class="text-center">
+                        <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
+                      </td>
+                      <td>{{$package->tracking ?? ''}}</td>
+                      <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
+                      <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
+                      <td>{{$package->description ?? ''}}</td>
+                      <td>{{$package->instruction ?? ''}}</td>
+                      <td>{{$package->vendors['name'] ?? ''}}</td>
+                      <td>{{$package->office_locations['direction'] ?? ''}}</td>
+                    </tr>
+                    @endforeach
+                  @endisset
+                  
+        
+                  </table>
+                </div>
+              </div>
+          </div>
+    </div>
+</div>
+@endisset
 
 @endsection
 

@@ -33,7 +33,7 @@ class PackageTypeOfGoodController extends Controller
             return redirect('/packages')->withDanger('Debe Registrar el Paquete Primero !!');
         }
 
-        return redirect('/packages/'.$request->id_package_type_of_good.'')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/packages/create/'.$request->id_package_type_of_good.'')->withSuccess('Se ha registrado exitosamente!');
        
     }
 
@@ -60,20 +60,20 @@ class PackageTypeOfGoodController extends Controller
         $package_type_of_good->charge = $request->charge;
         $package_type_of_good->save();
 
-        return redirect('/packages/'.$package_type_of_good->id_package.'')->withSuccess('Se ha actualizado el tipo de paquete exitosamente!');
+        return redirect('/packages/create/'.$package_type_of_good->id_package.'')->withSuccess('Se ha actualizado el tipo de paquete exitosamente!');
 
     }
 
     public function destroy(Request $request)
     {
-        
+       
         $package_type_of_good = PackageTypeOfGood::find($request->id_packages_type_of_good_modal); 
 
         if(isset($package_type_of_good)){
             
             $package_type_of_good->delete();
     
-            return redirect('/packages/'.$request->id_packages_type_of_good_modal.'')->withSuccess('Se ha Eliminado Correctamente!!');
+            return redirect('/packages/create/'.$request->id_package_modal.'')->withSuccess('Se ha Eliminado Correctamente!!');
         }
     }
 }

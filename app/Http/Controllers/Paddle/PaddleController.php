@@ -8,6 +8,7 @@ use App\Models\Administration\Agent;
 use App\Models\Administration\Countries\State;
 use App\Models\Package\Package;
 use App\Models\Paddle\Paddle;
+use Exception;
 use Illuminate\Http\Request;
 
 class PaddleController extends Controller
@@ -75,21 +76,45 @@ class PaddleController extends Controller
     }
     public function storePackage(Request $request)
     {
+        try{
+
+            $package = Package::findOrFail($request->package_reference);
+
+            $return = $this->validationStorePackage($package,$request);
+            
+            if($return != null){
+                return $return;
+            }
         
-        $package = Package::findOrFail($request->package_reference);
-       
-        if(empty($package)){
+            $package->id_paddle = $request->id_paddle;
+
+            $package->save();
+
+            return redirect('/paddles/create/'.$request->id_paddle.'')->withSuccess('Se ha registrado exitosamente el Paquete!');
+        
+        }catch(Exception $e){
             return redirect('/paddles/create/'.$request->id_paddle.'')->withDanger('No se ha encontrado el Paquete!');
         }
-       
-        $package->id_paddle = $request->id_paddle;
-
-        $package->save();
-
-        return redirect('/paddles/create/'.$request->id_paddle.'')->withSuccess('Se ha registrado exitosamente el Paquete!');
-       
 
     }
+
+    public function validationStorePackage($package,$request){
+       
+        if($package->id_paddle == $request->id_paddle){
+            return redirect('/paddles/create/'.$request->id_paddle.'')->withDanger('Ya se agrego el Paquete en la Paleta!');
+        }
+
+        if($package->id_paddle != null){
+            return redirect('/paddles/create/'.$request->id_paddle.'')->withDanger('Ya se agrego el Paquete en otra Paleta!');
+        }
+        if($package->id_tula != null){
+            return redirect('/paddles/create/'.$request->id_paddle.'')->withDanger('Ya se agrego el Paquete en la Tula '.$package->id_tula.'!');
+        }
+
+        return null;
+    }
+
+
     public function update(Request $request, $id)
     {
         
