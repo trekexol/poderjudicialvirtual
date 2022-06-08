@@ -34,9 +34,13 @@ class ClientController extends Controller
 
     public function consult($id_client){
 
-        $packages = Package::where('id_client',$id_client)->get();
+        $packages = Package::where('id_client',$id_client)
+                            ->where('status','Activo')
+                            ->get();
 
-        return view('admin.administrations.clients.consult',compact('packages'));
+        $client = Client::find($id_client);
+
+        return view('admin.administrations.clients.consult',compact('packages','client'));
     }
 
     public function store(Request $request)

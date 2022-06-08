@@ -245,4 +245,5 @@ Route::group(["prefix"=>'pre_alerts'],function(){
 Route::group(["prefix"=>'consolidados'],function(){
     Route::get('index', [ConsolidadoController::class, 'index'])->name('consolidados.index');
     Route::post('aerial', [ConsolidadoController::class, 'aerial'])->name('consolidados.aerial');
+    Route::post('maritime', [ConsolidadoController::class, 'maritime'])->name('consolidados.maritime');
 });

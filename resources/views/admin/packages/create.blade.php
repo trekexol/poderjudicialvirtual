@@ -520,7 +520,8 @@
 
 @endif
 
-
+@isset($package)
+    
 <!-- Delete Warning Modal -->
 <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -566,7 +567,7 @@
               @csrf
               @method('DELETE')
               <input id="id_packages_lump_modal" type="hidden" class="form-control @error('id_packages_lump_modal') is-invalid @enderror" name="id_packages_lump_modal" readonly required autocomplete="id_packages_lump_modal">
-              <input id="id_package_modal" type="hidden" class="form-control @error('id_package_modal') is-invalid @enderror" value="{{$package->id}}" name="id_package_modal" readonly required autocomplete="id_package_modal">
+              <input id="id_package_modal2" type="hidden" class="form-control @error('id_package_modal') is-invalid @enderror" value="{{$package->id}}" name="id_package_modal" readonly required autocomplete="id_package_modal">
                      
               <h5 class="text-center">Seguro que desea eliminar?</h5>
               
@@ -579,6 +580,8 @@
       </div>
   </div>
 </div>
+
+@endisset
 
 @endsection
 

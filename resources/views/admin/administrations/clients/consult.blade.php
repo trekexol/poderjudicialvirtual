@@ -7,22 +7,23 @@
 @include('admin.layouts.danger')    {{-- EDITAR --}}
 @include('admin.layouts.delete')    {{-- DELELTE --}}
 {{-- VALIDACIONES-RESPUESTA --}}
+
 <div class="right_col" role="main">
   <div class="col-md-12 col-sm-12 ">
+    
+<form method="POST" action="{{ route('consolidados.aerial') }}" enctype="multipart/form-data" >
+  @csrf
     <div class="x_panel">
       <div class="x_title">
         <div class="col-sm-8">
           <h2>Listado de Paquetes del Cliente Aéreo</h2>
         </div>
-      <form method="POST" action="{{ route('consolidados.aerial') }}" id="form" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
-        @csrf 
-        <input id="id_packages" type="hidden" class="form-control @error('id_packages') is-invalid @enderror" name="id_packages[]"  readonly required autocomplete="id_packages">
-    
+        <input type="hidden" id="id_client" name="id_client" value="{{ $client->id ?? null }}">
+
         <div class="col-sm-3">
           <button type="submit" class="btn btn-round btn-primary">Consolidar Aéreo</button>
         </div>
 
-      </form>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -55,7 +56,7 @@
               @if ($package->instruction == 'Aéreo')
                 <tr>
                   <td class="a-center ">
-                    <input onclick="addIdPackages();" type="checkbox" id="flexCheckChecked{{$package->id}}">                        
+                    <input type="checkbox"  name="checkAerial{{$package->id}}" class="flat" value="{{ $package->id }}" id="flexCheckCheckedAerial">    
                   </td>
                   <td class="text-center">
                     <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
@@ -80,8 +81,9 @@
 </div>
     </div>
 
-
-
+  </form>
+  <form method="POST" action="{{ route('consolidados.maritime') }}" enctype="multipart/form-data" >
+    @csrf
     <div class="x_panel">
       <div class="x_title">
         <div class="col-sm-8">
@@ -122,7 +124,7 @@
             @if ($package->instruction == 'Marítimo')
               <tr>
                 <td class="a-center ">
-                  <input  type="checkbox" class="flat" name="table_records2">
+                  <input type="checkbox"  name="checkMaritime{{$package->id}}" class="flat" value="{{ $package->id }}" id="flexCheckCheckedMaritime">    
                 </td>
                 <td class="text-center">
                   <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
@@ -147,7 +149,7 @@
     </div>
     </div>
 
-
+  </form>
 
 
 
@@ -155,30 +157,53 @@
 </div>
 
 
+<div class="modal modal-danger fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Verificar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <h5 class="text-center">Seguro que desea Consolidar los Paquetes Aereos?</h5>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button onclick="consolidarAerial();" class="btn btn-danger">Consolidar</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
 
 @endsection
 
 @section('validation')
 
 <script>
-   $('.bulk_action input#check-all2').on('ifChecked', function () {
-    checkState = 'all';
-    countChecked2();
-});
-$('.bulk_action input#check-all2').on('ifUnchecked', function () {
-    checkState = 'none';
-    countChecked2();
-});
 
-  function countChecked2() {
+    $('.bulk_action input#check-all').on('ifChecked', function () {
+      checkState = 'all';
+      countChecked();
+    });
+    $('.bulk_action input#check-all').on('ifUnchecked', function () {
+      checkState = 'none';
+      countChecked();
+    });
+
+    function countChecked() {
       if (checkState === 'all') {
-          $(".bulk_action input[name='table_records2']").iCheck('check');
+          $(".bulk_action input[id='flexCheckCheckedAerial']").iCheck('check');
       }
       if (checkState === 'none') {
-          $(".bulk_action input[name='table_records2']").iCheck('uncheck');
+          $(".bulk_action input[id='flexCheckCheckedAerial']").iCheck('uncheck');
       }
 
-      var checkCount = $(".bulk_action input[name='table_records2']:checked").length;
+      var checkCount = $(".bulk_action input[id='flexCheckCheckedAerial']:checked").length;
 
       if (checkCount) {
           $('.column-title').hide();
@@ -188,12 +213,45 @@ $('.bulk_action input#check-all2').on('ifUnchecked', function () {
           $('.column-title').show();
           $('.bulk-actions').hide();
       }
-  }
+    }
 
 
-  function addIdPackages(){
-   alert("hola");
-  }
+
+
+
+
+
+
+    
+
+    $('.bulk_action input#check-all2').on('ifChecked', function () {
+      checkState2 = 'all';
+      countChecked2();
+    });
+    $('.bulk_action input#check-all2').on('ifUnchecked', function () {
+      checkState2 = 'none';
+      countChecked2();
+    });
+
+    function countChecked2() {
+      if (checkState2 === 'all') {
+          $(".bulk_action input[id='flexCheckCheckedMaritime']").iCheck('check');
+      }
+      if (checkState2 === 'none') {
+          $(".bulk_action input[id='flexCheckCheckedMaritime']").iCheck('uncheck');
+      }
+
+      var checkCount2 = $(".bulk_action input[id='flexCheckCheckedMaritime']:checked").length;
+
+      if (checkCount2) {
+          $('.column-title').hide();
+          $('.bulk-actions').show();
+          $('.action-cnt').html(checkCount2 + ' Records Selected');
+      } else {
+          $('.column-title').show();
+          $('.bulk-actions').hide();
+      }
+    }
 
 </script>
 @endsection
