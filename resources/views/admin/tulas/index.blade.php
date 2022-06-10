@@ -50,7 +50,7 @@
                 <a href="{{ route('tulas.create',$tula->id) }}"  title="Seleccionar">{{$tula->id}}</a>
               </td>
               <td>{{$tula->wharehouse_origin['name'] ?? ''}}</td>
-              <td>{{$tula->wharehouse_destination['name'] ?? ''}}</td>
+              <td>{{$tula->wharehouse_destiny['name'] ?? ''}}</td>
               <td>{{$tula->reference ?? ''}}</td>
               <td>{{$tula->weight ?? ''}}</td>
               <td>{{$tula->volume ?? ''}}</td>

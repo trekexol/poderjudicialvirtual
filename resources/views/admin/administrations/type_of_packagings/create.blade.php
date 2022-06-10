@@ -11,7 +11,7 @@
 
     <div class="x_content">
         <br />
-        <form method="POST" action="{{ route('package_status.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="POST" action="{{ route('type_of_packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
                 
             <div class="item form-group">
@@ -26,18 +26,13 @@
                     <input type="text" id="description" name="description" required="required" class="form-control ">
                 </div>
             </div>
-            <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Color:</label>
-                <div class="col-md-4 col-sm-4 ">
-                    <input type="text" id="color" name="color" required="required" class="form-control ">
-                </div>
-            </div>
+           
            
             <div class="ln_solid"></div>
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
                     <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="{{ route('package_status.index') }}" class="btn btn-danger" type="button">Cancel</a>
+                    <a href="{{ route('type_of_packages.index') }}" class="btn btn-danger" type="button">Cancel</a>
                 </div>
             </div>
 
