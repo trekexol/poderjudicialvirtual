@@ -43,7 +43,7 @@
             @foreach ($type_of_goods as $type_of_good)
             <tr>
               <td>{{$type_of_good->code}}</td>
-              <td>{{$type_of_good->name}}</td>
+              <td>{{$type_of_good->description}}</td>
               <td>{{$type_of_good->tariff_rate ?? ''}}</td>
               <td>{{$type_of_good->tax_percentage ?? ''}}</td>
               <td>

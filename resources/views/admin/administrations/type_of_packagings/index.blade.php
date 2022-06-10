@@ -16,7 +16,7 @@
           <h2>Status de Paquetes</h2>
         </div>
         <div class="col-sm-2">
-          <a href="{{ route('package_status.create') }}" type="button" class="btn btn-round btn-primary">Agregar</a>
+          <a href="{{ route('type_of_packagings.create') }}" type="button" class="btn btn-round btn-primary">Agregar</a>
         </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -34,19 +34,17 @@
             <tr>
               <th>Código</th>
               <th>Descripción</th>
-              <th>Color</th>
               <th></th>
             </tr>
           </thead>
-          @isset($package_status)
-            @foreach ($package_status as $package_statu)
+          @isset($type_of_packagings)
+            @foreach ($type_of_packagings as $type_of_packaging)
             <tr>
-              <td>{{$package_statu->code}}</td>
-              <td>{{$package_statu->description}}</td>
-              <td>{{$package_statu->color}}</td>
+              <td>{{$type_of_packaging->code}}</td>
+              <td>{{$type_of_packaging->description}}</td>
               <td>
-                <a href="{{ route('package_status.edit',$package_statu->id) }}"  title="Editar"><i class="fa fa-edit"></i></a>
-                <a href="#" class="delete" data-id-package_statu={{$package_statu->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
+                <a href="{{ route('type_of_packagings.edit',$type_of_packaging->id) }}"  title="Editar"><i class="fa fa-edit"></i></a>
+                <a href="#" class="delete" data-id-type_of_packaging={{$type_of_packaging->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
               </td>
             </tr>
             @endforeach
@@ -61,6 +59,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- Delete Warning Modal -->
 <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -72,10 +72,10 @@
               </button>
           </div>
           <div class="modal-body">
-          <form action="{{ route('package_status.delete') }}" method="post">
+          <form action="{{ route('type_of_packagings.delete') }}" method="post">
               @csrf
               @method('DELETE')
-              <input id="id_package_statu_modal" type="hidden" class="form-control @error('id_package_statu_modal') is-invalid @enderror" name="id_package_statu_modal" readonly required autocomplete="id_package_statu_modal">
+              <input id="id_type_of_packaging_modal" type="hidden" class="form-control @error('id_type_of_packaging_modal') is-invalid @enderror" name="id_type_of_packaging_modal" readonly required autocomplete="id_type_of_packaging_modal">
                      
               <h5 class="text-center">Seguro que desea eliminar?</h5>
               
@@ -95,9 +95,9 @@
 <script>
     $(document).on('click','.delete',function(){
          
-         let id_package_statu = $(this).attr('data-id-package_statu');
+         let id_type_of_packaging = $(this).attr('data-id-type_of_packaging');
  
-         $('#id_package_statu_modal').val(id_package_statu);
+         $('#id_type_of_packaging_modal').val(id_type_of_packaging);
      });
 </script>
 @endsection
