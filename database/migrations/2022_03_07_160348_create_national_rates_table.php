@@ -17,6 +17,10 @@ class CreateNationalRatesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_wharehouse_origin')->nullable();
             $table->unsignedBigInteger('id_wharehouse_destination')->nullable();
+            $table->unsignedBigInteger('id_state_origin')->nullable();
+            $table->unsignedBigInteger('id_state_destination')->nullable();
+            $table->unsignedBigInteger('id_client_origin')->nullable();
+            $table->unsignedBigInteger('id_client_destination')->nullable();
 
             $table->string('weight_type',10);
             $table->decimal('minimum_weight',64,10);
@@ -28,6 +32,10 @@ class CreateNationalRatesTable extends Migration
 
             $table->foreign('id_wharehouse_origin')->references('id')->on('wharehouses');
             $table->foreign('id_wharehouse_destination')->references('id')->on('wharehouses');
+            $table->foreign('id_state_origin')->references('id')->on('states');
+            $table->foreign('id_state_destination')->references('id')->on('states');
+            $table->foreign('id_client_origin')->references('id')->on('clients');
+            $table->foreign('id_client_destination')->references('id')->on('clients');
             $table->timestamps();
         });
     }

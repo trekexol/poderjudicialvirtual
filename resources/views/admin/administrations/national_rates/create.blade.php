@@ -21,7 +21,7 @@
             <label class="col-form-label col-md-3 col-sm-3 label-align">Origen:</label>
             <div class="col-md-4 col-sm-4">
                 <select id="type_origin" name="id_type_origin" class="select2_single form-control" >
-                    <option>Seleccione un Tipo</option>
+                    <option value="">Seleccione un Tipo</option>
                     <option value="State">Estado</option>
                     <option value="Wharehouse">Almacén</option>
                     <option value="Client">Cliente</option>
@@ -29,7 +29,7 @@
             </div>
             <div id="wharehouse_origin_form" class="col-md-4 col-sm-4">
                 <select id="wharehouse_origin" name="id_wharehouse_origin" class="select2_single form-control" >
-                    <option>Seleccione un Almacén</option>
+                    <option value="">Seleccione un Almacén</option>
                     @foreach ($wharehouses as $wharehouse)
                         <option value="{{ $wharehouse->id }}">{{ $wharehouse->name }}</option>
                     @endforeach
@@ -37,7 +37,7 @@
             </div>
             <div id="client_origin_form" class="col-md-4 col-sm-4">
                 <select id="client_origin" name="id_client_origin" class="select2_single form-control" >
-                    <option>Seleccione un Cliente</option>
+                    <option value="">Seleccione un Cliente</option>
                     @foreach ($clients as $client)
                         <option value="{{ $client->id }}">{{ $client->name }}</option>
                     @endforeach
@@ -45,7 +45,7 @@
             </div>
             <div id="state_origin_form" class="col-md-4 col-sm-4">
                 <select id="state_origin" name="id_state_origin" class="select2_single form-control" >
-                    <option>Seleccione un Estado</option>
+                    <option value="">Seleccione un Estado</option>
                     @foreach ($states as $state)
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
                     @endforeach
@@ -56,7 +56,7 @@
             <label class="col-form-label col-md-3 col-sm-3 label-align">Destino:</label>
             <div class="col-md-4 col-sm-4">
                 <select id="type_destination" name="id_type_destination" class="select2_single form-control" >
-                    <option>Seleccione un Tipo</option>
+                    <option value="">Seleccione un Tipo</option>
                     <option value="State">Estado</option>
                     <option value="Wharehouse">Almacén</option>
                     <option value="Client">Cliente</option>
@@ -64,7 +64,7 @@
             </div>
             <div id="wharehouse_destination_form" class="col-md-4 col-sm-4">
                 <select id="wharehouse_destination" name="id_wharehouse_destination" class="select2_single form-control" >
-                    <option>Seleccione un Almacén</option>
+                    <option value="">Seleccione un Almacén</option>
                     @foreach ($wharehouses as $wharehouse)
                         <option value="{{ $wharehouse->id }}">{{ $wharehouse->name }}</option>
                     @endforeach
@@ -72,7 +72,7 @@
             </div>
             <div id="client_destination_form" class="col-md-4 col-sm-4">
                 <select id="client_destination" name="id_client_destination" class="select2_single form-control" >
-                    <option>Seleccione un Cliente</option>
+                    <option value="">Seleccione un Cliente</option>
                     @foreach ($clients as $client)
                         <option value="{{ $client->id }}">{{ $client->name }}</option>
                     @endforeach
@@ -80,7 +80,7 @@
             </div>
             <div id="state_destination_form" class="col-md-4 col-sm-4">
                 <select id="state_destination" name="id_state_destination" class="select2_single form-control" >
-                    <option>Seleccione un Estado</option>
+                    <option value="">Seleccione un Estado</option>
                     @foreach ($states as $state)
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
                     @endforeach
@@ -122,8 +122,8 @@
             <label class="col-form-label col-md-3 col-sm-3 label-align">Moneda:</label>
             <div class="col-md-4 col-sm-4">
                 <select id="coin" name="coin" class="select2_single form-control" >
-                    <option value="D">Dólares</option>
-                    <option value="Bs">Bolívares</option>
+                    <option value="Dolares">Dólares</option>
+                    <option value="Bolivares">Bolívares</option>
                 </select>
             </div>
         </div>
@@ -136,7 +136,7 @@
         <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align" for="price">Tasa:</label>
             <div class="col-md-4 col-sm-4 ">
-                <input type="text" id="rate" name="rate" required="required" class="form-control ">
+                <input id="rate" type="text" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{  number_format(bcdiv($bcv ?? 0, '1', 2) , 2, ',', '.') }}" required autocomplete="rate">
             </div>
         </div>
           
@@ -156,13 +156,22 @@
 @endsection
 @section('validation')
     <script>
-         $("#wharehouse_origin_form").hide();
-         $("#state_origin_form").hide();
-         $("#client_origin_form").hide();
 
-         $("#wharehouse_destination_form").hide();
-         $("#state_destination_form").hide();
-         $("#client_destination_form").hide();
+        $(document).ready(function () {
+            $("#price").mask('000.000.000.000.000,00', { reverse: true });
+        });
+        $(document).ready(function () {
+            $("#rate").mask('000.000.000.000.000,00', { reverse: true });
+        });
+
+
+        $("#wharehouse_origin_form").hide();
+        $("#state_origin_form").hide();
+        $("#client_origin_form").hide();
+
+        $("#wharehouse_destination_form").hide();
+        $("#state_destination_form").hide();
+        $("#client_destination_form").hide();
 
         $("#type_origin").on('change',function(){
             value = $(this).val();
