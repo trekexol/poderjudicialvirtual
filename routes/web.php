@@ -10,7 +10,7 @@ use App\Http\Controllers\Administration\Airline\AirlineController;
 use App\Http\Controllers\Administration\Carrier\CarrierController;
 use App\Http\Controllers\Whatsapp\WhatsappController;
 use App\Http\Controllers\Administration\Country\CountryController;
-use App\Http\Controllers\Administration\Country\CityController;
+use App\Http\Controllers\Administration\Country\StateController;
 use App\Http\Controllers\Administration\Wharehouse\WharehouseController;
 use App\Http\Controllers\Administration\Rate\NationalRateController;
 use App\Http\Controllers\Administration\Rate\InternationalRateController;
@@ -20,6 +20,7 @@ use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
+use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
@@ -49,7 +50,7 @@ Route::group(["prefix"=>'clients'],function(){
 Route::group(["prefix"=>'countries'],function(){
     Route::get('/list/codephone/{id_country}',[CountryController::class, 'listCodePhone'])->name('countries.listCodePhone');
     Route::get('/list/makingcode/{id_country}',[CountryController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
-    Route::get('/listcity/{id_country}', [CityController::class, 'list'])->name('cities.list');
+    Route::get('/listcity/{id_country}', [StateController::class, 'list'])->name('cities.list');
 
 });
 
@@ -92,12 +93,12 @@ Route::group(["prefix"=>'countries'],function(){
 });
 
 Route::group(["prefix"=>'cities'],function(){
-    Route::get('/', [CityController::class, 'index'])->name('cities.index');
-    Route::get('create', [CityController::class, 'create'])->name('cities.create');
-    Route::post('store', [CityController::class, 'store'])->name('cities.store');
-    Route::get('edit/{id}', [CityController::class, 'edit'])->name('cities.edit');
-    Route::patch('update/{id}', [CityController::class, 'update'])->name('cities.update');
-    Route::delete('delete', [CityController::class, 'destroy'])->name('cities.delete');
+    Route::get('/', [StateController::class, 'index'])->name('cities.index');
+    Route::get('create', [StateController::class, 'create'])->name('cities.create');
+    Route::post('store', [StateController::class, 'store'])->name('cities.store');
+    Route::get('edit/{id}', [StateController::class, 'edit'])->name('cities.edit');
+    Route::patch('update/{id}', [StateController::class, 'update'])->name('cities.update');
+    Route::delete('delete', [StateController::class, 'destroy'])->name('cities.delete');
 });
 
 Route::group(["prefix"=>'wharehouses'],function(){
@@ -246,4 +247,13 @@ Route::group(["prefix"=>'consolidados'],function(){
     Route::get('index', [ConsolidadoController::class, 'index'])->name('consolidados.index');
     Route::post('aerial', [ConsolidadoController::class, 'aerial'])->name('consolidados.aerial');
     Route::post('maritime', [ConsolidadoController::class, 'maritime'])->name('consolidados.maritime');
+});
+
+
+Route::group(["prefix"=>'historial_status'],function(){
+    Route::get('viewPackage/{id_package}', [HistorialStatusController::class, 'viewPackage'])->name('historial_status.viewPackage');
+    Route::post('store', [HistorialStatusController::class, 'store'])->name('historial_status.store');
+    Route::get('edit/{id}', [HistorialStatusController::class, 'edit'])->name('historial_status.edit');
+    Route::post('update/{id}', [HistorialStatusController::class, 'update'])->name('historial_status.update');
+    Route::delete('delete', [HistorialStatusController::class, 'destroy'])->name('historial_status.delete');
 });
