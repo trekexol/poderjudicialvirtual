@@ -50,6 +50,7 @@
               </td>
               <td>{{$package_traking->id}}</td>
               <td>
+                <a href="{{ route('historial_status.viewPackage',$package_traking->id) }}"  title="Ver Historial de Status"><i class="fa fa-question"></i></a>
               </td>
             </tr>
             @endforeach

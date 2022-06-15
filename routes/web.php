@@ -20,6 +20,7 @@ use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
+use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
@@ -246,4 +247,13 @@ Route::group(["prefix"=>'consolidados'],function(){
     Route::get('index', [ConsolidadoController::class, 'index'])->name('consolidados.index');
     Route::post('aerial', [ConsolidadoController::class, 'aerial'])->name('consolidados.aerial');
     Route::post('maritime', [ConsolidadoController::class, 'maritime'])->name('consolidados.maritime');
+});
+
+
+Route::group(["prefix"=>'historial_status'],function(){
+    Route::get('viewPackage/{id_package}', [HistorialStatusController::class, 'viewPackage'])->name('historial_status.viewPackage');
+    Route::post('store', [HistorialStatusController::class, 'store'])->name('historial_status.store');
+    Route::get('edit/{id}', [HistorialStatusController::class, 'edit'])->name('historial_status.edit');
+    Route::post('update/{id}', [HistorialStatusController::class, 'update'])->name('historial_status.update');
+    Route::delete('delete', [HistorialStatusController::class, 'destroy'])->name('historial_status.delete');
 });
