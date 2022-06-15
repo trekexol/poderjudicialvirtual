@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Global;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Goutte\Clientg;
+//use Goutte\Clientg;
 
 class BcvController extends Controller
 {
-    public function search_bcv()
+  /*  public function search_bcv()
     {
         $clientg = new Clientg();
 
@@ -60,12 +60,12 @@ class BcvController extends Controller
 
             } 
 
-            /*-------------------------- */
+            
             return bcdiv($bcv, '1', 2);
 
     
     }
-
+*/
 
 
 
