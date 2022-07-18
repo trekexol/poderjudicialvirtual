@@ -7,6 +7,21 @@
 @include('admin.layouts.danger')    {{-- EDITAR --}}
 @include('admin.layouts.delete')    {{-- DELELTE --}}
 
+<div class="col-sm-1 offset-sm-4">
+  <a href="{{ route('trakings.index') }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Tracking</a>
+</div>
+<div class="col-sm-1">
+  <a href="{{ route('packages.index') }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Basico</a>
+</div>
+<div class="col-sm-1">
+  <a type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Destino</a>
+</div>
+<div class="col-sm-1">
+  <a type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Cargos</a>
+</div>
+
+
+
 {{-- VALIDACIONES-RESPUESTA --}}
 <div class="right_col" role="main">
   <div class="clearfix"></div>
@@ -256,19 +271,19 @@
               <br>
               <div class="form-group row">
                 <div class="col-sm-2 offset-sm-1">
-                  <input type="checkbox" name="checks[]" id="high_value" value="high_value" data-parsley-mincheck="2"  class="flat" /> Alto Valor: 
+                  <input type="checkbox" name="checks[]"  id="myCheck"  value="high_value" onclick="myFunction();" >  Alto Valor: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="dangerous_goods" value="dangerous_goods" data-parsley-mincheck="2" class="flat" /> Merc. Peligrosa: 
+                  <input type="checkbox" name="checks[]" id="dangerous_goods" value="dangerous_goods" data-parsley-mincheck="2" /> Merc. Peligrosa: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="sed" value="sed" data-parsley-mincheck="2" class="flat" /> SED: 
+                  <input type="checkbox" name="checks[]" id="sed" value="sed" data-parsley-mincheck="2" /> SED: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="document" value="document" data-parsley-mincheck="2" class="flat" /> Documento: 
+                  <input type="checkbox" name="checks[]" id="document" value="document" data-parsley-mincheck="2" /> Documento: 
                 </div> 
                 <div class="col-sm-2">
-                  <input type="checkbox" name="checks[]" id="fragile" value="fragile" data-parsley-mincheck="2" class="flat" /> Fragil: 
+                  <input type="checkbox" name="checks[]" id="fragile" value="fragile" data-parsley-mincheck="2" /> Fragil: 
                 </div> 
               </div>
 
@@ -292,11 +307,9 @@
 </div>
 
 
-@if(isset($package))
-
   <div class="clearfix"></div>
-  <div class="row">
-      <div class="col-md-12 col-sm-12 ">
+  <div  class="row">
+      <div id="formTypeofGoods" class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
             <div class="col-md-2 col-sm-2 h5">
@@ -400,6 +413,10 @@
     </div>
   </div>
 </div>
+
+
+@if(isset($package))
+
 
 <div class="clearfix"></div>
   <div class="row">
@@ -589,6 +606,23 @@
 @section('validation')
 <script>
 
+    $("#formTypeofGoods").hide();
+
+    function myFunction() {
+      if(document.getElementById('myCheck').checked){
+        $("#formTypeofGoods").show();
+      }else{
+        $("#formTypeofGoods").hide();
+      }
+      
+    }
+
+    $(document).ready(function () {
+        $("#value").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });        
+    
+
     $(document).on('click','.delete_packages_type_of_good',function(){
         
         let id_packages_type_of_good = $(this).attr('data-id-packages_type_of_good');
@@ -603,6 +637,7 @@
         $('#id_packages_lump_modal').val(id_packages_lump);
     });
 
+   
 
   let agregar2 = document.getElementById('agregar2');
   let contenido2 = document.getElementById('contenedor2');
@@ -690,38 +725,48 @@
           document.getElementById("form_contacto").submit();
 
         });
-
-
+       
   </script>
  
 
 @isset($package)
   <script>  
      if("{{isset($package)}}"){
-      if("{{(isset($package->high_value) && $package->high_value == true)}}"){
+      
+      if("{{ (isset($package->high_value) && $package->high_value == '1') }}"){
+        document.getElementById("myCheck").checked = true;
+        
+        if(document.getElementById('myCheck').checked){
+          $("#formTypeofGoods").show();
+        }else{
+          $("#formTypeofGoods").hide();
+        }   
 
-        document.getElementById("high_value").checked = true;
-
-      }if("{{(isset($package->dangerous_goods) && $package->dangerous_goods == true)}}"){
+      }if("{{(isset($package->dangerous_goods) && $package->dangerous_goods == 1)}}"){
 
         document.getElementById("dangerous_goods").checked = true;
 
-      }if("{{(isset($package->sed) && $package->sed == true)}}"){
+      }if("{{(isset($package->sed) && $package->sed == 1)}}"){
         
         document.getElementById("sed").checked = true;
 
       }
-      if("{{(isset($package->document) && $package->document == true)}}"){
+      if("{{(isset($package->document) && $package->document == 1)}}"){
 
         document.getElementById("document").checked = true;
 
       }
-      if("{{(isset($package->fragile) && $package->fragile == true)}}"){
+      if("{{(isset($package->fragile) && $package->fragile == 1)}}"){
 
         document.getElementById("fragile").checked = true;
 
       }
+
+      
     }
+
+  
+
     function update(){
       document.getElementById("form").action = "{{ route('packages.update',$package->id) }}";
       document.getElementById("form").submit();

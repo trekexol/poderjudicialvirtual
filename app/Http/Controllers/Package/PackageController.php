@@ -133,7 +133,7 @@ class PackageController extends Controller
         $package->id_agent_office_location = $request->id_agent_office_location;
         $package->id_wharehouse = $request->id_wharehouse;
         $package->content = $request->content;
-        $package->value = $request->value;
+        $package->value = str_replace(',', '.', str_replace('.', '',$request->value));
         $package->id_origin_country = $request->id_origin_country;
         $package->id_destination_country = $request->id_destination_country;
         $package->id_delivery_company = $request->id_delivery_company;
@@ -239,26 +239,54 @@ class PackageController extends Controller
         $package->instruction_type = $request->instruction_type;
         $package->description = $request->description;
 
-       
+        //dd($request);
+     
         if(isset($request->checks)){
+            
             foreach($request->checks as $check){
+               
                 if($check == "high_value"){
                     $package->high_value = true;
+                    $high_value = true;
                 }
+
                 if($check == "dangerous_goods"){
                     $package->dangerous_goods = true;
+                    $dangerous_goods = true;
                 }
+
                 if($check == "sed"){
                     $package->sed = true;
+                    $sed = true;
                 }
+
                 if($check == "document"){
                     $package->document = true;
+                    $document = true;
                 }
+
                 if($check == "fragile"){
                     $package->fragile = true;
+                    $fragile = true;
                 }
             }
+            if(empty($high_value)){
+                $package->high_value = false;
+            }
+            if(empty($dangerous_goods)){
+                $package->dangerous_goods = false;
+            }
+            if(empty($sed)){
+                $package->sed = false;
+            }
+            if(empty($document)){
+                $package->document = false;
+            }
+            if(empty($fragile)){
+                $package->fragile = false;
+            }
         }
+
        
         $package->save();
        

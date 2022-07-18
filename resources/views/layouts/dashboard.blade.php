@@ -16,10 +16,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('theme-home/css/styles.css')}}" rel="stylesheet" />
-        <link href="{{asset('css/clientform.css')}}" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
         
+        <link href="{{asset('css/clientstyle.css')}}" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
