@@ -18,8 +18,9 @@
         <link href="{{asset('theme-home/css/styles.css')}}" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
-        
+      
         <link href="{{asset('css/clientstyle.css')}}" rel="stylesheet" />
+        <!--https://bbbootstrap.com/snippets/bootstrap-multi-step-survey-form-98749679#   pagina de estilos cliente -->
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -126,8 +127,7 @@
             </div>
         </div>
 
-        <script src="{{asset('js/clientform.js') }}"></script>
-
+        <script src="{{asset('js/client.js') }}"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

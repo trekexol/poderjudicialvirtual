@@ -1,115 +1,206 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<!-- MultiStep Form -->
-<div class="container-fluid" id="grad1">
-    <div class="row justify-content-center mt-0">
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
-            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2><strong>Sign Up Your User Account</strong></h2>
-                <p>Fill all form field to go to next step</p>
-                <div class="row">
-                    <div class="col-md-12 mx-0">
-                        <form id="msform">
-                            <!-- progressbar -->
-                            <ul id="progressbar">
-                                <li class="active" id="account"><strong>Account</strong></li>
-                                <li id="personal"><strong>Personal</strong></li>
-                                <li id="payment"><strong>Payment</strong></li>
-                                <li id="confirm"><strong>Finish</strong></li>
-                            </ul>
-                            <!-- fieldsets -->
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Account Information</h2>
-                                    <input type="email" name="email" placeholder="Email Id"/>
-                                    <input type="text" name="uname" placeholder="UserName"/>
-                                    <input type="password" name="pwd" placeholder="Password"/>
-                                    <input type="password" name="cpwd" placeholder="Confirm Password"/>
-                                </div>
-                                <input type="button" name="next" class="next action-button" value="Next Step"/>
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Personal Information</h2>
-                                    <input type="text" name="fname" placeholder="First Name"/>
-                                    <input type="text" name="lname" placeholder="Last Name"/>
-                                    <input type="text" name="phno" placeholder="Contact No."/>
-                                    <input type="text" name="phno_2" placeholder="Alternate Contact No."/>
-                                </div>
-                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                                <input type="button" name="next" class="next action-button" value="Next Step"/>
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Payment Information</h2>
-                                    <div class="radio-group">
-                                        <div class='radio' data-value="credit"><img src="https://i.imgur.com/XzOzVHZ.jpg" width="200px" height="100px"></div>
-                                        <div class='radio' data-value="paypal"><img src="https://i.imgur.com/jXjwZlj.jpg" width="200px" height="100px"></div>
-                                        <br>
-                                    </div>
-                                    <label class="pay">Card Holder Name*</label>
-                                    <input type="text" name="holdername" placeholder=""/>
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <label class="pay">Card Number*</label>
-                                            <input type="text" name="cardno" placeholder=""/>
-                                        </div>
-                                        <div class="col-3">
-                                            <label class="pay">CVC*</label>
-                                            <input type="password" name="cvcpwd" placeholder="***"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <label class="pay">Expiry Date*</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <select class="list-dt" id="month" name="expmonth">
-                                                <option selected>Month</option>
-                                                <option>January</option>
-                                                <option>February</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                                <option>May</option>
-                                                <option>June</option>
-                                                <option>July</option>
-                                                <option>August</option>
-                                                <option>September</option>
-                                                <option>October</option>
-                                                <option>November</option>
-                                                <option>December</option>
-                                            </select>
-                                            <select class="list-dt" id="year" name="expyear">
-                                                <option selected>Year</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                                <input type="button" name="make_payment" class="next action-button" value="Confirm"/>
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title text-center">Success !</h2>
-                                    <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-3">
-                                            <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-7 text-center">
-                                            <h5>You Have Successfully Signed Up</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+<br><br>
+<div class="container mt-5 " style="">
+    <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col-md-12">
+            <form id="regForm" method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
+                @csrf
+                <h1 id="register" style="color: black;">Registro de Cliente</h1>
+                <div class="all-steps" id="all-steps"> 
+                    <span class="step"><h6>Datos Generales   <br> <i class="fa fa-user"></i></h6></span> 
+                    <span class="step"><h6>Dirección Completa <br> <i class="bi bi-geo-alt"></i></h6></span>
+                    <span class="step"><h6>Dirección De Recepción <br> <i class="bi bi-building"></i></h6></span> 
+                    <span class="step"><h6>Teléfonos<br><i class="bi bi-telephone"></i></h6></span> 
+                    <span class="step"><h6>Adicional<br><i class="bi bi-patch-plus"></i></h6></span> 
+                </div>
+                <div class="tab">
+                    <div class="row" >
+                        <div class="col-sm-6">
+                            
+                            <p> <input  placeholder="Email ..." oninput="this.className = ''" name="email"></p>
+                        </div> 
+                        <div class="col-sm-2">
+                            <select class="form-select form-select-lg mb-3" id="type_cedula" name="type_cedula">
+                                <option value="V-">V-</option>
+                                <option value="E-">E-</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                           
+                            <p> <input  placeholder="Cedula ..." oninput="this.className = ''" name="cedula"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                          
+                            <p> <input  placeholder="Contraseña ..." type="password" oninput="this.className = ''" name="password"></p>
+                        </div>
+                        <div class="col">
+                          
+                            <p> <input  placeholder="Confirmacion Contraseña ..." type="password" oninput="this.className = ''" name="confirm_password"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           
+                            <p> <input  placeholder="Primer Nombre ..." oninput="this.className = ''"  name="firstname"></p>
+                        </div>
+                        <div class="col">
+                          
+                            <p> <input placeholder="Segundo Nombre ..." oninput="this.className = ''"  name="secondname"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           
+                            <p> <input  placeholder="Primer Apellido ..." oninput="this.className = ''" name="firstlastname"></p>
+                        </div>
+                        <div class="col">
+                           
+                            <p> <input placeholder="Segundo Apellido ..." oninput="this.className = ''" name="secondlastname"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="tab">
+                    <div class="row">
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" id="id_country" name="id_country">
+                                <option value="">Seleccione el Pais de Residencia</option>
+                                @if (isset($countries))
+                                    @foreach($countries as $var)
+                                        <option value="{{ $var->id }}">{{ $var->name }}</option>
+                                    @endforeach
+                                @endif
+                               
+                            </select>
+                        </div>
+                        <div class="col">
+                            <p> <input placeholder="Dirección ..." oninput="this.className = ''" name="direction"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+                    <div class="row">
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" id="id_country_received" name="id_country_received">
+                                <option value="">Pais donde recibirá</option>
+                                @if (isset($countries))
+                                    @foreach($countries as $var)
+                                        <option value="{{ $var->id }}">{{ $var->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select form-select-lg mb-3" id="city"  name="City" required>
+                                <option value="">Selecciona una Ciudad</option>
+                               
+                            </select> 
+                        </div>
+                    </div> 
+                    <div class="row" >
+                        <div class="col">
+                            <p> <input  placeholder="Calle / Avenida ..." oninput="this.className = ''" name="street_received"></p>
+                        </div>
+                        <div class="col">
+                            <p> <input  placeholder="Urbanización / Sector ..." oninput="this.className = ''" name="urbanization_received"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" >
+                        <label class="col-sm-3 h5 " >
+                            Recibir Envios en:
+                          </label>
+                        <div class="col-sm-3">
+                            <input class="form-check-input" type="radio" onclick="hideAgency();" name="this_direction" id="flexRadioDefault1" checked>
+                            <label class="form-check-label h5" for="flexRadioDefault1">
+                                En ésta dirección 
+                              </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-check-input" onclick="showAgency();" type="radio" name="agency_direction" id="flexRadioDefault2">
+                            <label class="form-check-label h5" for="flexRadioDefault2">
+                                Retirar en Agencia
+                              </label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-select form-select-lg mb-3" id="id_agency" name="id_agency">
+                                <option value="">Seleccione una Agencia</option>
+                                    @if (isset($agencies))
+                                        @foreach($agencies as $var)
+                                            <option value="{{ $var->id }}">{{ $var->cities->countries['abbreviation'] ?? '' }} - {{ $var->name }}</option>
+                                        @endforeach
+                                    @endif
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+                    <div class="row" >
+                        <input class="form-group col-sm-1 offset-sm-3"  id="code_phone_room" name="code_phone_room" readonly>
+                        <div class="col-sm-2">
+                            <select class="form-select form-select-lg mb-3" id="id_code_room" name="id_code_room">
+                                
+                            </select>
+                        </div>
+                        <input class="form-group col-sm-3 "  id="phone_room"  name="phone_room" placeholder="Habitación * ..." >
+                    </div>
+                    <div class="row" >
+                        <input class="form-group col-sm-1 offset-sm-3"  id="code_phone_work" name="code_phone_work" readonly>
+                        <div class="col-sm-2">
+                            <select class="form-select form-select-lg mb-3" id="id_code_work" name="id_code_work">
+                                
+                            </select>
+                        </div>
+                        <input class="form-group col-sm-3 "  id="phone_work"  name="phone_work" placeholder="work ..." >
+                    </div>
+                    <div class="row" >
+                        <input class="form-group col-sm-1 offset-sm-3"  id="code_phone_mobile" name="code_phone_mobile" readonly>
+                        <div class="col-sm-2">
+                            <select class="form-select form-select-lg mb-3" id="id_code_mobile" name="id_code_mobile">
+                                
+                            </select>
+                        </div>
+                        <input class="form-group col-sm-3 "  id="phone_mobile"  name="phone_mobile" placeholder="mobile ..." >
+                    </div>
+                    <div class="row" >
+                        <input class="form-group col-sm-1 offset-sm-3"  id="code_phone_fax" name="code_phone_fax" readonly>
+                        <div class="col-sm-2">
+                            <select class="form-select form-select-lg mb-3" id="id_code_fax" name="id_code_fax">
+                                
+                            </select>
+                        </div>
+                        <input class="form-group col-sm-3 "  id="phone_fax"  name="phone_fax" placeholder="Fax ..." >
+                    </div>
+                </div>
+                <div class="tab">
+                    <div class="row" >
+                        <div class="col">
+                            <p> <input  placeholder="Compañia ..." name="company"></p>
+                        </div>
+                        <div class="col">
+                            <p> <input  placeholder="Rif ..." oninput="this.className = ''" name="rif"></p>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="thanks-message text-center" id="text-message"> 
+                    <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
+                    <h3>Gracias por ser parte de nuestro Equipo!</h3> <span>Para terminar su registro presione "enviar"</span>
+                    <br><br>
+                    <div class="col-sm-4  offset-sm-4">
+                        <button type="submit" onclick="sendForm();" class="btn btn-primary ">
+                           Enviar
+                        </button>
+                    </div>
+                </div>
+                <div style="overflow:auto;" id="nextprevious">
+                    <div style="float:right;"> <button type="button" id="prevBtn" onclick="nextPrev(-1)"><i class="fa fa-angle-double-left"></i></button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)"><i class="fa fa-angle-double-right"></i></button> </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -166,7 +257,7 @@
                 
                 },
                 error:(xhr)=>{
-                    alert('Presentamos inconvenientes al consultar los datos');
+                    alert('hubo un error');
                 }
             })
         }
