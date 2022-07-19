@@ -43,8 +43,8 @@ var currentTab = 0;
 
               function validateForm() {
                    var x, y, i, valid = true;
-                   x = document.getElementsByClassName("tab");
-                   y = x[currentTab].getElementsByTagName("input");
+                 /*  x = document.getElementsByClassName("tab2");
+                   y = x[currentTab].getElementsByClassName("obli");
                    for (i = 0; i < y.length; i++) {
                        if (y[i].value == "") {
                            y[i].className += " invalid";
@@ -55,7 +55,7 @@ var currentTab = 0;
                    }
                    if (valid) {
                        document.getElementsByClassName("step")[currentTab].className += " finish";
-                   }
+                   }*/
                    return valid;
                }
 
