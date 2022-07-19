@@ -105,6 +105,7 @@
      
     </div>
     
+  </div>
     
     <!-- jQuery -->
     <script src="{{asset('vendors/jquery/dist/jquery.min.js')}}"></script>
