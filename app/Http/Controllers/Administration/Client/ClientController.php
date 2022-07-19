@@ -7,10 +7,12 @@ use App\Models\Administration\Countries\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
 use App\Models\Package\Package;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -106,6 +108,17 @@ class ClientController extends Controller
         $client->phone_fax            = $request->phone_fax;  
     
         $client->save();
+
+        $user = new User();
+
+        $user->id_client = $client->id;
+        $user->name = $request->firstname;
+        $user->email = $request->email;
+        $user->password =  Hash::make(request('password'));
+
+        $user->save();
     
+        return redirect('/home')->withSuccess('Se ha registrado exitosamente!');
+       
     }
 }

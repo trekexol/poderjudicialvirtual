@@ -12,6 +12,8 @@
   <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
       <div class="x_title">
+
+
         <form action="{{ route('trakings.packageWithTracking') }}" method="POST" enctype="multipart/form-data" id="form" data-parsley-validate class="form-horizontal form-label-left">
           @csrf 
           <div class="col-sm-4 h5">
@@ -28,6 +30,7 @@
             </li>
           </ul>
           <div class="clearfix"></div>
+        </form>
       </div>
       <div class="x_content">
           <div class="row">

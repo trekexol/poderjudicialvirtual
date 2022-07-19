@@ -54,7 +54,7 @@ class CountryController extends Controller
         //validar si la peticion es asincrona
         if($request->ajax()){
             try{
-                $country = Country::/*on(Auth::user()->database_name)->*/select('id','name','code_phone')->where('id',$id_country)->get();
+                $country = Country::select('id','name','code_phone')->where('id',$id_country)->get();
                 return response()->json($country,200);
             }catch(Throwable $th){
                 return response()->json(false,500);
@@ -67,7 +67,7 @@ class CountryController extends Controller
         //validar si la peticion es asincrona
         if($request->ajax()){
             try{
-                $codes = MakingCode::/*on(Auth::user()->database_name)->*/select('id','code')->where('id_country',$id_country)->get();
+                $codes = MakingCode::select('id','code')->where('id_country',$id_country)->get();
                 return response()->json($codes,200);
             }catch(Throwable $th){
                 return response()->json(false,500);
