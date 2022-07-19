@@ -48,9 +48,9 @@ Route::group(["prefix"=>'clients'],function(){
 });
 
 Route::group(["prefix"=>'countries'],function(){
-    Route::get('/list/codephone/{id_country}',[CountryController::class, 'listCodePhone'])->name('countries.listCodePhone');
-    Route::get('/list/makingcode/{id_country}',[CountryController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
-    Route::get('/listcity/{id_country}', [StateController::class, 'list'])->name('cities.list');
+    Route::get('list/codephone/{id_country}',[CountryController::class, 'listCodePhone'])->name('countries.listCodePhone');
+    Route::get('list/makingcode/{id_country}',[CountryController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
+    Route::get('listcity/{id_country}', [StateController::class, 'list'])->name('cities.list');
 
 });
 

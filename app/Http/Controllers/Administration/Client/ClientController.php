@@ -45,7 +45,7 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-       
+      
         $data = request()->validate([
             'email'                 =>'required|max:40',
             'type_cedula'           =>'required',
@@ -62,6 +62,10 @@ class ClientController extends Controller
             'City'                  =>'required',
             'street_received'       =>'required',
             'urbanization_received' =>'required',
+
+            'id_code_room' =>'required',
+            'id_code_work' =>'required',
+            'id_code_mobile' =>'required',
            
             
     
@@ -86,12 +90,8 @@ class ClientController extends Controller
         $client->street_received        = $request->street_received;  
         $client->urbanization_received  = $request->urbanization_received;
     
-        if(isset($request->this_direction)){
-            $type = "this Direction";
-        }elseif(isset($request->agency_direction)){
-            $type = "Agency Direction";
-        }
-        $client->type_direction_received= $type;
+    
+        $client->type_direction_received= $request->type_direction_received;
 
         $client->id_agency              = $request->id_agency;  
 
