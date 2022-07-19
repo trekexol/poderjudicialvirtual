@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<br><br>
 <div class="container mt-5 " style="">
     <div class="row d-flex justify-content-center align-items-center ">
         <div class="col-md-12">
             <form id="regForm" method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
                 @csrf
+                <br>
                 <h1 id="register" style="color: black;">Registro de Cliente</h1>
                 <div class="all-steps" id="all-steps"> 
                     <span class="step"><h6>Datos Generales   <br> <i class="fa fa-user"></i></h6></span> 
@@ -19,7 +19,7 @@
                     <div class="row" >
                         <div class="col-sm-6">
                             
-                            <p> <input  placeholder="Email ..." oninput="this.className = ''" name="email"></p>
+                            <p> <input class="require"  placeholder="Email ..." oninput="this.className = ''" name="email"></p>
                         </div> 
                         <div class="col-sm-2">
                             <select class="form-select form-select-lg mb-3" id="type_cedula" name="type_cedula">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-sm-4">
                            
-                            <p> <input  placeholder="Cedula ..." oninput="this.className = ''" name="cedula"></p>
+                          <input id="cedula" name="cedula"  placeholder="Cedula ..." oninput="this.className = ''" >
                         </div>
                     </div>
                     <div class="row">
@@ -114,17 +114,18 @@
                             Recibir Envios en:
                           </label>
                         <div class="col-sm-3">
-                            <input class="form-check-input" type="radio" onclick="hideAgency();" name="this_direction" id="flexRadioDefault1" checked>
+                            <input class="form-check-input" type="radio" onclick="hideAgency();" value="This Direction" name="type_direction_received" id="flexRadioDefault1" checked>
                             <label class="form-check-label h5" for="flexRadioDefault1">
                                 En ésta dirección 
                               </label>
                         </div>
                         <div class="col-sm-2">
-                            <input class="form-check-input" onclick="showAgency();" type="radio" name="agency_direction" id="flexRadioDefault2">
+                            <input class="form-check-input" onclick="showAgency();" type="radio" value="Agency Direction" name="type_direction_received" id="flexRadioDefault2">
                             <label class="form-check-label h5" for="flexRadioDefault2">
                                 Retirar en Agencia
                               </label>
                         </div>
+                     
                         <div class="col-sm-4">
                             <select class="form-select form-select-lg mb-3" id="id_agency" name="id_agency">
                                 <option value="">Seleccione una Agencia</option>
@@ -208,27 +209,29 @@
 @section('javascript')
     <script>
             
-        hideAgency();
+        $(document).ready(function () {
+            $("#cedula").mask('000.000.000.000.000', { reverse: true });
+        
+        });        
 
+
+
+        hideAgency();
         function showAgency(){
             $("#id_agency").show();
         }
-
         function hideAgency(){
             $("#id_agency").hide();
         }
-
         function sendForm(){
             document.getElementById("regForm").submit();
         }
-
         $("#id_country_received").on('change',function(){
             
             var country_id = $(this).val();
             $("#city").val("");
             getCities(country_id);
         });
-
         function getCities(country_id){
             
             $.ajax({
@@ -245,7 +248,6 @@
                         response.forEach((item, index, object)=>{
                             let {id,name} = item;
                             htmlOptions += `<option value='${id}' {{ old('City') == '${id}' ? 'selected' : '' }}>${name}</option>`
-
                         });
                     }
                     //console.clear();
@@ -261,17 +263,17 @@
                 }
             })
         }
-
         
         $("#id_country").on('change',function(){
             
             var country_id = $(this).val();
             $("#code_phone").val("");
           
+            
             getCodePhone(country_id);
             getMakingCodes(country_id);
         });
-
+        
         function getCodePhone(country_id){
             
             $.ajax({
@@ -293,11 +295,10 @@
                    
                 },
                 error:(xhr)=>{
-                    alert('No se encontro los datos');
+                    alert('No se encontro el Codigo de Telefono');
                 }
             })
         }
-
         function getMakingCodes(country_id){
             
             $.ajax({
@@ -309,10 +310,8 @@
                    
                     let code_room = $("#id_code_room");
                     let htmlOptions = `<option value='' >Codigo</option>`;
-
                     let code_work = $("#id_code_work");
                     let htmlOptions2 = `<option value='' >Codigo</option>`;
-
                     let code_mobile = $("#id_code_mobile");
                     let htmlOptions3 = `<option value='' >Codigo</option>`;
                     
@@ -326,19 +325,15 @@
                             htmlOptions2 += `<option value='${id}' {{ old('id_code_work') == '${code}' ? 'selected' : '' }}>${code}</option>`
                             htmlOptions3 += `<option value='${id}' {{ old('id_code_mobile') == '${code}' ? 'selected' : '' }}>${code}</option>`
                             htmlOptions4 += `<option value='${id}' {{ old('id_code_fax') == '${code}' ? 'selected' : '' }}>${code}</option>`
-
                         });
                     }
                    
                    code_room.html('');
                    code_room.html(htmlOptions);
-
                    code_work.html('');
                    code_work.html(htmlOptions2);
-
                    code_mobile.html('');
                    code_mobile.html(htmlOptions3);
-
                    code_fax.html('');
                    code_fax.html(htmlOptions4);
                 
@@ -350,6 +345,5 @@
                 }
             })
         }
-
     </script>
 @endsection

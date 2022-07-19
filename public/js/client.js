@@ -44,7 +44,7 @@ var currentTab = 0;
               function validateForm() {
                    var x, y, i, valid = true;
                    x = document.getElementsByClassName("tab");
-                   y = x[currentTab].getElementsByTagName("input");
+                   y = x[currentTab].getElementsByClassName("require");
                    for (i = 0; i < y.length; i++) {
                        if (y[i].value == "") {
                            y[i].className += " invalid";
