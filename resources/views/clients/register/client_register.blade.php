@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<br><br>
 <div class="container mt-5 " style="">
     <div class="row d-flex justify-content-center align-items-center ">
         <div class="col-md-12">
             <form id="regForm" method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
                 @csrf
+                <br>
                 <h1 id="register" style="color: black;">Registro de Cliente</h1>
                 <div class="all-steps" id="all-steps"> 
                     <span class="step"><h6>Datos Generales   <br> <i class="fa fa-user"></i></h6></span> 
@@ -201,155 +201,3 @@
                     <button type="button" id="nextBtn" onclick="nextPrev(1)"><i class="fa fa-angle-double-right"></i></button> </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-@endsection
-@section('javascript')
-    <script>
-            
-        hideAgency();
-
-        function showAgency(){
-            $("#id_agency").show();
-        }
-
-        function hideAgency(){
-            $("#id_agency").hide();
-        }
-
-        function sendForm(){
-            document.getElementById("regForm").submit();
-        }
-
-        $("#id_country_received").on('change',function(){
-            
-            var country_id = $(this).val();
-            $("#city").val("");
-            getCities(country_id);
-        });
-
-        function getCities(country_id){
-            
-            $.ajax({
-                url:"{{ route('cities.list','') }}" + '/' + country_id,
-                beforSend:()=>{
-                    alert('consultando datos');
-                },
-                success:(response)=>{
-                   
-                    let city = $("#city");
-                    let htmlOptions = `<option value='' >Seleccione Ciudad..</option>`;
-                    // console.clear();
-                    if(response.length > 0){
-                        response.forEach((item, index, object)=>{
-                            let {id,name} = item;
-                            htmlOptions += `<option value='${id}' {{ old('City') == '${id}' ? 'selected' : '' }}>${name}</option>`
-
-                        });
-                    }
-                    //console.clear();
-                    // console.log(htmlOptions);
-                   city.html('');
-                   city.html(htmlOptions);
-                
-                    
-                
-                },
-                error:(xhr)=>{
-                    alert('hubo un error');
-                }
-            })
-        }
-
-        
-        $("#id_country").on('change',function(){
-            
-            var country_id = $(this).val();
-            $("#code_phone").val("");
-          
-            getCodePhone(country_id);
-            getMakingCodes(country_id);
-        });
-
-        function getCodePhone(country_id){
-            
-            $.ajax({
-                url:"{{ route('countries.listCodePhone','') }}" + '/' + country_id,
-                beforSend:()=>{
-                    alert('consultando datos');
-                },
-                success:(response)=>{
-                   
-                    if(response.length > 0){
-                        response.forEach((item, index, object)=>{
-                            let {id,name,code_phone} = item;
-                            document.getElementById('code_phone_room').value = code_phone;
-                            document.getElementById('code_phone_work').value = code_phone;
-                            document.getElementById('code_phone_mobile').value = code_phone;
-                            document.getElementById('code_phone_fax').value = code_phone;
-                        });
-                    }
-                   
-                },
-                error:(xhr)=>{
-                    alert('No se encontro los datos');
-                }
-            })
-        }
-
-        function getMakingCodes(country_id){
-            
-            $.ajax({
-                url:"{{ route('countries.listMakingCodes','') }}" + '/' + country_id,
-                beforSend:()=>{
-                    alert('consultando datos');
-                },
-                success:(response)=>{
-                   
-                    let code_room = $("#id_code_room");
-                    let htmlOptions = `<option value='' >Codigo</option>`;
-
-                    let code_work = $("#id_code_work");
-                    let htmlOptions2 = `<option value='' >Codigo</option>`;
-
-                    let code_mobile = $("#id_code_mobile");
-                    let htmlOptions3 = `<option value='' >Codigo</option>`;
-                    
-                    let code_fax = $("#id_code_fax");
-                    let htmlOptions4 = `<option value='' >Codigo</option>`;
-                    
-                    if(response.length > 0){
-                        response.forEach((item, index, object)=>{
-                            let {id,code} = item;
-                            htmlOptions += `<option value='${id}' {{ old('id_code_room') == '${code}' ? 'selected' : '' }}>${code}</option>`
-                            htmlOptions2 += `<option value='${id}' {{ old('id_code_work') == '${code}' ? 'selected' : '' }}>${code}</option>`
-                            htmlOptions3 += `<option value='${id}' {{ old('id_code_mobile') == '${code}' ? 'selected' : '' }}>${code}</option>`
-                            htmlOptions4 += `<option value='${id}' {{ old('id_code_fax') == '${code}' ? 'selected' : '' }}>${code}</option>`
-
-                        });
-                    }
-                   
-                   code_room.html('');
-                   code_room.html(htmlOptions);
-
-                   code_work.html('');
-                   code_work.html(htmlOptions2);
-
-                   code_mobile.html('');
-                   code_mobile.html(htmlOptions3);
-
-                   code_fax.html('');
-                   code_fax.html(htmlOptions4);
-                
-                    
-                
-                },
-                error:(xhr)=>{
-                    alert('Presentamos inconvenientes al consultar los datos');
-                }
-            })
-        }
-
-    </script>
-@endsection
