@@ -76,12 +76,15 @@
                         <div id="contenedor"></div>
                         <br>
                         <div class="form-row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                               @if (isset($historia))
                                 <a href="#" onclick="update()" class="btn btn-success offset-sm-1" id="enviar">Actualizar</a>
                               @else
                                 <button class="btn btn-primary offset-sm-1" id="enviar">Registrar</button>
                               @endif
+                            </div>
+                            <div class="col-sm-2">
+                              <a href="{{route($return ?? 'home')}}" class="btn btn-success offset-sm-1" id="enviar">Volver</a>
                             </div>
                         </div>
 

@@ -20,6 +20,7 @@ use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
 use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
+use App\Http\Controllers\AdministrationClient\ClientRecipient\ClientRecipientController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
@@ -51,7 +52,7 @@ Route::group(["prefix"=>'clients'],function(){
 Route::group(["prefix"=>'countries'],function(){
     Route::get('list/codephone/{id_country}',[ListController::class, 'listCodePhone'])->name('countries.listCodePhone');
     Route::get('list/makingcode/{id_country}',[ListController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
-    Route::get('listcity/{id_country?}', [ListController::class, 'list'])->name('cities.list');
+    Route::get('listcity/{id_country}', [ListController::class, 'list'])->name('cities.list');
 
 });
 
@@ -258,3 +259,13 @@ Route::group(["prefix"=>'historial_status'],function(){
     Route::post('update/{id}', [HistorialStatusController::class, 'update'])->name('historial_status.update');
     Route::delete('delete', [HistorialStatusController::class, 'destroy'])->name('historial_status.delete');
 });
+
+
+/* CLIENTS */
+Route::group(["prefix"=>'client_recipients'],function(){
+    Route::get('/index', [ClientRecipientController::class, 'index'])->name('client_recipients.index');
+    Route::get('/register', [ClientRecipientController::class, 'register'])->name('client_recipients.create');
+    Route::post('/store', [ClientRecipientController::class, 'store'])->name('client_recipients.store');
+    Route::get('/consult/{id_client}', [ClientRecipientController::class, 'consult'])->name('client_recipients.consult');
+});
+/*------------------------- */
