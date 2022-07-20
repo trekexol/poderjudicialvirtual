@@ -11,6 +11,7 @@ use App\Http\Controllers\Administration\Carrier\CarrierController;
 use App\Http\Controllers\Whatsapp\WhatsappController;
 use App\Http\Controllers\Administration\Country\CountryController;
 use App\Http\Controllers\Administration\Country\StateController;
+use App\Http\Controllers\Administration\Country\ListController;
 use App\Http\Controllers\Administration\Wharehouse\WharehouseController;
 use App\Http\Controllers\Administration\Rate\NationalRateController;
 use App\Http\Controllers\Administration\Rate\InternationalRateController;
@@ -48,9 +49,9 @@ Route::group(["prefix"=>'clients'],function(){
 });
 
 Route::group(["prefix"=>'countries'],function(){
-    Route::get('list/codephone/{id_country}',[CountryController::class, 'listCodePhone'])->name('countries.listCodePhone');
-    Route::get('list/makingcode/{id_country}',[CountryController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
-    Route::get('listcity/{id_country}', [StateController::class, 'list'])->name('cities.list');
+    Route::get('list/codephone/{id_country}',[ListController::class, 'listCodePhone'])->name('countries.listCodePhone');
+    Route::get('list/makingcode/{id_country}',[ListController::class, 'listMakingCodes'])->name('countries.listMakingCodes');
+    Route::get('listcity/{id_country?}', [ListController::class, 'list'])->name('cities.list');
 
 });
 

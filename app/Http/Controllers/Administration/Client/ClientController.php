@@ -65,9 +65,7 @@ class ClientController extends Controller
             'street_received'       =>'required',
             'urbanization_received' =>'required',
 
-            'id_code_room' =>'required',
-            'id_code_work' =>'required',
-            'id_code_mobile' =>'required',
+           
            
             
     
@@ -88,7 +86,7 @@ class ClientController extends Controller
         $client->id_country             = $request->id_country;       
         $client->direction              = $request->direction;       
        
-        $client->id_state_received       = $request->City;         
+        $client->id_state_received      = $request->City;         
         $client->street_received        = $request->street_received;  
         $client->urbanization_received  = $request->urbanization_received;
     
@@ -102,6 +100,7 @@ class ClientController extends Controller
         $client->id_code_mobile         = $request->id_code_mobile;  
         $client->id_code_fax            = $request->id_code_fax;  
 
+       
         $client->phone_room           = $request->phone_room;  
         $client->phone_work           = $request->phone_work;  
         $client->phone_mobile         = $request->phone_mobile;  
@@ -118,7 +117,7 @@ class ClientController extends Controller
 
         $user->save();
     
-        return redirect('/home')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/login')->withSuccess('Se ha registrado exitosamente, puede iniciar sesion con su correo y clave!');
        
     }
 }

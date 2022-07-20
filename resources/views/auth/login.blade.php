@@ -23,12 +23,19 @@
 </head>
 <body>
 	
+
 	<div class="limiter">
 		<div class="container-login100">
+						
+			{{-- VALIDACIONES-RESPUESTA--}}
+			@include('admin.layouts.success')   {{-- SAVE --}}
+			@include('admin.layouts.danger')    {{-- EDITAR --}}
+			@include('admin.layouts.delete')    {{-- DELELTE --}}
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{{ asset('images/inicio.png') }}" alt="IMG">
 				</div>
+
 
 				<form method="POST" class="login100-form validate-form" action="{{ route('login') }}">
 				@csrf
