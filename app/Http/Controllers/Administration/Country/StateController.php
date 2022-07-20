@@ -13,7 +13,7 @@ class StateController extends Controller
     {
         $this->middleware('auth');
     }
-
+   
     public function index(){
 
         $cities = State::all();
@@ -39,17 +39,5 @@ class StateController extends Controller
     
     }
 
-    public function list(Request $request, $id_country){
-        //validar si la peticion es asincrona
-        if($request->ajax()){
-            try{
-              
-                $cities = State::select('id','name')->where('id_country',$id_country)->orderBy('name','asc')->get();
-                return response()->json($cities,200);
-            }catch(Throwable $th){
-                return response()->json(false,500);
-            }
-        }
-        
-    }
+   
 }

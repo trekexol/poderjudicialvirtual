@@ -21,6 +21,7 @@
       
         <link href="{{asset('css/clientstyle.css')}}" rel="stylesheet" />
         <!--https://bbbootstrap.com/snippets/bootstrap-multi-step-survey-form-98749679#   pagina de estilos cliente -->
+       
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -136,7 +137,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        
+       
         <!-- Core theme JS-->
         <script src="{{asset('theme-home/js/scripts.js') }}"></script>
       

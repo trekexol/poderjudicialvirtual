@@ -50,30 +50,6 @@ class CountryController extends Controller
      }
 
 
-     public function listCodePhone(Request $request, $id_country){
-        //validar si la peticion es asincrona
-        if($request->ajax()){
-            try{
-                $country = Country::select('id','name','code_phone')->where('id',$id_country)->get();
-                return response()->json($country,200);
-            }catch(Throwable $th){
-                return response()->json(false,500);
-            }
-        }
-        
-    }
-
-    public function listMakingCodes(Request $request, $id_country){
-        //validar si la peticion es asincrona
-        if($request->ajax()){
-            try{
-                $codes = MakingCode::select('id','code')->where('id_country',$id_country)->get();
-                return response()->json($codes,200);
-            }catch(Throwable $th){
-                return response()->json(false,500);
-            }
-        }
-        
-    }
+ 
 
 }
