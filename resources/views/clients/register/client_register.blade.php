@@ -220,7 +220,7 @@
             
             if(confirm_pass != ""){
                 if(pass != confirm_pass){
-                    alert("Las contraseñas no coinciden");
+                    
                     document.getElementById('password').style.borderColor = 'red';
                     document.getElementById('confirm_password').style.borderColor = 'red';
                     $("#nextBtn").hide();
