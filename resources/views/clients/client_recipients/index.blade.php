@@ -16,7 +16,7 @@
           <h2>Destinatarios</h2>
         </div>
         <div class="col-sm-2">
-          <a href="{{ route('agents.create') }}" type="button" class="btn btn-round btn-primary">Agregar</a>
+          <a href="{{ route('client_recipients.create') }}" type="button" class="btn btn-round btn-primary">Agregar</a>
         </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -36,21 +36,27 @@
               <th>Nombre</th>
               <th>Cédula</th>
               <th>Dirección</th>
+              <th>Dirección 2</th>
               <th>Teléfono</th>
+              <th>Pais</th>
               <th>Observaciones</th>
               <th></th>
             </tr>
           </thead>
-          @isset($agents)
-            @foreach ($agents as $agent)
+          @isset($client_recipients)
+            @foreach ($client_recipients as $client_recipient)
             <tr>
-              <td>{{$agent->code}}</td>
-              <td>{{$agent->name}}</td>
-              <td>{{$agent->type ?? ''}}</td>
-              <td>{{$agent->phone ?? ''}}</td>
+              <td>{{$client_recipient->email}}</td>
+              <td>{{$client_recipient->name}}</td>
+              <td>{{$client_recipient->identification_card ?? ''}}</td>
+              <td>{{$client_recipient->direction1 ?? ''}}</td>
+              <td>{{$client_recipient->direction2 ?? ''}}</td>
+              <td>{{$client_recipient->phone ?? ''}}</td>
+              <td>{{$client_recipient->countries['name'] ?? ''}}</td>
+              <td>{{$client_recipient->observation ?? ''}}</td>
               <td>
-                <a href="{{ route('agents.edit',$agent->id) }}"  title="Editar"><i class="fa fa-edit"></i></a>
-                <a href="#" class="delete" data-id-agent={{$agent->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
+                <a href="{{ route('client_recipients.edit',$client_recipient->id) }}"  title="Editar"><i class="fa fa-edit"></i></a>
+                <a href="#" class="delete" data-id-client_recipient={{$client_recipient->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
               </td>
             </tr>
             @endforeach
@@ -76,10 +82,10 @@
               </button>
           </div>
           <div class="modal-body">
-          <form action="{{ route('agents.delete') }}" method="post">
+          <form action="{{ route('client_recipients.delete') }}" method="post">
               @csrf
               @method('DELETE')
-              <input id="id_agent_modal" type="hidden" class="form-control @error('id_agent_modal') is-invalid @enderror" name="id_agent_modal" readonly required autocomplete="id_agent_modal">
+              <input id="id_client_recipient_modal" type="hidden" class="form-control @error('id_client_recipient_modal') is-invalid @enderror" name="id_client_recipient_modal" readonly required autocomplete="id_client_recipient_modal">
                      
               <h5 class="text-center">Seguro que desea eliminar?</h5>
               
@@ -99,9 +105,9 @@
 <script>
     $(document).on('click','.delete',function(){
          
-         let id_agent = $(this).attr('data-id-agent');
+         let id_client_recipient = $(this).attr('data-id-client_recipient');
  
-         $('#id_agent_modal').val(id_agent);
+         $('#id_client_recipient_modal').val(id_client_recipient);
      });
 </script>
 @endsection

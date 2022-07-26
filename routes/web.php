@@ -264,8 +264,10 @@ Route::group(["prefix"=>'historial_status'],function(){
 /* CLIENTS */
 Route::group(["prefix"=>'client_recipients'],function(){
     Route::get('/index', [ClientRecipientController::class, 'index'])->name('client_recipients.index');
-    Route::get('/register', [ClientRecipientController::class, 'register'])->name('client_recipients.create');
+    Route::get('/register', [ClientRecipientController::class, 'create'])->name('client_recipients.create');
     Route::post('/store', [ClientRecipientController::class, 'store'])->name('client_recipients.store');
-    Route::get('/consult/{id_client}', [ClientRecipientController::class, 'consult'])->name('client_recipients.consult');
+    Route::get('edit/{id}', [ClientRecipientController::class, 'edit'])->name('client_recipients.edit');
+    Route::patch('update/{id}', [ClientRecipientController::class, 'update'])->name('client_recipients.update');
+    Route::delete('delete', [ClientRecipientController::class, 'destroy'])->name('client_recipients.delete');
 });
 /*------------------------- */
