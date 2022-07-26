@@ -13,7 +13,17 @@
         <br />
         <form method="POST" action="{{ route('client_recipients.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
-                
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Pais:</label>
+                <div class="col-md-4 col-sm-4">
+                    <select id="country" name="id_country" class="select2_single form-control" >
+                        <option>Seleccione un Pais</option>
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="code">Email:</label>
                 <div class="col-md-4 col-sm-4 ">
@@ -36,6 +46,12 @@
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Dirección:</label>
                 <div class="col-md-4 col-sm-4 ">
                     <textarea type="text" id="direction" name="direction" rows="5" cols="20" required="required" class="form-control "></textarea>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Dirección 2:</label>
+                <div class="col-md-4 col-sm-4 ">
+                    <textarea type="text" id="direction2" name="direction2" rows="5" cols="20" required="required" class="form-control "></textarea>
                 </div>
             </div>
             <div class="item form-group">

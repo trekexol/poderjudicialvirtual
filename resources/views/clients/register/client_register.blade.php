@@ -29,37 +29,37 @@
                         </div>
                         <div class="col-sm-4">
                            
-                          <input id="cedula" name="cedula"  placeholder="Cedula ..." oninput="this.className = ''" >
+                          <input class="require" id="cedula" name="cedula"  placeholder="Cedula ..." oninput="this.className = ''" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                           
-                            <p> <input  placeholder="Contraseña ..." type="password" oninput="this.className = ''" name="password"></p>
+                            <p> <input  class="require" onblur="confirmPassword();" placeholder="Contraseña ..." type="password" oninput="this.className = ''" id="password" name="password"></p>
                         </div>
                         <div class="col">
                           
-                            <p> <input  placeholder="Confirmacion Contraseña ..." type="password" oninput="this.className = ''" name="confirm_password"></p>
+                            <p> <input class="require" onblur="confirmPassword();" placeholder="Confirmacion Contraseña ..." type="password" oninput="this.className = ''" id="confirm_password" name="confirm_password"></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                            
-                            <p> <input  placeholder="Primer Nombre ..." oninput="this.className = ''"  name="firstname"></p>
+                            <p> <input class="require" placeholder="Primer Nombre ..." oninput="this.className = ''"  name="firstname"></p>
                         </div>
                         <div class="col">
                           
-                            <p> <input placeholder="Segundo Nombre ..." oninput="this.className = ''"  name="secondname"></p>
+                            <p> <input  placeholder="Segundo Nombre ..." oninput="this.className = ''"  name="secondname"></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                            
-                            <p> <input  placeholder="Primer Apellido ..." oninput="this.className = ''" name="firstlastname"></p>
+                            <p> <input class="require"  placeholder="Primer Apellido ..." oninput="this.className = ''" name="firstlastname"></p>
                         </div>
                         <div class="col">
                            
-                            <p> <input placeholder="Segundo Apellido ..." oninput="this.className = ''" name="secondlastname"></p>
+                            <p> <input  placeholder="Segundo Apellido ..." oninput="this.className = ''" name="secondlastname"></p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                             </select>
                         </div>
                         <div class="col">
-                            <p> <input placeholder="Dirección ..." oninput="this.className = ''" name="direction"></p>
+                            <p> <input class="require" placeholder="Dirección ..." oninput="this.className = ''" name="direction"></p>
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,24 @@
         
         });        
 
-
+        function confirmPassword(){
+            var pass = document.getElementById('password').value;
+            var confirm_pass = document.getElementById('confirm_password').value;
+            
+            if(confirm_pass != ""){
+                if(pass != confirm_pass){
+                    alert("Las contraseñas no coinciden");
+                    document.getElementById('password').style.borderColor = 'red';
+                    document.getElementById('confirm_password').style.borderColor = 'red';
+                    $("#nextBtn").hide();
+                }else{
+                    document.getElementById('password').style.borderColor = 'green';
+                    document.getElementById('confirm_password').style.borderColor = 'green';
+                    $("#nextBtn").show();
+                }
+            }
+            
+        }
 
         hideAgency();
         function showAgency(){
