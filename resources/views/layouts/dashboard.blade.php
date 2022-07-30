@@ -21,6 +21,7 @@
       
         <link href="{{asset('css/clientstyle.css')}}" rel="stylesheet" />
         <!--https://bbbootstrap.com/snippets/bootstrap-multi-step-survey-form-98749679#   pagina de estilos cliente -->
+       
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -136,7 +137,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        
+       
         <!-- Core theme JS-->
         <script src="{{asset('theme-home/js/scripts.js') }}"></script>
       
@@ -145,6 +146,10 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+          <!-- Para las mascaras -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
+
 
         
         @yield('javascript')

@@ -7,10 +7,12 @@ use App\Models\Administration\Countries\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
 use App\Models\Package\Package;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -45,7 +47,7 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-       
+      
         $data = request()->validate([
             'email'                 =>'required|max:40',
             'type_cedula'           =>'required',
@@ -62,6 +64,8 @@ class ClientController extends Controller
             'City'                  =>'required',
             'street_received'       =>'required',
             'urbanization_received' =>'required',
+
+           
            
             
     
@@ -82,16 +86,12 @@ class ClientController extends Controller
         $client->id_country             = $request->id_country;       
         $client->direction              = $request->direction;       
        
-        $client->id_state_received       = $request->City;         
+        $client->id_state_received      = $request->City;         
         $client->street_received        = $request->street_received;  
         $client->urbanization_received  = $request->urbanization_received;
     
-        if(isset($request->this_direction)){
-            $type = "this Direction";
-        }elseif(isset($request->agency_direction)){
-            $type = "Agency Direction";
-        }
-        $client->type_direction_received= $type;
+    
+        $client->type_direction_received= $request->type_direction_received;
 
         $client->id_agency              = $request->id_agency;  
 
@@ -100,12 +100,24 @@ class ClientController extends Controller
         $client->id_code_mobile         = $request->id_code_mobile;  
         $client->id_code_fax            = $request->id_code_fax;  
 
+       
         $client->phone_room           = $request->phone_room;  
         $client->phone_work           = $request->phone_work;  
         $client->phone_mobile         = $request->phone_mobile;  
         $client->phone_fax            = $request->phone_fax;  
     
         $client->save();
+
+        $user = new User();
+
+        $user->id_client = $client->id;
+        $user->name = $request->firstname;
+        $user->email = $request->email;
+        $user->password =  Hash::make(request('password'));
+
+        $user->save();
     
+        return redirect('/login')->withSuccess('Se ha registrado exitosamente, puede iniciar sesion con su correo y clave!');
+       
     }
 }

@@ -43,8 +43,13 @@ var currentTab = 0;
 
               function validateForm() {
                    var x, y, i, valid = true;
+<<<<<<< HEAD
                  /*  x = document.getElementsByClassName("tab2");
                    y = x[currentTab].getElementsByClassName("obli");
+=======
+                   x = document.getElementsByClassName("tab");
+                   y = x[currentTab].getElementsByClassName("require");
+>>>>>>> 44e169b7627999bc4e93a494f4a483e8ee3e70ed
                    for (i = 0; i < y.length; i++) {
                        if (y[i].value == "") {
                            y[i].className += " invalid";
