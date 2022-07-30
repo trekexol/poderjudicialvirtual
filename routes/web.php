@@ -30,6 +30,7 @@ use App\Http\Controllers\Tula\TulaController;
 use App\Http\Controllers\MasterGuide\MasterGuideController;
 use App\Http\Controllers\Paddle\PaddleController;
 use App\Http\Controllers\PreAlert\PreAlertController;
+use App\Http\Controllers\Whatsapp\WhatsAppChannelController;
 
 Route::get('/', function () {
     
@@ -82,7 +83,7 @@ Route::group(["prefix"=>'airlines'],function(){
 
 Route::group(["prefix"=>'whatsapps'],function(){
     Route::get('/', [WhatsappController::class, 'index'])->name('whatsapps.index');
-
+    Route::get('send', [WhatsAppChannelController::class, 'send'])->name('whatsapps.send');
 });
 
 Route::group(["prefix"=>'countries'],function(){
