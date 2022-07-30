@@ -40,7 +40,7 @@ class WhatsappController extends Controller
         ]);
       
 
-        dd($res);
+        
        /* $client = new GuzzleHttp\Client();
         $response = $client->request('POST','https://01da9qbyce.execute-api.us-east-2.amazonaws.com/dev/whatsapp',
         [
@@ -49,7 +49,7 @@ class WhatsappController extends Controller
         ]
         );*/
 
-        return redirect('/agencies/create')->withSuccess('Se ha registrado exitosamente!');
+        return redirect('/home')->withSuccess('Se ha registrado exitosamente!');
       
     }
     
