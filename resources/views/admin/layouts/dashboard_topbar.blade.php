@@ -15,7 +15,7 @@
                 <span class="badge bg-red pull-right">50%</span>
                 <span>Settings</span>
               </a>
-              <a class="dropdown-item" href="{{ route('whatsapps.send') }}" href="javascript:;">Enviar</a>    
+              <a class="dropdown-item" href="{{ route('whatsapps.send') }}" href="javascript:;">Enviar!</a>    
           <a class="dropdown-item"  href="javascript:;">Help</a>
          
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
