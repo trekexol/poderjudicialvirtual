@@ -15,11 +15,11 @@ class WhatsAppChannelController extends Controller
        
  
         $sid    = "ACc6fabbf1885958d0e8f0da7cb459fd16"; 
-        $token  = "3cf6586a118e57aa322097a1c5467525"; 
+        $token  = "704a2535e0de0e89752537e9ec676147"; 
         $twilio = new Client($sid, $token); 
          
         $message = $twilio->messages 
-                          ->create("whatsapp:+584242041615", // to 
+                          ->create("whatsapp:+584241592813", // to 
                                    array( 
                                        "from" => "whatsapp:+14155238886",       
                                        "body" => "hola Señor Nestor, Soy Carlos, ya couriertool puede enviar msj por whatsapp, ahora estoy viendo si arriba puedo cambiarle el nombre e imagen por couriertool" 
