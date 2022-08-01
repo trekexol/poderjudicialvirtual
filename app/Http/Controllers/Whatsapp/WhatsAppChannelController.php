@@ -15,7 +15,7 @@ class WhatsAppChannelController extends Controller
        
  
         $sid    = "ACc6fabbf1885958d0e8f0da7cb459fd16"; 
-        $token  = "704a2535e0de0e89752537e9ec676147"; 
+        $token  = "42f5ffb14a270acada4be224e0fc57c1"; 
         $twilio = new Client($sid, $token); 
          
         $message = $twilio->messages 
