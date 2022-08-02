@@ -29,12 +29,7 @@
           </ul>
         </li>
        
-        <li><a><i class="fa fa-paper-plane"></i> Origen<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="{{ route('pre_alerts.index') }}">Pre-Alertas</a></li>
-           
-          </ul>
-        </li>
+        <li><a href="{{ route('calculations.index') }}"><i class="fa fa-calculator"></i>Calcular<span class="fa fa-chevron-down"></span></a></li>
         
 
        
