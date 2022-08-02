@@ -20,6 +20,7 @@ use App\Http\Controllers\Administration\PackageStatus\PackageStatusController;
 use App\Http\Controllers\Administration\Traking\TrakingController;
 use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
+use App\Http\Controllers\AdministrationClient\Calculation\CalculationController;
 use App\Http\Controllers\AdministrationClient\ClientRecipient\ClientRecipientController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Historial\HistorialStatusController;
@@ -270,5 +271,9 @@ Route::group(["prefix"=>'client_recipients'],function(){
     Route::get('edit/{id}', [ClientRecipientController::class, 'edit'])->name('client_recipients.edit');
     Route::patch('update/{id}', [ClientRecipientController::class, 'update'])->name('client_recipients.update');
     Route::delete('delete', [ClientRecipientController::class, 'destroy'])->name('client_recipients.delete');
+});
+Route::group(["prefix"=>'calculations'],function(){
+    Route::get('index', [CalculationController::class, 'index'])->name('calculations.index');
+    Route::post('store', [CalculationController::class, 'store'])->name('calculations.store');
 });
 /*------------------------- */
