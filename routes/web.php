@@ -22,6 +22,7 @@ use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
 use App\Http\Controllers\AdministrationClient\Calculation\CalculationController;
 use App\Http\Controllers\AdministrationClient\ClientRecipient\ClientRecipientController;
+use App\Http\Controllers\AdministrationClient\PreAlert\ClientPreAlertController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
@@ -274,5 +275,11 @@ Route::group(["prefix"=>'client_recipients'],function(){
 Route::group(["prefix"=>'calculations'],function(){
     Route::get('index', [CalculationController::class, 'index'])->name('calculations.index');
     Route::post('store', [CalculationController::class, 'store'])->name('calculations.store');
+});
+Route::group(["prefix"=>'client_pre_alert'],function(){
+    Route::get('index', [ClientPreAlertController::class, 'index'])->name('client_pre_alerts.index');
+    Route::get('create/{id?}', [ClientPreAlertController::class, 'create'])->name('client_pre_alerts.create');
+    Route::post('store', [ClientPreAlertController::class, 'store'])->name('client_pre_alerts.store');
+    Route::post('update/{id}', [ClientPreAlertController::class, 'update'])->name('client_pre_alerts.update');
 });
 /*------------------------- */
