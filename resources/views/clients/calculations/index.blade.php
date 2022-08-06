@@ -96,21 +96,33 @@
           
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Dimesiones del paquete (pulg):</label>
+
+                <label class="col-form-label col-sm-1 label-align " for="instruction">Alto:</label>
                 <div class="col-sm-1">
-                  <input type="text" placeholder="Largo." class="form-control" >
+                  <input type="text"  id="tall" name="tall" class="form-control" >
                 </div>
+                <label class="col-form-label col-sm-1 label-align " for="instruction">Ancho:</label>
                 <div class="col-sm-1">
-                  <input type="text" placeholder="Ancho." class="form-control" >
+                  <input type="text"  id="width" name="width" class="form-control" >
                 </div>
+                <label class="col-form-label col-sm-1 label-align " for="instruction">Largo:</label>
                 <div class="col-sm-1">
-                  <input type="text" placeholder="Alto." class="form-control" >
+                  <input type="text"  id="lenght"  name="lenght" class="form-control" >
+                </div>
+                <label class="col-form-label col-sm-1 label-align " for="instruction">Volumen:</label>
+                <div class="col-sm-1">
+                  <input type="text"  id="volume" name="volume" class="form-control" >
+                </div>
+                <label class="col-form-label col-sm-1 label-align " for="instruction">Pie Cúbico:</label>
+                <div class="col-sm-1">
+                  <input type="text"  id="cubic_foot" name="cubic_foot" class="form-control" >
                 </div>
               </div>
 
               <br>
               <div class="form-row">
                   <div class="col-sm-3 offset-sm-1">
-                    <button type="submit" class="btn btn-primary offset-sm-1" id="BtnPackage">Registrar Paquete</button>
+                    <button type="submit" class="btn btn-primary offset-sm-1" id="BtnPackage">Calcular</button>
                   </div>
             </div>
           </form>
@@ -136,6 +148,27 @@
     
     $(document).ready(function () {
         $("#weight").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });    
+
+    $(document).ready(function () {
+        $("#tall").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });    
+    $(document).ready(function () {
+        $("#width").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });    
+    $(document).ready(function () {
+        $("#lenght").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });    
+    $(document).ready(function () {
+        $("#volume").mask('000.000.000.000.000,00', { reverse: true });
+        
+    });    
+    $(document).ready(function () {
+        $("#cubic_foot").mask('000.000.000.000.000,00', { reverse: true });
         
     });    
 
