@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_client');
             $table->unsignedBigInteger('id_bank');
 
+            $table->date('date');  
             $table->string('type',25);  
             $table->string('transferred_from',100);
             $table->string('confirmation',30);

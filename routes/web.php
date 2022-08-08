@@ -22,6 +22,7 @@ use App\Http\Controllers\Administration\TypeOfGoods\TypeOfGoodsController;
 use App\Http\Controllers\Administration\TypeOfPackagings\TypeOfPackagingsController;
 use App\Http\Controllers\AdministrationClient\Calculation\CalculationController;
 use App\Http\Controllers\AdministrationClient\ClientRecipient\ClientRecipientController;
+use App\Http\Controllers\AdministrationClient\ClientPayment\ClientPaymentController;
 use App\Http\Controllers\AdministrationClient\PreAlert\ClientPreAlertController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Historial\HistorialStatusController;
@@ -282,5 +283,12 @@ Route::group(["prefix"=>'client_pre_alert'],function(){
     Route::get('create/{id?}', [ClientPreAlertController::class, 'create'])->name('client_pre_alerts.create');
     Route::post('store', [ClientPreAlertController::class, 'store'])->name('client_pre_alerts.store');
     Route::post('update/{id}', [ClientPreAlertController::class, 'update'])->name('client_pre_alerts.update');
+});
+Route::group(["prefix"=>'client_payments'],function(){
+    Route::get('index', [ClientPaymentController::class, 'index'])->name('client_payments.index');
+    Route::get('register/{id?}', [ClientPaymentController::class, 'create'])->name('client_payments.create');
+    Route::post('store', [ClientPaymentController::class, 'store'])->name('client_payments.store');
+    Route::post('update/{id}', [ClientPaymentController::class, 'update'])->name('client_payments.update');
+    Route::delete('delete', [ClientPaymentController::class, 'destroy'])->name('client_payments.delete');
 });
 /*------------------------- */

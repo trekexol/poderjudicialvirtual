@@ -31,7 +31,8 @@
        
         <li><a href="{{ route('calculations.index') }}"><i class="fa fa-calculator"></i>Calcular<span class="fa fa-chevron-down"></span></a></li>
         <li><a href="{{ route('client_pre_alerts.index') }}"><i class="fa fa-bell"></i>Pre Alertas<span class="fa fa-chevron-down"></span></a></li>
-        
+        <li><a href="{{ route('client_payments.index') }}"><i class="fa fa-credit-card"></i>Pagos<span class="fa fa-chevron-down"></span></a></li>
+       
 
        
 

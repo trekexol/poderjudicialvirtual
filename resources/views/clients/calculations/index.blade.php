@@ -3,11 +3,9 @@
 @section('content')
 
 {{-- VALIDACIONES-RESPUESTA--}}
-@include('admin.layouts.success')   {{-- SAVE --}}
-@include('admin.layouts.danger')    {{-- EDITAR --}}
-@include('admin.layouts.delete')    {{-- DELELTE --}}
-
-
+@include('clients.layouts.success')   {{-- SAVE --}}
+@include('clients.layouts.danger')    {{-- EDITAR --}}
+@include('clients.layouts.delete')    {{-- DELELTE --}}
 
 {{-- VALIDACIONES-RESPUESTA --}}
 <div class="right_col" role="main">
@@ -16,7 +14,7 @@
     <div class="col-md-12 col-sm-12 ">
       <div class="x_panel">
           <div class="x_title">
-            <h2>Ingresar Paquetes</h2>
+            <h2>Ingresar Pre Alertas</h2>
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -30,7 +28,7 @@
               
               <div class="item form-group">
                 <label class="col-sm-5 offset-sm-1  h5" for="tracking">Cliente: {{Auth::user()->clients['firstname']}} {{Auth::user()->clients['firstlastname']}}</label>
-                <label class="col-sm-6 offset-sm-1  h5" for="tracking">Casillero: {{Auth::user()->clients->countries['abbreviation'] ?? '' }}{{str_pad(Auth::user()->id_client ?? 0, 6, "0", STR_PAD_LEFT)}}</label>
+                <label class="col-sm-5 offset-sm-1  h5" for="tracking">Casillero: {{Auth::user()->clients->countries['abbreviation'] ?? '' }}{{str_pad(Auth::user()->id_client ?? 0, 6, "0", STR_PAD_LEFT)}}</label>
             
               </div>
            
@@ -65,7 +63,6 @@
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Tipo de Envío:</label>
                 <div class="col-sm-3">
                     <select class="select2_group form-control" name="instruction" required>
-                    
                       <option value="">Seleccione...</option>
                       <option value="Aéreo">Aéreo</option>
                       <option value="Marítimo">Marítimo</option>
@@ -107,7 +104,7 @@
                 </div>
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Largo:</label>
                 <div class="col-sm-1">
-                  <input type="text"  id="lenght"  name="lenght" class="form-control" >
+                  <input type="text" onblur="calculateVolume();" id="lenght"  name="lenght" class="form-control" >
                 </div>
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Volumen:</label>
                 <div class="col-sm-1">
@@ -124,16 +121,14 @@
                   <div class="col-sm-3 offset-sm-1">
                     <button type="submit" class="btn btn-primary offset-sm-1" id="BtnPackage">Calcular</button>
                   </div>
-            </div>
-          </form>
+              </div>
+            </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
-@endsection
+  
+  @endsection
 
 
 @section('validation')
@@ -172,6 +167,28 @@
         
     });    
 
+    function calculateVolume(){
+      
+      var tall = document.getElementById("tall").value;
+      var montoFormat = tall.replace(/[$.]/g,'');
+      tall = montoFormat.replace(/[,]/g,'.');    
+
+      var width = document.getElementById("width").value;
+      var montoFormat = width.replace(/[$.]/g,'');
+      width = montoFormat.replace(/[,]/g,'.');    
+
+      var lenght = document.getElementById("lenght").value;
+      var montoFormat = lenght.replace(/[$.]/g,'');
+      lenght = montoFormat.replace(/[,]/g,'.');    
+
+      if((tall != "" && tall != 0) && (width != "" && width != 0) && (lenght != "" && lenght != 0)){
+        var volume = Math.ceil((tall * width * lenght) / 166);
+        document.getElementById("volume").value = volume;
+        var cubic_foot = Math.ceil((tall * width * lenght) / 1728);
+        document.getElementById("cubic_foot").value = cubic_foot;
+      }
+      
+    }
     
 </script>
    

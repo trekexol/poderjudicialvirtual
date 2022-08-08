@@ -19,6 +19,7 @@ class CreateCountriesTable extends Migration
             $table->string('abbreviation',10);
             $table->string('name',50);
             $table->string('code_phone',10);
+            $table->string('weight',10);
             $table->string('status',40)->nullable();
             
             $table->timestamps();
