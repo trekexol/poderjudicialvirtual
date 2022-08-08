@@ -159,7 +159,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="value">Valor:</label>
                 <div class="col-sm-3">
-                  <input type="text" id="value" name="value" required="required" class="form-control" value="{{ $package->value ?? null }}">
+                  <input type="text" id="value" name="value" required="required" class="form-control" value="{{ number_format($package->value ?? 0, 2, ',', '.') }}">
                 </div>
               </div>
               <div class="item form-group">
