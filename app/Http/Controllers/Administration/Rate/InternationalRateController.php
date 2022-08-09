@@ -57,4 +57,19 @@ class InternationalRateController extends Controller
 
         return view('admin.administrations.international_rates.edit',compact('international_rate'));
     }
+
+    public function list(Request $request, $weight){
+        //validar si la peticion es asincrona
+        if($request->ajax()){
+            try{
+                /*$country = Country::select('id','name','code_phone')->where('id',$weight)->get();
+
+                return response()->json($country,200);*/
+                
+            }catch(Throwable $th){
+                return response()->json(false,500);
+            }
+        }
+        
+    }
 }

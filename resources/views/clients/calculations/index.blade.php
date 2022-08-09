@@ -23,8 +23,7 @@
           </div>
           <div class="x_content">
             <br />
-            <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
-              @csrf 
+           
               
               <div class="item form-group">
                 <label class="col-sm-5 offset-sm-1  h5" for="tracking">Cliente: {{Auth::user()->clients['firstname']}} {{Auth::user()->clients['firstlastname']}}</label>
@@ -118,16 +117,28 @@
 
               <br>
               <div class="form-row">
-                  <div class="col-sm-3 offset-sm-1">
+                  <div class="col-sm-3 offset-sm-4">
                     <button type="submit" class="btn btn-primary offset-sm-1" id="BtnPackage">Calcular</button>
                   </div>
               </div>
             </form>
+            <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="text-center">Concepto</th>
+                  <th class="text-center">Costo</th>
+                </tr>
+                <tr>
+                  <td id="first" class="text-center"></td>
+                  <td id="first2" class="text-center"></td>
+                </tr>
+              </thead>
+             
+              </table>
         </div>
       </div>
     </div>
-  </div>
-  
+
   @endsection
 
 
@@ -190,6 +201,38 @@
       
     }
     
+
+    function getRates(weight){
+            
+            $.ajax({
+                url:"{{ route('international_rates.list','') }}" + '/' + weight,
+                beforSend:()=>{
+                    alert('consultando datos');
+                },
+                success:(response)=>{
+                   
+                    let city = $("#city");
+                    let htmlOptions = `<option value='' >Seleccione Ciudad..</option>`;
+                    // console.clear();
+                    if(response.length > 0){
+                        response.forEach((item, index, object)=>{
+                            let {id,name} = item;
+                            htmlOptions += `<option value='${id}' {{ old('City') == '${id}' ? 'selected' : '' }}>${name}</option>`
+                        });
+                    }
+                    //console.clear();
+                    // console.log(htmlOptions);
+                   city.html('');
+                   city.html(htmlOptions);
+                
+                    
+                
+                },
+                error:(xhr)=>{
+                    alert('hubo un error');
+                }
+            })
+        }
 </script>
    
 @endsection

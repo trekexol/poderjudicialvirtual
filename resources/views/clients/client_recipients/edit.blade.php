@@ -8,9 +8,20 @@
 @include('admin.layouts.delete')    {{-- DELELTE --}}
 {{-- VALIDACIONES-RESPUESTA --}}
 <div class="right_col" role="main">
-
-    <div class="x_content">
-        <br />
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+              <h2>Ingresar Destinatarios</h2>
+              <ul class="col-sm-1 nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
         <form  method="POST"   action="{{ route('client_recipients.update',$client_recipient->id) }}" enctype="multipart/form-data" >
             @method('PATCH')
             @csrf()
@@ -80,6 +91,8 @@
 
         </form>
     </div>
+</div>
+</div>
 </div>
 @endsection
 @section('validation')

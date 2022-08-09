@@ -8,9 +8,20 @@
 @include('admin.layouts.delete')    {{-- DELELTE --}}
 {{-- VALIDACIONES-RESPUESTA --}}
 <div class="right_col" role="main">
-
-    <div class="x_content">
-        <br />
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="x_panel">
+          <div class="x_title">
+            <h2>Ingresar Destinatarios</h2>
+            <ul class="col-sm-1 nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
         <form method="POST" action="{{ route('client_recipients.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
             <div class="item form-group">
@@ -66,7 +77,9 @@
                     <textarea type="text" id="observation" name="observation" rows="5" cols="20" required="required" class="form-control "></textarea>
                 </div>
             </div>
+
             <div class="ln_solid"></div>
+
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
                     <button type="submit" class="btn btn-primary">Registrar</button>
@@ -75,9 +88,10 @@
             </div>
 
         </form>
+      </div>
     </div>
+  </div>
 </div>
-
 @endsection
 
 

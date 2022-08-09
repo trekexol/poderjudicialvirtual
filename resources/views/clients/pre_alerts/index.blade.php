@@ -88,10 +88,10 @@
               </button>
           </div>
           <div class="modal-body">
-          <form action="{{ route('carriers.delete') }}" method="post">
+          <form action="{{ route('client_pre_alerts.delete') }}" method="post">
               @csrf
               @method('DELETE')
-              <input id="id_carrier_modal" type="hidden" class="form-control @error('id_carrier_modal') is-invalid @enderror" name="id_carrier_modal" readonly required autocomplete="id_carrier_modal">
+              <input id="id_client_pre_alert_modal" type="hidden" class="form-control @error('id_client_pre_alert_modal') is-invalid @enderror" name="id_client_pre_alert_modal" readonly required autocomplete="id_client_pre_alert_modal">
                      
               <h5 class="text-center">Seguro que desea eliminar?</h5>
               
@@ -104,4 +104,17 @@
       </div>
   </div>
 </div>
+@endsection
+
+
+@section('validation')
+
+<script>
+    $(document).on('click','.delete',function(){
+         
+         let id_client_pre_alert = $(this).attr('data-id-client_pre_alert');
+ 
+         $('#id_client_pre_alert_modal').val(id_client_pre_alert);
+     });
+</script>
 @endsection
