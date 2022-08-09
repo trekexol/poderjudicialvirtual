@@ -132,7 +132,7 @@ Route::group(["prefix"=>'international_rates'],function(){
     Route::get('edit/{id}', [InternationalRateController::class, 'edit'])->name('international_rates.edit');
     Route::patch('update/{id}', [InternationalRateController::class, 'update'])->name('international_rates.update');
     Route::delete('delete', [InternationalRateController::class, 'destroy'])->name('international_rates.delete');
-    Route::get('list/{id}', [InternationalRateController::class, 'list'])->name('international_rates.list');
+    Route::get('list/{weight}', [InternationalRateController::class, 'list'])->name('international_rates.list');
 });
 
 
