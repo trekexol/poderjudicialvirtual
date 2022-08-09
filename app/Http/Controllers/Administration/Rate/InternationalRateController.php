@@ -8,6 +8,7 @@ use App\Models\Administration\Countries\State;
 use App\Models\Administration\Rate\InternationalRate;
 use App\Models\Administration\Wharehouse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class InternationalRateController extends Controller
 {
@@ -62,9 +63,9 @@ class InternationalRateController extends Controller
         //validar si la peticion es asincrona
         if($request->ajax()){
             try{
-                /*$country = Country::select('id','name','code_phone')->where('id',$weight)->get();
+                $international_rate = InternationalRate::select('id','minimum_weight','maximum_weight','price','rate')->where('minimum_weight','<',$weight)->where('maximum_weight','>',$weight)->get();
 
-                return response()->json($country,200);*/
+                return response()->json($international_rate,200);
                 
             }catch(Throwable $th){
                 return response()->json(false,500);

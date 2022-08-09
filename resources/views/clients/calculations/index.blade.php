@@ -14,7 +14,7 @@
     <div class="col-md-12 col-sm-12 ">
       <div class="x_panel">
           <div class="x_title">
-            <h2>Ingresar Pre Alertas</h2>
+            <h2>Calcule el costo del envío</h2>
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -103,22 +103,22 @@
                 </div>
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Largo:</label>
                 <div class="col-sm-1">
-                  <input type="text" onblur="calculateVolume();" id="lenght"  name="lenght" class="form-control" >
+                  <input type="text"  id="lenght"  name="lenght" class="form-control" >
                 </div>
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Volumen:</label>
                 <div class="col-sm-1">
-                  <input type="text"  id="volume" name="volume" class="form-control" >
+                  <input type="text" readonly id="volume" name="volume" class="form-control" >
                 </div>
                 <label class="col-form-label col-sm-1 label-align " for="instruction">Pie Cúbico:</label>
                 <div class="col-sm-1">
-                  <input type="text"  id="cubic_foot" name="cubic_foot" class="form-control" >
+                  <input type="text" readonly id="cubic_foot" name="cubic_foot" class="form-control" >
                 </div>
               </div>
 
               <br>
               <div class="form-row">
                   <div class="col-sm-3 offset-sm-4">
-                    <button type="submit" class="btn btn-primary offset-sm-1" id="BtnPackage">Calcular</button>
+                    <a href="#" type="submit" onclick="calculateVolume();" class="btn btn-primary offset-sm-1" id="BtnPackage">Calcular</a>
                   </div>
               </div>
             </form>
@@ -128,12 +128,9 @@
                   <th class="text-center">Concepto</th>
                   <th class="text-center">Costo</th>
                 </tr>
-                <tr>
-                  <td id="first" class="text-center"></td>
-                  <td id="first2" class="text-center"></td>
-                </tr>
+               
               </thead>
-             
+              <tbody><td></td><td></td></tbody>
               </table>
         </div>
       </div>
@@ -198,12 +195,21 @@
         var cubic_foot = Math.ceil((tall * width * lenght) / 1728);
         document.getElementById("cubic_foot").value = cubic_foot;
       }
+
+      var weight = document.getElementById("weight").value;
+      var montoFormat = weight.replace(/[$.]/g,'');
+      weight = montoFormat.replace(/[,]/g,'.'); 
+
+      if(weight <= volume){
+        getRates(volume);
+      }else{
+        getRates(weight);
+      }
       
     }
     
 
     function getRates(weight){
-            
             $.ajax({
                 url:"{{ route('international_rates.list','') }}" + '/' + weight,
                 beforSend:()=>{
@@ -211,21 +217,14 @@
                 },
                 success:(response)=>{
                    
-                    let city = $("#city");
-                    let htmlOptions = `<option value='' >Seleccione Ciudad..</option>`;
-                    // console.clear();
                     if(response.length > 0){
                         response.forEach((item, index, object)=>{
-                            let {id,name} = item;
-                            htmlOptions += `<option value='${id}' {{ old('City') == '${id}' ? 'selected' : '' }}>${name}</option>`
+                            let {minimum_weight,maximum_weight,price,rate} = item;
+                            document.getElementById("datatable-buttons").insertRow(1).innerHTML = '<td>ENVIO INTERNACIONAL</td><td>'+price * weight+'</td>';
+                           
                         });
                     }
-                    //console.clear();
-                    // console.log(htmlOptions);
-                   city.html('');
-                   city.html(htmlOptions);
-                
-                    
+                 
                 
                 },
                 error:(xhr)=>{
