@@ -13,14 +13,14 @@ class BackendController extends Controller
         $user       =   auth()->user();
 
         if(isset($user->id_client)){
-            $package_trakings = Package::where('id_client',$user->id_client)->groupBy('tracking','id')->select('tracking','id')->get();
+            $package_trackings = Package::where('id_client',$user->id_client)->get();
 
-            return view('clients.home.index',compact('package_trakings'));
+            return view('clients.home.index',compact('package_trackings'));
         }
         
-        $package_trakings = Package::groupBy('tracking','id')->select('tracking','id')->get();
+        $package_trackings = Package::all();
 
-        return view('admin.trakings.index',compact('package_trakings'));
+        return view('admin.trackings.index',compact('package_trackings'));
     
     }
 }

@@ -52,8 +52,7 @@ class ClientPreAlertController extends Controller
       
         $pre_alert->save();
 
-        dd("eo");
-
+       
         return redirect('/client_pre_alerts/index')->withSuccess('Se ha registrado exitosamente!');
        
     }
@@ -82,13 +81,14 @@ class ClientPreAlertController extends Controller
 
     public function destroy(Request $request)
     {
-        $pre_alert = PreAlert::find($request->id_pre_alert_modal); 
+       
+        $pre_alert = PreAlert::find($request->id_client_pre_alert_modal); 
 
         if(isset($pre_alert)){
             
             $pre_alert->delete();
     
-            return redirect('/client_pre_alerts')->withSuccess('Se ha Eliminado Correctamente!!');
+            return redirect('/client_pre_alert/index')->withSuccess('Se ha Eliminado Correctamente!!');
         }
     }
 }

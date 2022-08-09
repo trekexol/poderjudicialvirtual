@@ -132,6 +132,7 @@ Route::group(["prefix"=>'international_rates'],function(){
     Route::get('edit/{id}', [InternationalRateController::class, 'edit'])->name('international_rates.edit');
     Route::patch('update/{id}', [InternationalRateController::class, 'update'])->name('international_rates.update');
     Route::delete('delete', [InternationalRateController::class, 'destroy'])->name('international_rates.delete');
+    Route::get('list/{id}', [InternationalRateController::class, 'list'])->name('international_rates.list');
 });
 
 
@@ -283,6 +284,7 @@ Route::group(["prefix"=>'client_pre_alert'],function(){
     Route::get('create/{id?}', [ClientPreAlertController::class, 'create'])->name('client_pre_alerts.create');
     Route::post('store', [ClientPreAlertController::class, 'store'])->name('client_pre_alerts.store');
     Route::post('update/{id}', [ClientPreAlertController::class, 'update'])->name('client_pre_alerts.update');
+    Route::delete('delete', [ClientPreAlertController::class, 'destroy'])->name('client_pre_alerts.delete');
 });
 Route::group(["prefix"=>'client_payments'],function(){
     Route::get('index', [ClientPaymentController::class, 'index'])->name('client_payments.index');

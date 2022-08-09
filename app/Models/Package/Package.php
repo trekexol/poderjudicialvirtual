@@ -33,4 +33,8 @@ class Package extends Model
     public function delivery_companies(){
         return $this->belongsTo('App\Models\Administration\DeliveryCompany','id_delivery_company');
     }
+
+    public function client_recipients(){
+        return $this->belongsTo('App\Models\AdministrationClient\ClientRecipient','id_client_recipient');
+    }
 }
