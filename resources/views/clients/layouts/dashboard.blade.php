@@ -180,11 +180,11 @@
           setContentHeight();
       </script>
 
-        
+    
     @yield('validacion_time')
-     @yield('eo')
-     @yield('country')
-     @yield('validation')
-     
+    @yield('eo')
+    @yield('country')
+    @yield('validation')
+    @yield('javascript') 
   </body>
 </html>

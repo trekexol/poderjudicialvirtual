@@ -17,7 +17,7 @@ class ConsolidadoController extends Controller
                                 ->join('clients','clients.id','packages.id_client')
                                 ->orderBy('packages.id','desc')
                                 ->groupBy('id_client','instruction')
-                                ->select('instruction',DB::raw('SUM(id) As amount_packages'))
+                                ->select('instruction',DB::raw('SUM(packages.id) As amount_packages'))
                                 ->get();
 
        

@@ -21,4 +21,20 @@ class Client extends Model
     public function agents(){
         return $this->belongsTo('App\Models\Administration\Agent','id_agent');
     }
+
+    public function making_code_rooms(){
+        return $this->belongsTo('App\Models\Administration\Countries\MakingCode','id_code_room');
+    }
+
+    public function making_code_works(){
+        return $this->belongsTo('App\Models\Administration\Countries\MakingCode','id_code_work');
+    }
+
+    public function making_code_mobiles(){
+        return $this->belongsTo('App\Models\Administration\Countries\MakingCode','id_code_mobile');
+    }
+
+    public function making_code_fax(){
+        return $this->belongsTo('App\Models\Administration\Countries\MakingCode','id_code_fax');
+    }
 }
