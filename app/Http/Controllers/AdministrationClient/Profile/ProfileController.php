@@ -1,59 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Administration\Client;
+namespace App\Http\Controllers\AdministrationClient\Profile;
 
-use App\Models\Administration\Client;
-use App\Models\Administration\Countries\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
-use App\Models\Package\Package;
+use App\Models\Administration\Client;
+use App\Models\Administration\Countries\Country;
+use App\Models\Administration\Countries\MakingCode;
+use App\Models\Administration\Countries\State;
 use App\Models\User;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class ClientController extends Controller
+class ProfileController extends Controller
 {
-
-    public function index(){
-
-        $clients = Client::all();
-
-        return view('admin.administrations.clients.index',compact('clients'));
-    }
-
-    public function register()
+    public function index()
     {
+        $user       =   auth()->user();
+
+        $profile = Client::where('id',$user->id_client)->first();
+
         $countries = Country::orderBy('name','asc')->get();
 
         $agencies = Agency::orderBy('id','desc')->get();
 
-        return view('clients.register.client_register',compact('countries','agencies'));
+        $making_codes = MakingCode::where('id_country',$profile->id_country)->orderBy('id','desc')->get();
+
+        $states = State::where('id_country',$profile->states->countries['id'])->orderBy('id','desc')->get();
+       
+        return view('clients.profiles.index',compact('profile','countries','agencies','making_codes','states'));
     
     }
 
-    public function consult($id_client){
-
-        $packages = Package::where('id_client',$id_client)
-                            ->where('status','Activo')
-                            ->get();
-
-        $client = Client::find($id_client);
-
-        return view('admin.administrations.clients.consult',compact('packages','client'));
-    }
 
     public function store(Request $request)
     {
-      
+       
         $data = request()->validate([
             'email'                 =>'required|max:40',
             'type_cedula'           =>'required',
             'cedula'                =>'required',
-            'password'              =>'required|min:6|max:20',
-            'confirm_password'      =>'required|min:6|max:20',
+           
             'firstname'             =>'required|max:30',
             'firstlastname'         =>'required|max:30',
            
@@ -72,9 +59,12 @@ class ClientController extends Controller
            
         ]);
 
-        $client = new Client();
+        
+        $user       =   auth()->user();
 
-       
+        $client = Client::findOrFail($user->id_client);
+
+        
         $client->type_cedula            = $request->type_cedula;         
         $client->cedula                 = $request->cedula;
         
@@ -95,32 +85,35 @@ class ClientController extends Controller
 
         $client->id_agency              = $request->id_agency;  
 
-        $client->id_code_room           = $request->code_phone_room;  
-        $client->id_code_work           = $request->code_phone_work;  
-        $client->id_code_mobile         = $request->code_phone_mobile;  
-        $client->id_code_fax            = $request->code_phone_fax;  
+        $client->id_code_room           = $request->id_code_room;  
+        $client->id_code_work           = $request->id_code_work;  
+        $client->id_code_mobile         = $request->id_code_mobile;  
+        $client->id_code_fax            = $request->id_code_fax;  
 
        
-        $client->phone_room           = $request->phone_room;  
-        $client->phone_work           = $request->phone_work;  
-        $client->phone_mobile         = $request->phone_mobile;  
-        $client->phone_fax            = $request->phone_fax;  
-    
+        $client->phone_room             = $request->phone_room;  
+        $client->phone_work             = $request->phone_work;  
+        $client->phone_mobile           = $request->phone_mobile;  
+        $client->phone_fax              = $request->phone_fax;  
+
         $client->company                = $request->company;  
         $client->rif                    = $request->rif;  
-        
+    
         $client->save();
 
-        $user = new User();
+        $user = User::findOrFail($user->id);
 
-        $user->id_client = $client->id;
         $user->name = $request->firstname;
         $user->email = $request->email;
-        $user->password =  Hash::make(request('password'));
+        if($request->password != ""){
+            $user->password =  Hash::make(request('password'));
+        }
 
         $user->save();
-    
-        return redirect('/login')->withSuccess('Se ha registrado exitosamente, puede iniciar sesion con su correo y clave!');
+
+        
+       
+        return redirect('/profiles/index')->withSuccess('Se ha registrado exitosamente!');
        
     }
 }

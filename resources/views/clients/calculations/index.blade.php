@@ -220,7 +220,9 @@
                     if(response.length > 0){
                         response.forEach((item, index, object)=>{
                             let {minimum_weight,maximum_weight,price,rate} = item;
-                            document.getElementById("datatable-buttons").insertRow(1).innerHTML = '<td>ENVIO INTERNACIONAL</td><td>'+price * weight+'</td>';
+                            rate_total = price * weight;
+                            
+                            document.getElementById("datatable-buttons").insertRow(1).innerHTML = '<td class="text-center">ENVIO INTERNACIONAL</td><td class="text-center">'+rate_total.toLocaleString('de-DE', {minimumFractionDigits: 2,maximumFractionDigits: 2})+'</td>';
                            
                         });
                     }

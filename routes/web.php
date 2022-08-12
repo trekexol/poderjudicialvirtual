@@ -24,6 +24,8 @@ use App\Http\Controllers\AdministrationClient\Calculation\CalculationController;
 use App\Http\Controllers\AdministrationClient\ClientRecipient\ClientRecipientController;
 use App\Http\Controllers\AdministrationClient\ClientPayment\ClientPaymentController;
 use App\Http\Controllers\AdministrationClient\PreAlert\ClientPreAlertController;
+use App\Http\Controllers\AdministrationClient\Profile\ProfileController;
+use App\Http\Controllers\ClientRecipientPackage\ClientRecipientPackageController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
 use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
@@ -61,7 +63,7 @@ Route::group(["prefix"=>'countries'],function(){
 });
 
 Route::group(["prefix"=>'trakings'],function(){
-    Route::get('/', [TrakingController::class, 'index'])->name('trakings.index');
+    Route::get('index', [TrakingController::class, 'index'])->name('trakings.index');
     Route::post('package', [TrakingController::class, 'packageWithTracking'])->name('trakings.packageWithTracking');
 
 });
@@ -293,4 +295,13 @@ Route::group(["prefix"=>'client_payments'],function(){
     Route::post('update/{id}', [ClientPaymentController::class, 'update'])->name('client_payments.update');
     Route::delete('delete', [ClientPaymentController::class, 'destroy'])->name('client_payments.delete');
 });
+Route::group(["prefix"=>'profiles'],function(){
+    Route::get('index', [ProfileController::class, 'index'])->name('profiles.index');
+    Route::post('store', [ProfileController::class, 'store'])->name('profiles.store');
+});
 /*------------------------- */
+
+Route::group(["prefix"=>'client_recipient_packages'],function(){
+    Route::get('register/{id_package}', [ClientRecipientPackageController::class, 'register'])->name('client_recipient_packages.register');
+    Route::post('store', [ClientRecipientPackageController::class, 'store'])->name('client_recipient_packages.store');
+});

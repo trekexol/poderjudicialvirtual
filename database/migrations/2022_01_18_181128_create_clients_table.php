@@ -39,7 +39,7 @@ class CreateClientsTable extends Migration
             $table->string('street_received',100);
             $table->string('urbanization_received',100);
 
-            $table->string('type_direction_received',15);
+            $table->string('type_direction_received',30);
 
             $table->string('phone_room',20);
             $table->string('phone_work',20);

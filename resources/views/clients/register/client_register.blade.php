@@ -131,7 +131,7 @@
                                 <option value="">Seleccione una Agencia</option>
                                     @if (isset($agencies))
                                         @foreach($agencies as $var)
-                                            <option value="{{ $var->id }}">{{ $var->cities->countries['abbreviation'] ?? '' }} - {{ $var->name }}</option>
+                                            <option value="{{ $var->id }}">{{ $var->states->countries['abbreviation'] ?? '' }} - {{ $var->name }}</option>
                                         @endforeach
                                     @endif
                             </select>
