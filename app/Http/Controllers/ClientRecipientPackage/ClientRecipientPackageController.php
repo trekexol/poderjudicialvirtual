@@ -34,6 +34,16 @@ class ClientRecipientPackageController extends Controller
     
     }
 
+    public function create($id_package)
+    {
+      
+        $package = Package::where('id_client',$id_package)->first();
+        $countries = Country::orderBy('name','asc')->get();
+
+        return view('admin.client_recipients.create',compact('package','countries'));
+    
+    }
+
    
 
     public function store(Request $request)
@@ -46,6 +56,38 @@ class ClientRecipientPackageController extends Controller
         $package->save();
 
         return redirect('/packages/create/'.$package->id.'')->withSuccess('Se ha Guardado el destino del paquete exitosamente!');
+       
+    }
+
+    public function storeNew(Request $request)
+    {
+        
+        $user       =   auth()->user();
+        $client_recipient = new ClientRecipient();
+
+        $package = Package::findOrFail($request->id_package);
+
+        $client_recipient->id_client = $package->id_client;
+        $client_recipient->id_country = $request->id_country;
+        $client_recipient->name = $request->name;
+        $client_recipient->identification_card = $request->identification_card;
+        $client_recipient->direction1 = $request->direction;
+        $client_recipient->direction2 = $request->direction2;
+        $client_recipient->phone = $request->phone;
+        $client_recipient->email = $request->email;
+        $client_recipient->observation = $request->observation;
+
+        $client_recipient->status = 'Activo';
+      
+        $client_recipient->save();
+
+        
+
+        $package->id_client_recipient = $client_recipient->id;
+       
+        $package->save();
+
+        return redirect('/packages/create/'.$request->id_package.'')->withSuccess('Se ha Guardado el destino del paquete exitosamente!');
        
     }
 

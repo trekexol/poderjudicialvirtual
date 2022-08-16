@@ -9,14 +9,14 @@
 {{-- VALIDACIONES-RESPUESTA --}}
 @if (isset($package))
 <div class="col-sm-1 offset-sm-4">
-    <a href="{{ route('packages.create',$package->id) }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Tracking</a>
+    <a href="{{ route('packages.index') }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Tracking</a>
   </div>
  
     <div class="col-sm-1">
-      <a href="{{ route('packages.index') }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Basico</a>
+      <a href="{{ route('packages.create',$package->id)  }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Basico</a>
     </div>
     <div class="col-sm-1">
-      <a href="{{ route('client_recipient_packages.register',$package->id) }}" type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Destino</a>
+      <a href="{{ route('client_recipient_packages.register',$package->id) }}" type="submit" class="active btn btn-light offset-sm-1" id="BtnPackage">Destino</a>
     </div>
     <div class="col-sm-1">
       <a type="submit" class="btn btn-light offset-sm-1" id="BtnPackage">Cargos</a>
@@ -58,6 +58,7 @@
                         @endforeach
                     </select>
                 </div>
+                <a href="{{ route('client_recipient_packages.create',$package->id) }}" class="btn btn-info" type="button">Agregar Nuevo</a>
             </div>
             @endif
           

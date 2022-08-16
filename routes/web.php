@@ -304,4 +304,6 @@ Route::group(["prefix"=>'profiles'],function(){
 Route::group(["prefix"=>'client_recipient_packages'],function(){
     Route::get('register/{id_package}', [ClientRecipientPackageController::class, 'register'])->name('client_recipient_packages.register');
     Route::post('store', [ClientRecipientPackageController::class, 'store'])->name('client_recipient_packages.store');
+    Route::get('create/{id_package}', [ClientRecipientPackageController::class, 'create'])->name('client_recipient_packages.create');
+    Route::post('storenew', [ClientRecipientPackageController::class, 'storeNew'])->name('client_recipient_packages.storeNew');
 });

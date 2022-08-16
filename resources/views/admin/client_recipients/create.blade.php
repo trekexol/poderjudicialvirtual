@@ -22,16 +22,16 @@
           </div>
           <div class="x_content">
             <br />
-        <form method="POST" action="{{ route('client_recipient_packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="POST" action="{{ route('client_recipient_packages.storeNew') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
         @csrf
            
           
+        <input type="hidden" id="id_package" name="id_package" value="{{$package->id}}">
         <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align">Pais:</label>
             <div class="col-md-4 col-sm-4">
-                <select id="country" name="id_country" class="select2_single form-control" >
-                    <option value="{{ $package->client_recipient['id_country'] ?? '' }}">{{ $package->client_recipient->countries['name'] ?? '' }}</option>
-                    <option>------------</option>
+                <select id="country" name="id_country" class="select2_single form-control" required>
+                    <option value="">Seleccione ...</option>
                     @foreach ($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                     @endforeach
@@ -86,7 +86,7 @@
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
                     <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="{{ route('package_client_recipients.index') }}" class="btn btn-danger" type="button">Cancel</a>
+                    <a href="{{ route('client_recipient_packages.register',$package->id) }}" class="btn btn-danger" type="button">Cancel</a>
                 </div>
             </div>
 
