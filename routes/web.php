@@ -27,12 +27,15 @@ use App\Http\Controllers\AdministrationClient\PreAlert\ClientPreAlertController;
 use App\Http\Controllers\AdministrationClient\Profile\ProfileController;
 use App\Http\Controllers\ClientRecipientPackage\ClientRecipientPackageController;
 use App\Http\Controllers\Consolidado\ConsolidadoController;
+use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\Historial\HistorialStatusController;
 use App\Http\Controllers\Package\PackageSelectController;
 use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 use App\Http\Controllers\Tula\TulaController;
 use App\Http\Controllers\MasterGuide\MasterGuideController;
+use App\Http\Controllers\Package\PackagePrintController;
+use App\Http\Controllers\PackageCharge\PackageChargeController;
 use App\Http\Controllers\Paddle\PaddleController;
 use App\Http\Controllers\PreAlert\PreAlertController;
 use App\Http\Controllers\Whatsapp\WhatsAppChannelController;
@@ -203,6 +206,9 @@ Route::group(["prefix"=>'packages'],function(){
     Route::get('select/client/{id_package?}', [PackageSelectController::class, 'selectClient'])->name('packages.selectClient');
 
     Route::post('update/{id}', [PackageController::class, 'update'])->name('packages.update');
+
+    Route::get('print/{id_package}', [PackagePrintController::class, 'print'])->name('packages.print');
+    Route::delete('delete', [PackageController::class, 'destroy'])->name('packages.delete');
 });
 
 Route::group(["prefix"=>'packages_lumps'],function(){
@@ -306,4 +312,17 @@ Route::group(["prefix"=>'client_recipient_packages'],function(){
     Route::post('store', [ClientRecipientPackageController::class, 'store'])->name('client_recipient_packages.store');
     Route::get('create/{id_package}', [ClientRecipientPackageController::class, 'create'])->name('client_recipient_packages.create');
     Route::post('storenew', [ClientRecipientPackageController::class, 'storeNew'])->name('client_recipient_packages.storeNew');
+});
+
+Route::group(["prefix"=>'package_charges'],function(){
+    Route::get('index/{id_package}', [PackageChargeController::class, 'index'])->name('package_charges.index');
+    Route::post('store', [PackageChargeController::class, 'store'])->name('package_charges.store');
+    Route::get('edit/{id}/{id_package}', [PackageChargeController::class, 'edit'])->name('package_charges.edit');
+    Route::post('update/{id}', [PackageChargeController::class, 'update'])->name('package_charges.update');
+    Route::delete('delete', [PackageChargeController::class, 'destroy'])->name('package_charges.delete');
+});
+
+Route::group(["prefix"=>'generals'],function(){
+    Route::get('index', [GeneralController::class, 'index'])->name('generals.index');
+    Route::post('store', [GeneralController::class, 'store'])->name('generals.store');
 });

@@ -28,7 +28,7 @@
             <li><a href="{{ route('wharehouses.index') }}">Almacenes</a></li>
             <li><a href="{{ route('agencies.index') }}">Agencias</a></li>
             <li><a href="{{ route('agents.index') }}">Agentes</a></li>
-            <li><a href="{{ route('clients.create') }}">Clientes</a></li>
+            <li><a href="{{ route('clients.index') }}">Clientes</a></li>
             <li><a href="{{ route('cities.index') }}">Ciudades</a></li>
             <li><a href="{{ route('delivery_companies.index') }}">Empresas Entrega</a></li>
             <li><a href="{{ route('countries.index') }}">Paises</a></li>
@@ -71,6 +71,9 @@
             <li><a href="{{ route('clients.index') }}">Clientes</a></li>
            
           </ul>
+        </li>
+        <li><a href="{{ route('generals.index') }}"><i class="fa fa-wrench"></i>General<span class="fa fa-chevron-down"></span></a>
+          
         </li>
 
         @endif

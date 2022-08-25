@@ -231,7 +231,7 @@ class PackageController extends Controller
         $package->id_agent_office_location = $request->id_agent_office_location;
         $package->id_wharehouse = $request->id_wharehouse;
         $package->content = $request->content;
-        $package->value = $request->value;
+        $package->value = str_replace(',', '.', str_replace('.', '',$request->value));
         $package->id_origin_country = $request->id_origin_country;
         $package->id_destination_country = $request->id_destination_country;
         $package->id_delivery_company = $request->id_delivery_company;
