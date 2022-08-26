@@ -17,9 +17,8 @@ class ClientRecipientPackageController extends Controller
     
     public function register($id_package)
     {
-      
-
-        $package = Package::where('id_client',$id_package)->first();
+        
+        $package = Package::where('id',$id_package)->first();
         $client_recipients = null;
 
         if(isset($package)){
@@ -37,7 +36,7 @@ class ClientRecipientPackageController extends Controller
     public function create($id_package)
     {
       
-        $package = Package::where('id_client',$id_package)->first();
+        $package = Package::where('id',$id_package)->first();
         $countries = Country::orderBy('name','asc')->get();
 
         return view('admin.client_recipients.create',compact('package','countries'));

@@ -7,10 +7,13 @@ use App\Models\Administration\Agent;
 use App\Models\Administration\Client;
 use App\Models\Administration\Countries\Country;
 use App\Models\Administration\DeliveryCompany;
+use App\Models\Administration\PackageStatus;
 use App\Models\Administration\TypeOfGood;
 use App\Models\Administration\TypeOfPackaging;
 use App\Models\Administration\Wharehouse;
+use App\Models\Historial\HistorialStatus;
 use App\Models\Package\Package;
+use App\Models\Package\PackageCharge;
 use App\Models\Package\PackageLump;
 use App\Models\Package\PackageTypeOfGood;
 use Illuminate\Http\Request;
@@ -295,5 +298,21 @@ class PackageController extends Controller
 
         return redirect('/packages/create/'.$package->id.'')->withSuccess('Se ha Actualizado exitosamente!');
        
+    }
+
+    public function destroy(Request $request)
+    {
+         $package = Package::find($request->id_package_modal); 
+ 
+         if(isset($package)){
+            PackageLump::where('id_package',$package->id)->delete();
+            PackageCharge::where('id_package',$package->id)->delete();
+            HistorialStatus::where('id_package',$package->id)->delete();
+            Package::where('id',$package->id)->delete();
+
+            $package->delete();
+     
+            return redirect('/packages/index')->withSuccess('Se ha Eliminado Correctamente el Paquete!!');
+         }
     }
 }
