@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Package;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administration\Agency;
 use App\Models\Administration\Agent;
 use App\Models\Administration\Client;
 use App\Models\Administration\Countries\Country;
@@ -58,6 +59,8 @@ class PackageController extends Controller
         
         $agents = Agent::orderBy('name','asc')->get();
 
+        $agencies = Agency::orderBy('name','asc')->get();
+
         $countries = Country::orderBy('name','asc')->get();
 
         $wharehouses = Wharehouse::orderBy('name','asc')->get();
@@ -72,7 +75,7 @@ class PackageController extends Controller
 
         
        
-        return view('admin.packages.create',compact('package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+        return view('admin.packages.create',compact('agencies','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }
 
