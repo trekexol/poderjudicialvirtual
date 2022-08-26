@@ -33,6 +33,9 @@
       <div class="x_panel">
           <div class="x_title">
             <h2>Ingresar Paquetes</h2>
+            @isset($package)
+              <h2>Número de Paquete: {{$package->id}}</h2>
+            @endisset
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -43,7 +46,8 @@
             <br />
             <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
-              
+             
+
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
                 <div class="col-sm-4">
@@ -115,25 +119,25 @@
                 </label>
                 <div class="col-sm-3 ">
                   @if (isset($package->arrival_date))
-                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" value="{{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}">        
+                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  value="{{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}">        
                   @else
-                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time" required="required" >                   
+                    <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  >                   
                   @endif
                   </div>
               </div>
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_agent_office_location" required>
+                    <select class="select2_group form-control" name="id_agency_office_location" required>
                       @if (isset($package))
-                        <option value="{{ $package->id_agent_office_location ?? null }}">{{ $package->office_locations['name'] ?? null }} - {{ $package->office_locations['direction'] ?? null }}</option>
+                        <option value="{{ $package->id_agency_office_location ?? null }}">{{ $package->agency_locations['name'] ?? null }} - {{ $package->agency_locations['direction'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @if (isset($agents))
-                        @foreach ($agents as $agent)
-                          <option value="{{ $agent->id }}">{{ $agent->name ?? '' }} - {{ $agent->direction ?? '' }}</option>
+                      @if (isset($agencys))
+                        @foreach ($agencys as $agency)
+                          <option value="{{ $agency->id }}">{{ $agency->name ?? '' }} - {{ $agency->direction ?? '' }}</option>
                         @endforeach
                       @endif
                     </select>
@@ -218,7 +222,7 @@
                 </div>
                 <label class="col-form-label col-sm-3 label-align " for="number_transport_guide">N° Guía Transporte:</label>
                 <div class="col-sm-3">
-                  <input type="text" id="number_transport_guide" name="number_transport_guide" required="required" class="form-control" value="{{ $package->number_transport_guide ?? null }}">
+                  <input type="text" id="number_transport_guide" name="number_transport_guide"  class="form-control" value="{{ $package->number_transport_guide ?? null }}">
                 </div>
               </div>
 
