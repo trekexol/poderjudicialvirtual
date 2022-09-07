@@ -111,6 +111,10 @@ class ClientController extends Controller
         
         $client->save();
 
+        $client->casillero =  $client->id.$client->countries['abbreviation'];
+        
+        $client->save();
+
         $user = new User();
 
         $user->id_client = $client->id;

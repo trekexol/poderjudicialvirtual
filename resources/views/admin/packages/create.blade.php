@@ -32,10 +32,23 @@
     <div class="col-md-12 col-sm-12 ">
       <div class="x_panel">
           <div class="x_title">
+            <div class="col-sm-2">
             <h2>Ingresar Paquetes</h2>
+            </div>
             @isset($package)
+            <div class="col-sm-2">
               <h2>Número de Paquete: {{$package->id}}</h2>
+            </div>
             @endisset
+            <div class="col-sm-2">
+              <a href="{{ route('package_exports.exportPackageTemplate') }}" type="submit" class="btn btn-success offset-sm-1" id="BtnPackage">Plantilla</a>
+            </div>
+            <div class="col-sm-2">
+              <form id="fileForm" method="POST" action="{{ route('package_imports.importPackageTemplate') }}" enctype="multipart/form-data" >
+                @csrf
+                <input id="file" type="file" value="import" accept=".xlsx" name="file" class="file">
+              </form>
+            </div>
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -46,7 +59,6 @@
             <br />
             <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
-             
 
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
@@ -686,7 +698,28 @@
     document.getElementById("form_contacto2").submit();
 
   });
+  
+  $("#file").on('change',function(){
+      
+      var file = document.getElementById("file").value;
 
+      /*Extrae la extencion del archivo*/
+      var basename = file.split(/[\\/]/).pop(),  // extract file name from full path ...
+                                          // (supports `\\` and `/` separators)
+      pos = basename.lastIndexOf(".");       // get last position of `.`
+
+      if (basename === "" || pos < 1) {
+          alert("El archivo no tiene extension");
+      }          
+      /*-------------------------------*/     
+
+      if(basename.slice(pos + 1) == 'xlsx'){
+        document.getElementById("fileForm").submit();
+      }else{
+        alert("Solo puede cargar archivos .xlsx");
+      }            
+          
+  });
 
 </script>
 
@@ -772,12 +805,14 @@
       
     }
 
-  
-
+    
     function update(){
       document.getElementById("form").action = "{{ route('packages.update',$package->id) }}";
       document.getElementById("form").submit();
     }
+
+   
+
   </script>
 @endisset
 @endsection

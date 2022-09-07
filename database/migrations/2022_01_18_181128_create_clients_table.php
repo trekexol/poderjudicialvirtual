@@ -25,7 +25,7 @@ class CreateClientsTable extends Migration
             $table->unsignedBigInteger('id_code_mobile')->nullable();
             $table->unsignedBigInteger('id_code_fax')->nullable();
 
-            
+            $table->string('casillero',50)->nullable();
 
             $table->string('type_cedula',2);
             $table->string('cedula',15);
