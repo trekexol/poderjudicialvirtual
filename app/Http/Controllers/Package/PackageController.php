@@ -18,6 +18,7 @@ use App\Models\Package\PackageCharge;
 use App\Models\Package\PackageLump;
 use App\Models\Package\PackageTypeOfGood;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PackageController extends Controller
 {
@@ -29,9 +30,18 @@ class PackageController extends Controller
     public function index()
     {
       
-        $packages = Package::orderBy('id','desc')
+        $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
+                            ->leftJoin('clients','clients.id','packages.id_client')
+                            ->leftJoin('agencies','agencies.id','packages.id_agency_office_location')
                             ->where('id_tula',null)
                             ->where('id_paddle',null)
+                            ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
+                            'packages.tracking','clients.firstname','clients.firstlastname','clients.type_cedula','clients.cedula',
+                            'packages.description','packages.instruction','agencies.name',
+                            DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
+                            ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
+                                    'packages.tracking','clients.firstname','clients.firstlastname','clients.type_cedula','clients.cedula',
+                                    'packages.description','packages.instruction','agencies.name')
                             ->get();
        
         return view('admin.packages.index',compact('packages'));
@@ -136,7 +146,7 @@ class PackageController extends Controller
         $package->id_agent_shipper = $request->id_agent_shipper;
         $package->id_agent_vendor = $request->id_agent_vendor;
         $package->arrival_date = $request->arrival_date.' '.$request->check_in;
-        $package->id_agent_office_location = $request->id_agent_office_location;
+        $package->id_agency_office_location = $request->id_agency_office_location;
         $package->id_wharehouse = $request->id_wharehouse;
         $package->content = $request->content;
         $package->value = str_replace(',', '.', str_replace('.', '',$request->value));
@@ -234,7 +244,7 @@ class PackageController extends Controller
         $package->id_agent_shipper = $request->id_agent_shipper;
         $package->id_agent_vendor = $request->id_agent_vendor;
         $package->arrival_date = $request->arrival_date.' '.$request->check_in;
-        $package->id_agent_office_location = $request->id_agent_office_location;
+        $package->id_agency_office_location = $request->id_agency_office_location;
         $package->id_wharehouse = $request->id_wharehouse;
         $package->content = $request->content;
         $package->value = str_replace(',', '.', str_replace('.', '',$request->value));

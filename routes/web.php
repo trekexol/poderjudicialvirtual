@@ -34,6 +34,8 @@ use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Http\Controllers\PackageTypeOfGood\PackageTypeOfGoodController;
 use App\Http\Controllers\Tula\TulaController;
 use App\Http\Controllers\MasterGuide\MasterGuideController;
+use App\Http\Controllers\Package\PackageExportController;
+use App\Http\Controllers\Package\PackageImportController;
 use App\Http\Controllers\Package\PackagePrintController;
 use App\Http\Controllers\PackageCharge\PackageChargeController;
 use App\Http\Controllers\Paddle\PaddleController;
@@ -327,4 +329,12 @@ Route::group(["prefix"=>'package_charges'],function(){
 Route::group(["prefix"=>'generals'],function(){
     Route::get('index', [GeneralController::class, 'index'])->name('generals.index');
     Route::post('store', [GeneralController::class, 'store'])->name('generals.store');
+});
+
+Route::group(["prefix"=>'package_exports'],function(){
+    Route::get('exportPackageTemplate', [PackageExportController::class, 'exportPackageTemplate'])->name('package_exports.exportPackageTemplate');
+});
+
+Route::group(["prefix"=>'package_imports'],function(){
+    Route::post('importPackageTemplate', [PackageImportController::class, 'importPackageTemplate'])->name('package_imports.importPackageTemplate');
 });

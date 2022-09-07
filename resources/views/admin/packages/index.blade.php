@@ -30,12 +30,12 @@
           <thead>
             <tr>
               <th>N°</th>
+              <th>Pz</th>
               <th>Tracking</th>
               <th>Cliente</th>
               <th>Casillero</th>
               <th>Descripcion</th>
               <th>Tipo</th>
-              <th>packagee</th>
               <th>Oficina</th>
               <th></th>
             </tr>
@@ -46,13 +46,13 @@
               <td class="text-center">
                 <a href="{{ route('packages.create',$package->id) }}"  title="Seleccionar">{{$package->id}}</a>
               </td>
+              <td>{{$package->count_package_lumps ?? ''}}</td>
               <td>{{$package->tracking ?? ''}}</td>
-              <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
-              <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
+              <td>{{$package->firstname ?? ''}} {{$package->firstlastname ?? ''}}</td>
+              <td>{{$package->type_cedula ?? ''}}{{$package->cedula ?? ''}}</td>
               <td>{{$package->description ?? ''}}</td>
               <td>{{$package->instruction ?? ''}}</td>
-              <td>{{$package->vendors['name'] ?? ''}}</td>
-              <td>{{$package->office_locations['direction'] ?? ''}}</td>
+              <td>{{$package->name_agency_office ?? ''}}</td>
               <td>
                 <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
                 <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
