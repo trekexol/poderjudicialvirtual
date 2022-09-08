@@ -244,7 +244,7 @@
                       </td>
                       <td>{{$package->tracking ?? ''}}</td>
                       <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
-                      <td>{{$package->clients['type_cedula'] ?? ''}}{{$package->clients['cedula'] ?? ''}}</td>
+                      <td>{{$package->clients['casillero'] ?? ''}}</td>
                       <td>{{$package->description ?? ''}}</td>
                       <td>{{$package->instruction ?? ''}}</td>
                       <td>{{$package->vendors['name'] ?? ''}}</td>

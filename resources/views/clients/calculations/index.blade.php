@@ -27,7 +27,7 @@
               
               <div class="item form-group">
                 <label class="col-sm-5 offset-sm-1  h5" for="tracking">Cliente: {{Auth::user()->clients['firstname']}} {{Auth::user()->clients['firstlastname']}}</label>
-                <label class="col-sm-5 offset-sm-1  h5" for="tracking">Casillero: {{Auth::user()->clients->countries['abbreviation'] ?? '' }}{{str_pad(Auth::user()->id_client ?? 0, 6, "0", STR_PAD_LEFT)}}</label>
+                <label class="col-sm-5 offset-sm-1  h5" for="tracking">Casillero: {{Auth::user()->clients['casillero'] ?? '' }}</label>
             
               </div>
            

@@ -50,7 +50,7 @@
               <td class="text-center">
                 <a href="{{ route('client_pre_alerts.create',$client_pre_alert->id) }}"  title="Seleccionar">{{$client_pre_alert->tracking}}</a>
               </td>
-              <td>{{$client_pre_alert->clients->countries['abbreviation'] ?? ''}}{{$client_pre_alert->id_client}}</td>
+              <td>{{$client_pre_alert->clients->countries['casillero'] ?? ''}}</td>
               <td>{{$client_pre_alert->clients['firstname'] ?? '' }} {{ $client_pre_alert->clients['firstlastname'] ?? ''}}</td>
               <td>{{$client_pre_alert->shipping_type ?? ''}}</td>
               <td>{{$client_pre_alert->transport_company ?? ''}}</td>

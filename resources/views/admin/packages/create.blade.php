@@ -87,14 +87,14 @@
                 <div class="col-sm-4">
                     <select class="select2_group form-control" name="id_client" required>
                       @if (isset($package))
-                        <option value="{{ $package->id_client ?? null }}">{{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
+                        <option value="{{ $package->id_client ?? null }}">{{$client->casillero ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
                       @if (isset($clients)) 
                         @foreach ($clients as $client)
-                          <option value="{{ $client->id }}">{{$client->type_cedula ?? ''}}{{$client->cedula ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
+                          <option value="{{ $client->id }}">{{$client->casillero ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
                         @endforeach
                       @endif
                      
