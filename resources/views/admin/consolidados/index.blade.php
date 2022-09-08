@@ -49,7 +49,7 @@
                 {{$consolidado->id_tula ?? $consolidado->id_paddle}}
               </td>
               <td>{{$consolidado->instruction ?? ''}}</td>
-              <td>{{$consolidado->countries_abbreviation ?? ''}}{{$consolidado->id_client ?? ''}}</td>
+              <td>{{$consolidado->casillero ?? ''}}</td>
               <td>{{$consolidado->firstname ?? '' }} {{ $consolidado->firstlastname ?? '' }}</td>
               <td>{{$consolidado->amount_packages ?? ''}}</td>
               <td>{{$consolidado->amount_for_pay ?? ''}}</td>

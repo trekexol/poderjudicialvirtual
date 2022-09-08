@@ -49,7 +49,7 @@
               <td>{{$package->count_package_lumps ?? ''}}</td>
               <td>{{$package->tracking ?? ''}}</td>
               <td>{{$package->firstname ?? ''}} {{$package->firstlastname ?? ''}}</td>
-              <td>{{$package->type_cedula ?? ''}}{{$package->cedula ?? ''}}</td>
+              <td>{{$package->casillero ?? ''}}</td>
               <td>{{$package->description ?? ''}}</td>
               <td>{{$package->instruction ?? ''}}</td>
               <td>{{$package->name_agency_office ?? ''}}</td>
