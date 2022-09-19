@@ -114,6 +114,8 @@ class PackageController extends Controller
         
         $agents = Agent::orderBy('name','asc')->get();
 
+        $agencies = Agency::orderBy('name','asc')->get();
+
         $countries = Country::orderBy('name','asc')->get();
 
         $wharehouses = Wharehouse::orderBy('name','asc')->get();
@@ -125,9 +127,57 @@ class PackageController extends Controller
         $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
 
        
-        return view('admin.packages.create',compact('package_type_of_goods','package_lumps','package','client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+       
+        return view('admin.packages.create',compact('agencies','package_type_of_goods','package_lumps','package','client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }
+
+    
+    public function createByTracking($tracking)
+    {
+        
+        if(isset($tracking)){
+            $package = Package::where('tracking',$tracking)->first();
+           
+            if(isset($package)){
+
+                $package_lumps = PackageLump::where('id_package',$package->id)->orderBy('id','asc')->get();
+
+                $package_type_of_goods = PackageTypeOfGood::where('id_package',$package->id)->orderBy('id','asc')->get();    
+            
+            }else{
+
+                $package = null;
+
+                $package_lumps = null;
+    
+                $package_type_of_goods = null;
+            }
+           
+        }else{
+            return redirect('/packages')->withDanger('No se recibio el tracking!');
+        }
+        
+        $agents = Agent::orderBy('name','asc')->get();
+
+        $countries = Country::orderBy('name','asc')->get();
+
+        $wharehouses = Wharehouse::orderBy('name','asc')->get();
+
+        $delivery_companies = DeliveryCompany::orderBy('description','asc')->get();
+
+        $type_of_goods = TypeOfGood::orderBy('description','asc')->get();
+
+        $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
+
+        $clients = Client::orderBy('firstname','asc')->get();
+
+        $agencies = Agency::orderBy('name','asc')->get();
+       
+        return view('admin.packages.create',compact('agencies','tracking','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+    
+    }
+ 
 
     public function store(Request $request)
     {
@@ -187,51 +237,6 @@ class PackageController extends Controller
        
     }
 
-    public function createByTracking($tracking)
-    {
-        
-        if(isset($tracking)){
-            $package = Package::where('tracking',$tracking)->first();
-           
-            if(isset($package)){
-
-                $package_lumps = PackageLump::where('id_package',$package->id)->orderBy('id','asc')->get();
-
-                $package_type_of_goods = PackageTypeOfGood::where('id_package',$package->id)->orderBy('id','asc')->get();    
-            
-            }else{
-
-                $package = null;
-
-                $package_lumps = null;
-    
-                $package_type_of_goods = null;
-            }
-           
-        }else{
-            return redirect('/packages')->withDanger('No se recibio el tracking!');
-        }
-        
-        $agents = Agent::orderBy('name','asc')->get();
-
-        $countries = Country::orderBy('name','asc')->get();
-
-        $wharehouses = Wharehouse::orderBy('name','asc')->get();
-
-        $delivery_companies = DeliveryCompany::orderBy('description','asc')->get();
-
-        $type_of_goods = TypeOfGood::orderBy('description','asc')->get();
-
-        $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
-
-        $clients = Client::orderBy('firstname','asc')->get();
-
-       
-       
-        return view('admin.packages.create',compact('tracking','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
-    
-    }
- 
     public function update(Request $request,$id)
     {
         //VALIDACION PARA SABER SI EL TRACKING YA EXISTE, SI EXISTE SE ENVIA UN MENSAJE DE ALERTA

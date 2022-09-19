@@ -33,13 +33,9 @@
       <div class="x_panel">
           <div class="x_title">
             <div class="col-sm-2">
-            <h2>Ingresar Paquetes</h2>
+              <h2>Ingresar Paquetes</h2>
             </div>
-            @isset($package)
-            <div class="col-sm-2">
-              <h2>Número de Paquete: {{$package->id}}</h2>
-            </div>
-            @endisset
+            
             <div class="col-sm-2">
               <a href="{{ route('package_exports.exportPackageTemplate') }}" type="submit" class="btn btn-success offset-sm-1" id="BtnPackage">Plantilla</a>
             </div>
@@ -49,6 +45,7 @@
                 <input id="file" type="file" value="import" accept=".xlsx" name="file" class="file">
               </form>
             </div>
+             
             <ul class="col-sm-1 nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -59,7 +56,13 @@
             <br />
             <form method="POST" enctype="multipart/form-data" action="{{ route('packages.store') }}" id="form" data-parsley-validate class="form-horizontal form-label-left">
               @csrf 
-
+              @isset($package)
+                <div class="item form-group">
+                <div class="col-sm-6">
+                  <h3>Número de Paquete: {{ str_pad($package->id ?? 0, 6, "0", STR_PAD_LEFT)}}</h3>
+                </div>
+                </div>
+              @endisset
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
                 <div class="col-sm-4">
@@ -85,9 +88,9 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control" name="id_client" required>
+                    <select class="select2_group form-control js-example-matcher" data-live-search="true" data-show-subtext="true" name="id_client" required>
                       @if (isset($package))
-                        <option value="{{ $package->id_client ?? null }}">{{$client->casillero ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
+                        <option value="{{ $package->id_client ?? null }}">{{$package->clients['casillero'] ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
@@ -142,13 +145,13 @@
                 <div class="col-sm-4">
                     <select class="select2_group form-control" name="id_agency_office_location" required>
                       @if (isset($package))
-                        <option value="{{ $package->id_agency_office_location ?? null }}">{{ $package->agency_locations['name'] ?? null }} - {{ $package->agency_locations['direction'] ?? null }}</option>
+                        <option value="{{ $package->id_agency_office_location ?? null }}">{{ $package->office_locations['name'] ?? null }} - {{ $package->office_locations['direction'] ?? null }}</option>
                         <option value="">---------------------</option>
                       @else
                         <option value="">Seleccione una Opción</option>
                       @endif
-                      @if (isset($agencys))
-                        @foreach ($agencys as $agency)
+                      @if (isset($agencies))
+                        @foreach ($agencies as $agency)
                           <option value="{{ $agency->id }}">{{ $agency->name ?? '' }} - {{ $agency->direction ?? '' }}</option>
                         @endforeach
                       @endif
@@ -624,6 +627,37 @@
 
 @section('validation')
 <script>
+   $(".js-example-matcher").select2({
+    matcher: matchCustom
+    });
+
+    function matchCustom(params, data) {
+      // If there are no search terms, return all of the data
+      if ($.trim(params.term) === '') {
+        return data;
+      }
+
+      // Do not display the item if there is no 'text' property
+      if (typeof data.text === 'undefined') {
+        return null;
+      }
+
+      // `params.term` should be the term that is used for searching
+      // `data.text` is the text that is displayed for the data object
+      if (data.text.indexOf(params.term) > -1) {
+        var modifiedData = $.extend({}, data, true);
+        modifiedData.text += ' (matched)';
+
+        // You can return modified objects from here
+        // This includes matching the `children` how you want in nested data sets
+        return modifiedData;
+      }
+
+      // Return `null` if the term should not be displayed
+      return null;
+    }
+
+   
 
     $("#formTypeofGoods").hide();
 
