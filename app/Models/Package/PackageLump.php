@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PackageLump extends Model
 {
+
+    protected $fillable = ['id_package','id_type_of_packaging','amount',
+    'bulk_weight','length_weight','width_weight','high_weight','description','status',
+    'created_at','updated_at'];
+
     use HasFactory;
 
     public function packages(){

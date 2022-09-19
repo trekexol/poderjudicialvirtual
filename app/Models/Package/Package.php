@@ -9,7 +9,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','id_agent_shipper','id_agent_vendor','id_client',
+    protected $fillable = ['id_agent_shipper','id_agent_vendor','id_client',
     'id_agency_office_location','id_agency_destination','id_wharehouse','id_origin_country','id_destination_country','id_delivery_company',
     'id_client_recipient','id_tula','id_paddle','tracking',
     'arrival_date','content','value','number_transport_guide','service_type',

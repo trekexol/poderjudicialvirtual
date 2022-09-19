@@ -14,10 +14,9 @@ class TrakingController extends Controller
 {
     public function index()
     {
-        $package_trakings = Package::groupBy('tracking','id')->select('tracking','id')->get();
+        $package_trackings = Package::groupBy('tracking','id')->select('tracking','id')->get();
        
-        
-        return view('admin.trackings.index',compact('package_trakings'));
+        return view('admin.trackings.index',compact('package_trackings'));
     
     }
 
