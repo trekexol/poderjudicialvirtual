@@ -8,6 +8,7 @@ use App\Models\Administration\Agent;
 use App\Models\Administration\Client;
 use App\Models\Administration\Countries\Country;
 use App\Models\Administration\Wharehouse;
+use App\Models\AdministrationClient\ClientRecipient;
 use App\Models\Package\Package;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -31,9 +32,11 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
     */
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) {
+        foreach ($rows as $row) 
+        {
 
-            if(isset($row['contenido'])){
+            if(isset($row['contenido']))
+            {
                 
             $user       =   auth()->user();
 
@@ -58,7 +61,8 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
            // dd($agency_ubicacion_oficina->id);
     
            //dd($rows);
-            if(empty($package_exist)){
+            if(empty($package_exist))
+            {
                // dd($client->id);
               
                 $package = new Package();
@@ -67,15 +71,15 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
                  $package->content                      = $row['contenido'] ?? 'No Tiene';
                  $package->status                       = $row['estado'];
                  $package->value                        = $row['valor'] ?? 'No Tiene';
-                 $package->id_agency_office_location    = 1;
+                 $package->id_agency_office_location    = $agency_ubicacion_oficina->id ?? null;
                   
                  $package->service_type                 = $row['tipo_servicio'] ?? 'No Tiene';;
-                 $package->id_wharehouse                = 1;
-                 $package->id_agency_destination        = 1;
-                 $package->id_origin_country            = 1;
-                 $package->id_destination_country       = 1;
+                 $package->id_wharehouse                = $wharehouse_ubicacion_almacen->id ?? null;
+                 $package->id_agency_destination        = $agency_oficina_recibe->id ?? null;
+                 $package->id_origin_country            = $country_origen->id ?? null;
+                 $package->id_destination_country       = $country_destino->id ?? null;
                  $package->tracking                     = $row['tracking_origen'] ?? 'No Tiene';;
-                 $package->id_agent_shipper             = 1;
+                 $package->id_agent_shipper             = $agent_empresa_entrega->id ?? null;
                  $package->instruction                  = $row['instrucciones1'] ?? 'No Tiene';; 
                  $package->instruction_type             = 'Directo'; 
                  $package->description                  = $row['comentarios'] ?? 'No Tiene';; 
@@ -84,8 +88,10 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
                 
 
                 $package->save();
+              
 
-                        /*for($i = 1 ; $i <= $row['num_bultos']; $i ++){
+                //registro de los bultos
+                for($i = 1 ; $i <= $row['num_bultos']; $i ++){
                     
                     $package_lump = DB::table('package_lumps')->insert([
                         
@@ -102,14 +108,77 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
                         'updated_at'                => $date,
                     ]);
                 }
-            */
-                
+
+            }else{
+                //Si el paquete ya esta registrado con el numero de tracking solo se registran los bultos
+                for($i = 1 ; $i <= $row['num_bultos']; $i ++){
+                    
+                    $package_lump = DB::table('package_lumps')->insert([
+                        
+                        'id_package'                => $package_exist->id, 
+                        'id_type_of_packaging'      => $row['tipo_bulto'], 
+                        'amount'                    => $row['unid'], 
+                        'bulk_weight'               => $row['peso'], 
+                        'length_weight'             => $row['largo'], 
+                        'width_weight'              => $row['ancho'],  
+                        'high_weight'               => $row['alto'],   
+                        'description'               => $row['comentarios'],  
+                        'status'                    => 'Activo',  
+                        'created_at'                => $date,
+                        'updated_at'                => $date,
+                    ]);
+                }
             }
+
             }
-           
+
+            $this->registerClientRecipient($package,$client,$row,$country_destino,$date);
+            
+
         }
 
         
+    }
+
+
+    public function registerClientRecipient($package,$client,$row,$country_destino,$date){
+
+        if(isset($row['cedula_cliente_destinatario'])){
+
+        $client_recipient = ClientRecipient::where('identification_card',$row['cedula_cliente_destinatario'])->first();
+
+        $package_update_client_recipient = Package::findOrFail($package->id);
+
+        if(empty($client_recipient)){
+            
+            $client_recipient = new ClientRecipient();
+                
+            $client_recipient->id_client                    = $client->id;
+            $client_recipient->id_country                   = $country_destino->id;
+            $client_recipient->email                        = $row['correo_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->name                         = $row['nombre_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->identification_card          = $row['cedula_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->direction1                   = $row['direccion_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->direction2                   = $row['direccion2_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->observation                  = $row['observacion_cliente_destinatario'] ?? 'No Tiene';
+            $client_recipient->phone                        = $row['telefono_cliente_destinatario'] ?? 'No Tiene';
+            
+            $client_recipient->status                       = 'Activo';
+            $client_recipient->created_at                   = $date;
+            $client_recipient->updated_at                   = $date;
+        
+
+            $client_recipient->save();
+       
+            
+        }
+            
+        //actualizar el cliente destino del paquete
+        $package_update_client_recipient->id_client_recipient = $client_recipient->id;
+        $package_update_client_recipient->save();
+
+        }
+           
     }
 
     public function onError(\Throwable $e)
