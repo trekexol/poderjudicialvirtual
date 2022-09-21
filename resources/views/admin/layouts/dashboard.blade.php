@@ -39,7 +39,9 @@
      <link href="{{asset('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
      <link href="{{asset('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
  
-     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+     <!-- Select 
+     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />-->
+     <link href="{{asset('select/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
 
   </head>
 
@@ -149,8 +151,10 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('build/js/custom.js')}}"></script>
     
-    <!-- SELECT MULTIPLE -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- SELECT MULTIPLE 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+    <script src="{{asset('select/select2/dist/js/select2.min.js') }}"></script>
+	
    <!-- TERMINA AQUI -->
 
 

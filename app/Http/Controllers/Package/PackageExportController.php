@@ -22,9 +22,9 @@ class PackageExportController extends Controller
              'num_bultos','tipo_bulto','unid','peso','largo','ancho'
              ,'alto','ubicacion_oficina','ubicacion_almacen'
              ,'oficina_recibe','origen','destino','tracking_origen','empresa_entrega','tipo_servicio','instrucciones1'
-             ,'comentarios','direccion_cliente1','direccion_cliente2'
-             ,'ci_cliente2','direccion_cliente3','direccion_cliente4','direccion_destino1'
-             ,'direccion_destino2','direccion_destino3','direccion_destino4','moneda']		
+             ,'comentarios','correo_cliente_destinatario','nombre_cliente_destinatario'
+             ,'cedula_cliente_destinatario','direccion_cliente_destinatario','direccion2_cliente_destinatario','observacion_cliente_destinatario'
+             ,'telefono_cliente_destinatario','moneda']		
             
         ]);
         
