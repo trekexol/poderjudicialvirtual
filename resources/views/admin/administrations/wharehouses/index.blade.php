@@ -43,7 +43,7 @@
             <tr>
               <td>{{$wharehouse->code}}</td>
               <td>{{$wharehouse->name}}</td>
-              <td>{{$wharehouse->agencies['name']}}</td>
+              <td>{{$wharehouse->agencies['name'] ?? ''}}</td>
               <td>
                 <a href="{{ route('wharehouses.edit',$wharehouse->id) }}"  title="Editar"><i class="fa fa-edit"></i></a>
                 <a href="#" class="delete" data-id-$wharehouse={{$wharehouse->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
