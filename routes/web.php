@@ -37,6 +37,7 @@ use App\Http\Controllers\MasterGuide\MasterGuideController;
 use App\Http\Controllers\Package\PackageExportController;
 use App\Http\Controllers\Package\PackageImportController;
 use App\Http\Controllers\Package\PackagePrintController;
+use App\Http\Controllers\Package\PackageSearchController;
 use App\Http\Controllers\PackageCharge\PackageChargeController;
 use App\Http\Controllers\Paddle\PaddleController;
 use App\Http\Controllers\PreAlert\PreAlertController;
@@ -337,4 +338,8 @@ Route::group(["prefix"=>'package_exports'],function(){
 
 Route::group(["prefix"=>'package_imports'],function(){
     Route::post('importPackageTemplate', [PackageImportController::class, 'importPackageTemplate'])->name('package_imports.importPackageTemplate');
+});
+
+Route::group(["prefix"=>'package_searchs'],function(){
+    Route::post('index', [PackageSearchController::class, 'index'])->name('package_searchs.index');
 });
