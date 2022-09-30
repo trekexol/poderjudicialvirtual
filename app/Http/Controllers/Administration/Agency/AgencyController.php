@@ -56,4 +56,11 @@ class AgencyController extends Controller
         return view('admin.administrations.agencies.edit',compact('agency'));
     }
 
+    public function returnAgencyById($id_agency){
+
+        $agency = Agency::find($id_agency);
+
+        return $agency->name ?? 'No tiene';
+    }
+
 }

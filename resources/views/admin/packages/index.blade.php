@@ -94,7 +94,7 @@
               <td>{{$package->casillero ?? ''}}</td>
               <td>{{$package->description ?? ''}}</td>
               <td>{{$package->instruction ?? ''}}</td>
-              <td>{{$package->name_agency_office ?? ''}}</td>
+              <td>{{$package->agency ?? ''}}</td>
               <td>
                 <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
                 <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
