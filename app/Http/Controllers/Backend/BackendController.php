@@ -10,6 +10,7 @@ class BackendController extends Controller
 {
    public function index()
     {
+        
         $user       =   auth()->user();
         $package_trackings = null;
 
@@ -22,6 +23,7 @@ class BackendController extends Controller
        
         $package_trackings = Package::groupBy('tracking','id')->select('tracking','id')->get();
 
+        
         return view('admin.trackings.index',compact('package_trackings'));
     
     }
