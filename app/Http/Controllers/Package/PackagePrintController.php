@@ -42,6 +42,8 @@ class PackagePrintController extends Controller
             $date = Carbon::now();
             $datenow = $date->format('d-m-Y'); 
 
+           
+
             $pdf = $pdf->loadView('admin.packages.prints.ticket',compact('general','package','package_lumps','datenow'));
             return $pdf->stream();
     

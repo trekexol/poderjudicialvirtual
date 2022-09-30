@@ -143,7 +143,7 @@
       <h1 style="text-align: left; font-size: 40px;">{{ $package->instruction ?? ''}}</h1>
       <div style="font-size: 20px; padding:0 17rem;">Tracking: {{ $package->tracking ?? ''}} </div>
       </br>
-      <div style="padding:0 14rem; ">{!! DNS1D::getBarcodeHTML($package->tracking, 'QRCODE') !!}</div>
+      <div style="padding:0 14rem; ">{!! DNS1D::getBarcodeHTML($package->tracking, 'CODABAR') !!}</div>
 
       @php
           $primera_pagina = true;

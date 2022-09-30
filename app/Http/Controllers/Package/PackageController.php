@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Package;
 
+use App\Http\Controllers\Administration\Agency\AgencyController;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Agency;
 use App\Models\Administration\Agent;
@@ -43,6 +44,13 @@ class PackageController extends Controller
                                     'packages.tracking','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.cedula',
                                     'packages.description','packages.instruction','agencies.name')
                             ->get();
+
+        if(isset($packages)){
+            $agencyController = new AgencyController();
+            foreach($packages as $package){
+                $package->agency = $agencyController->returnAgencyById($package->id_agency);
+            }
+        }
 
         $agencies = Agency::orderBy('name','asc')->get();
 
