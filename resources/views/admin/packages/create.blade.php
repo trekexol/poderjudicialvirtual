@@ -555,6 +555,49 @@
               </div>
           </div>
     </div>
+
+
+<div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="col-md-2 col-sm-2 h5">
+            Totales
+            </div>
+           
+            <ul class="col-sm-1 nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+                <div class="item form-group">
+                  <div class="item form-group form-horizontal form-label-left">
+                    <label class="col-form-label col-sm-1 label-align " for="number_transport_guide">Peso Inicial:</label>
+                    <div class="col-sm-1">
+                      <input type="text"  class="form-control" value="{{ $package->starting_weight ?? 0 }}">
+                    </div>
+                    <label class="col-form-label col-sm-1 label-align " for="number_transport_guide">Peso Final:</label>
+                    <div class="col-sm-1">
+                      <input type="text"  class="form-control" value="{{ $package->final_weight ?? 0 }}">
+                    </div>
+                    <label class="col-form-label col-sm-1 label-align " for="number_transport_guide">Volumen:</label>
+                    <div class="col-sm-1">
+                      <input type="text"  class="form-control" value="{{ $package->volume ?? 0 }}">
+                    </div>
+                    <label class="col-form-label col-sm-1 label-align " for="number_transport_guide">Pie Cúbico:</label>
+                    <div class="col-sm-1">
+                      <input type="text"  class="form-control" value="{{ $package->cubic_foot ?? 0}}">
+                    </div>
+                    
+                  </div>
+                          
+              </div>
+          </div>
+    </div>
 </div>
 
 @endif

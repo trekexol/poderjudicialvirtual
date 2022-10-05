@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PackageLump;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administration\TypeOfPackaging;
+use App\Models\Package\Package;
 use App\Models\Package\PackageLump;
 use Illuminate\Http\Request;
 
@@ -21,18 +22,20 @@ class PackageLumpController extends Controller
 
             for($count = 0;$count < count($request->type_of_packaging); $count ++){
 
-                $package = new PackageLump();
+                $package_lump = new PackageLump();
 
-                $package->id_package = $request->id_package_lump;
-                $package->id_type_of_packaging = $request->type_of_packaging[$count];
-                $package->amount = $request->amount_lump[$count];
-                $package->bulk_weight = $request->bulk_weight_lump[$count];
-                $package->length_weight = $request->length_lump[$count];
-                $package->width_weight = $request->width_lump[$count];
-                $package->high_weight = $request->high_lump[$count];
-                $package->description = $request->description_lump[$count];
+                $package_lump->id_package = $request->id_package_lump;
+                $package_lump->id_type_of_packaging = $request->type_of_packaging[$count];
+                $package_lump->amount = $request->amount_lump[$count];
+                $package_lump->bulk_weight = $request->bulk_weight_lump[$count];
+                $package_lump->length_weight = $request->length_lump[$count];
+                $package_lump->width_weight = $request->width_lump[$count];
+                $package_lump->high_weight = $request->high_lump[$count];
+                $package_lump->description = $request->description_lump[$count];
         
-                $package->save();
+                $package_lump->save();
+
+                $this->updatePackage($package_lump);
             }
             
         }else{
@@ -41,6 +44,36 @@ class PackageLumpController extends Controller
 
         return redirect('/packages/create/'.$request->id_package_lump.'')->withSuccess('Se ha registrado exitosamente!');
        
+    }
+
+    public function updatePackage($package_lump){
+        
+        
+        $package = Package::findOrFail($package_lump->id_package);
+
+        $lenght = $package_lump->length_weight;
+      
+        $width = $package_lump->width_weight;
+             
+        $high = $package_lump->high_weight;
+
+        if(($high != "" && $high != 0) && ($width != "" && $width != 0) && ($lenght != "" && $lenght != 0)){
+
+            $volume = ceil(($high * $width * $lenght) / 166);
+            
+            $cubic_foot = ceil(($high * $width * $lenght) / 1728);
+
+            $package->volume += $volume;
+            $package->cubic_foot += $cubic_foot;
+
+            $package->starting_weight += $package_lump->bulk_weight;
+
+            $package->save();
+        }
+    
+
+       
+           
     }
 
     public function findAllPackageLumpByPackage($package){

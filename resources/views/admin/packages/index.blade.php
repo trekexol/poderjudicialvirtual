@@ -79,6 +79,9 @@
               <th>Descripcion</th>
               <th>Tipo</th>
               <th>Oficina</th>
+              <th>PC</th>
+              <th>P</th>
+              <th>PV</th>
               <th></th>
             </tr>
           </thead>
@@ -95,6 +98,9 @@
               <td>{{$package->description ?? ''}}</td>
               <td>{{$package->instruction ?? ''}}</td>
               <td>{{$package->agency ?? ''}}</td>
+              <td>{{$package->cubic_foot ?? 0}}</td>
+              <td>{{$package->final_weight ?? 0}}</td>
+              <td>{{$package->volume ?? 0}}</td>
               <td>
                 <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
                 <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
