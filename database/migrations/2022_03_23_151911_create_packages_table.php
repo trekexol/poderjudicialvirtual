@@ -30,6 +30,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tula')->nullable();
             $table->unsignedBigInteger('id_paddle')->nullable();
 
+            $table->decimal('starting_weight',64,2)->nullable();
+            $table->decimal('final_weight',64,2)->nullable();
+            $table->decimal('volume',64,2)->nullable();
+            $table->decimal('cubic_foot',64,2)->nullable();
+
             $table->string('tracking',250);
             $table->timestamp('arrival_date');
             $table->string('content',250);
@@ -39,6 +44,7 @@ return new class extends Migration
             $table->string('instruction',20);
             $table->string('instruction_type',15);
             $table->string('description',250);
+
 
             $table->boolean('high_value')->default(false);
             $table->boolean('dangerous_goods')->default(false);
