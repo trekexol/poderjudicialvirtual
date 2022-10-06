@@ -37,11 +37,11 @@ class PackageController extends Controller
                             ->where('id_tula',null)
                             ->where('id_paddle',null)
                             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-                            'packages.tracking','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
+                            'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
                             'packages.description','packages.instruction','agencies.name',
                             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-                                    'packages.tracking','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
+                                    'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
                                     'packages.description','packages.instruction','agencies.name')
                             ->get();
 
@@ -241,6 +241,7 @@ class PackageController extends Controller
                 }
             }
         }
+        $package->status = "(1) Recibido en Origen";
        
         $package->save();
        

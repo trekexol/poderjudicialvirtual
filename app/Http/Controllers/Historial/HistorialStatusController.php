@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Historial;
 
 use App\Http\Controllers\Controller;
 use App\Models\Historial\HistorialStatus;
+use App\Models\Package\Package;
 use Illuminate\Http\Request;
 
 class HistorialStatusController extends Controller
@@ -27,6 +28,14 @@ class HistorialStatusController extends Controller
         $historial_status->number_guide_transport = $request->number_guide_transport;
         
         $historial_status->save();
+
+        $package = Package::findOrFail($historial_status->id_package);
+
+        $package->status = $historial_status->status;
+
+        
+        $package->save();
+       
 
         return redirect('historial_status/viewPackage/'.$request->id_package.'')->withSuccess('Se ha registrado el historial exitosamente!');
     }

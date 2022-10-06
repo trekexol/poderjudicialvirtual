@@ -14,21 +14,28 @@
       <div class="x_title">
 
 
-        <form action="{{ route('trakings.packageWithTracking') }}" method="POST" enctype="multipart/form-data" id="form" data-parsley-validate class="form-horizontal form-label-left">
-          @csrf 
-          <div class="col-sm-4 h5">
+          <div class="col-sm-2 h6">
             Entrada de Paquetes
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-1">
+              <a href="{{ route('package_exports.exportPackageTemplate') }}" type="submit" class="btn btn-success offset-sm-1" id="BtnPackage" title="Descargar plantilla"><i class="fa fa-download"></i></a>
+            </div>
+            <div class="col-sm-4">
+              <form id="fileForm" method="POST" action="{{ route('package_imports.importPackageTemplate') }}" enctype="multipart/form-data" >
+                @csrf
+                <input id="file" type="file"  value="import" accept=".xlsx" name="file" class="file">
+              </form>
+            </div>
+            
+        <form action="{{ route('trakings.packageWithTracking') }}" method="POST" enctype="multipart/form-data" id="form" data-parsley-validate class="form-horizontal form-label-left">
+          @csrf 
+          <div class="col-sm-2">
             <input type="text" id="tracking" name="tracking" class="form-control" required>       
           </div>
           <div class="col-sm-3">
-            <button type="submit" class="btn btn-round btn-primary">Escanear Tracking</button>
+            <button type="submit" class="btn btn-round btn-primary ">Escanear Tracking</button>
           </div>
-          <ul class="col-sm-1 nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </li>
-          </ul>
+         
           <div class="clearfix"></div>
         </form>
       </div>
@@ -109,5 +116,28 @@
  
          $('#id_package_modal').val(id_package);
      });
+
+     $("#file").on('change',function(){
+      
+      var file = document.getElementById("file").value;
+
+      /*Extrae la extencion del archivo*/
+      var basename = file.split(/[\\/]/).pop(),  // extract file name from full path ...
+                                          // (supports `\\` and `/` separators)
+      pos = basename.lastIndexOf(".");       // get last position of `.`
+
+      if (basename === "" || pos < 1) {
+          alert("El archivo no tiene extension");
+      }          
+      /*-------------------------------*/     
+
+      if(basename.slice(pos + 1) == 'xlsx'){
+        document.getElementById("fileForm").submit();
+      }else{
+        alert("Solo puede cargar archivos .xlsx");
+      }            
+          
+  });
+
 </script>
 @endsection
