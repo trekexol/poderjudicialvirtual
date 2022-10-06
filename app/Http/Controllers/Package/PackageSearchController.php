@@ -16,6 +16,28 @@ class PackageSearchController extends Controller
     {
         $packages = null;
 
+      
+        $packages = $this->validation($request);
+   
+
+        if(isset($packages)){
+            $agencyController = new AgencyController();
+            foreach($packages as $package){
+                $package->agency = $agencyController->returnAgencyById($package->id_agency);
+            }
+        }
+
+
+       $agencies = Agency::orderBy('name','asc')->get();
+
+       $wharehouses = Wharehouse::orderBy('name','asc')->get();
+      
+       return view('admin.packages.index',compact('packages','agencies','wharehouses','shipping_type','status'));
+    }
+
+
+    public function validation($request){
+
         if(isset($request->checks)){
             $shipping_type = $request->checks;
         }
@@ -259,25 +281,8 @@ class PackageSearchController extends Controller
                 'packages.description','packages.instruction','agencies.name')
         ->get(); 
     }
-
-    //-----------------------
-        }
-
-        if(isset($packages)){
-            $agencyController = new AgencyController();
-            foreach($packages as $package){
-                $package->agency = $agencyController->returnAgencyById($package->id_agency);
-            }
-        }
-
-
-       $agencies = Agency::orderBy('name','asc')->get();
-
-       $wharehouses = Wharehouse::orderBy('name','asc')->get();
-      
-       return view('admin.packages.index',compact('packages','agencies','wharehouses','shipping_type','status'));
     }
-
-
+    return $packages;
+    }
 
 }

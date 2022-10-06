@@ -43,6 +43,7 @@ class PackageController extends Controller
                             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
                                     'packages.description','packages.instruction','agencies.name')
+                            ->orderBy('packages.id','desc')
                             ->get();
 
         if(isset($packages)){
