@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Account;
+use App\Http\Controllers\PackageLump\PackageLumpController;
 use App\Models\Administration\Agency;
 use App\Models\Administration\Agent;
 use App\Models\Administration\Client;
@@ -58,6 +59,7 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
     
             $country_destino = Country::where('abbreviation',$row['destino'])->first();
 
+           
            // dd($agency_ubicacion_oficina->id);
     
            //dd($rows);
@@ -107,9 +109,12 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
                         'created_at'                => $date,
                         'updated_at'                => $date,
                     ]);
+                    
+                    $this->updatePackage($row,$package);
                 }
 
             }else{
+                
                 //Si el paquete ya esta registrado con el numero de tracking solo se registran los bultos
                 for($i = 1 ; $i <= $row['num_bultos']; $i ++){
                     
@@ -127,6 +132,7 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
                         'created_at'                => $date,
                         'updated_at'                => $date,
                     ]);
+                    $this->updatePackage($row,$package_exist);
                 }
             }
 
@@ -140,6 +146,33 @@ class PackageImport implements ToCollection,WithHeadingRow, SkipsOnError
         
     }
 
+    public function updatePackage($row,$package){
+        
+        
+        $package = Package::findOrFail($package->id);
+     
+        $lenght = $row['largo'];
+      
+        $width = $row['ancho'];
+             
+        $high = $row['alto'];
+
+        if(($high != "" && $high != 0) && ($width != "" && $width != 0) && ($lenght != "" && $lenght != 0)){
+
+            $volume = ceil(($high * $width * $lenght) / 166);
+            
+            $cubic_foot = ceil(($high * $width * $lenght) / 1728);
+
+            $package->volume += $volume;
+            $package->cubic_foot += $cubic_foot;
+
+            $package->starting_weight += $row['peso'];
+
+            $package->save();
+        }
+    
+           
+    }
 
     public function registerClientRecipient($package,$client,$row,$country_destino,$date){
 
