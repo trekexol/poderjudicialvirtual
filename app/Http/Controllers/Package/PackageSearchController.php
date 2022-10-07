@@ -15,7 +15,16 @@ class PackageSearchController extends Controller
     public function index(Request $request)
     {
         $packages = null;
+        $shipping_type =null;
+        $status = null;
 
+        if(isset($request->checks)){
+            $shipping_type = $request->checks;
+        }
+
+        if(isset($request->status)){
+            $status = $request->status;
+        }
       
         $packages = $this->validation($request);
    
@@ -38,6 +47,7 @@ class PackageSearchController extends Controller
 
     public function validation($request){
 
+       
         if(isset($request->checks)){
             $shipping_type = $request->checks;
         }
