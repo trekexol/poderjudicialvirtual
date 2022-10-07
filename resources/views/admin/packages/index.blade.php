@@ -16,8 +16,8 @@
           <h2>Listado de Paquetes</h2>
         </div>
         <div class="col-sm-1">
-          <a href="{{ route('package_exports.exportPackage') }}" title="Paquetes en Origen Todos"><img src="{{asset('img/excel.png')}}" /> </a>
-        </div>
+          <a href="{{ route('package_exports.exportPackageManifiesto') }}" title="Paquetes en Origen Todos"><img src="{{asset('img/excel.png')}}" /> </a>
+         </div>
         <div class="col-sm-1">
           <a href="{{ route('package_exports.exportPackage') }}" title="Paquetes en Origen AP"><img src="{{asset('img/excel.png')}}" /> </a>
         </div>

@@ -337,6 +337,7 @@ Route::group(["prefix"=>'generals'],function(){
 Route::group(["prefix"=>'package_exports'],function(){
     Route::get('exportPackageTemplate', [PackageExportController::class, 'exportPackageTemplate'])->name('package_exports.exportPackageTemplate');
     Route::get('exportPackage', [PackageExportController::class, 'exportPackage'])->name('package_exports.exportPackage');
+    Route::get('exportPackageManifiesto', [PackageExportController::class, 'exportPackageManifiesto'])->name('package_exports.exportPackageManifiesto');
 });
 
 Route::group(["prefix"=>'package_imports'],function(){
