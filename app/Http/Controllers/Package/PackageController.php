@@ -35,20 +35,22 @@ class PackageController extends Controller
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
                             ->leftJoin('clients','clients.id','packages.id_client')
                             ->leftJoin('agencies','agencies.id','packages.id_agency_office_location')
+                            ->leftJoin('wharehouses','wharehouses.id','packages.id_wharehouse')
                             ->where('id_tula',null)
                             ->where('id_paddle',null)
                             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
                             'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
-                            ,'packages.date_payment','packages.instruction','agencies.name',
+                            ,'packages.date_payment','packages.instruction','agencies.name','wharehouses.code as wharehouse_code',
                             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
                                     'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
-                                    ,'packages.date_payment','packages.instruction','agencies.name')
+                                    ,'packages.date_payment','packages.instruction','agencies.name','wharehouses.code')
                             ->orderBy('packages.id','desc')
                             ->get();
 
+        
         if(isset($packages)){
             $agencyController = new AgencyController();
             foreach($packages as $package){

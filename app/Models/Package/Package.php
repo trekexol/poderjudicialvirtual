@@ -30,6 +30,7 @@ class Package extends Model
     public function office_locations(){
         return $this->belongsTo('App\Models\Administration\Agency','id_agency_office_location');
     }
+   
     public function wharehouses(){
         return $this->belongsTo('App\Models\Administration\Wharehouse','id_wharehouse');
     }
