@@ -13,21 +13,19 @@ class ConsolidadoController extends Controller
     public function index()
     {
       
-        $consolidados = /*Consolidado::join('packages','packages.id','consolidados.id_package')
+        $consolidados = Consolidado::
+                                join('packages','packages.id','consolidados.id_package')
                                 ->join('clients','clients.id','packages.id_client')
-                                ->join('agencies','agencies.id','clients.id_agency')
-                                ->join('agents','agents.id','clients.id_agency')
-                                ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-                                'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','agencies.name as agency_name','agents.name as agent_name','instruction')
-                                ->groupBy('consolidados.id_package','packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-                                'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','id_client','agencies.name','agents.name','instruction')
-                                ->get();*/
-                                Consolidado::orderBy('consolidados.number_consolidado', 'desc')->groupBy('consolidados.number_consolidado','id','id_package','amount_total','status','created_at','updated_at')->get();
+                                ->leftJoin('agencies','agencies.id','clients.id_agency')
+                                ->leftJoin('agents','agents.id','clients.id_agent')
+                                ->select('consolidados.number_consolidado','clients.firstname','clients.firstlastname','clients.casillero','agencies.name as agency_name','agents.name as agent_name'
+                                ,'packages.instruction','packages.status as package_status','consolidados.amount_total'
+                                ,DB::raw('count(number_consolidado) as consolidados'))
+                                ->orderBy('consolidados.number_consolidado', 'desc')
+                                ->groupBy('consolidados.number_consolidado','clients.firstname','clients.firstlastname','clients.casillero',
+                                'agencies.name','agents.name','packages.instruction','packages.status','consolidados.amount_total')->get();
 
-        dd($consolidados);
-      
+       
         return view('admin.consolidados.index',compact('consolidados'));
     
     }

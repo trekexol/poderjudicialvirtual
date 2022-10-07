@@ -46,16 +46,16 @@
             @foreach ($consolidados as $consolidado)
             <tr>
               <td class="text-center">
-                {{$consolidado->id_tula ?? $consolidado->id_paddle}}
+                {{$consolidado->number_consolidado ?? ''}}
               </td>
               <td>{{$consolidado->instruction ?? ''}}</td>
               <td>{{$consolidado->casillero ?? ''}}</td>
               <td>{{$consolidado->firstname ?? '' }} {{ $consolidado->firstlastname ?? '' }}</td>
-              <td>{{$consolidado->amount_packages ?? ''}}</td>
-              <td>{{$consolidado->amount_for_pay ?? ''}}</td>
+              <td>{{$consolidado->consolidados ?? ''}}</td>
+              <td>{{$consolidado->amount_total ?? ''}}</td>
               <td>{{$consolidado->agency_name ?? ''}}</td>
               <td>{{$consolidado->agent_name ?? ''}}</td>
-              <td>{{$consolidado->status ?? ''}}</td>
+              <td>{{$consolidado->package_status ?? ''}}</td>
               <td></td>
             </tr>
             @endforeach

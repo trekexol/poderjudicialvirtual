@@ -32,6 +32,7 @@ return [
     |            "postmark", "log", "array", "failover"
     |
     */
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     'mailers' => [
         'smtp' => [
