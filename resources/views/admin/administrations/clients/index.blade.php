@@ -45,7 +45,7 @@
           @isset($clients)
             @foreach ($clients as $client)
             <tr>
-              <td>{{$client->countries['abbreviation'] ?? ''}}{{str_pad($client->id_client ?? 0, 6, "0", STR_PAD_LEFT)}}</td>
+              <td>{{$client->casillero}}</td>
               <td>{{$client->firstname}} {{$client->firstlastname}}</td>
               <td>{{$client->casillero}}</td>
               <td>{{$client->direction ?? ''}}</td>
