@@ -13,14 +13,21 @@ class ConsolidadoController extends Controller
     public function index()
     {
       
-        $consolidados = Consolidado::join('packages','packages.id','consolidados.id_package')
+        $consolidados = Consolidado::join('packages','packages.id_package','consolidados.id_package')
                                 ->join('clients','clients.id','packages.id_client')
-                                ->orderBy('packages.id','desc')
-                                ->groupBy('id_client','instruction')
-                                ->select('instruction',DB::raw('SUM(packages.id) As amount_packages'))
+                                ->join('agencies','agencies.id','clients.id_agency')
+                                ->join('agents','agents.id','clients.id_agency')
+                                ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
+                                'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
+                                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','agencies.name as agency_name','agents.name as agent_name','instruction',
+                                DB::raw('COUNT(packages.id)  As count_packages'))
+                                ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
+                                'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
+                                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','id_client','agencies.name','agents.name','instruction')
                                 ->get();
 
-       
+        dd($consolidados);
+      
         return view('admin.consolidados.index',compact('consolidados'));
     
     }

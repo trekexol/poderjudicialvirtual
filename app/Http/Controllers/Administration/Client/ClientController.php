@@ -37,11 +37,12 @@ class ClientController extends Controller
     public function consult($id_client){
 
         $packages = Package::where('id_client',$id_client)
-                            ->where('status','Activo')
+                            ->where('status',"LIKE",'(1) Recibido en Origen')
                             ->get();
 
         $client = Client::find($id_client);
 
+        
         return view('admin.administrations.clients.consult',compact('packages','client'));
     }
 

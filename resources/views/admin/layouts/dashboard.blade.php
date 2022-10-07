@@ -187,6 +187,8 @@
           $BODY.toggleClass('nav-md nav-sm');
 
           setContentHeight();
+
+   
       </script>
 
         

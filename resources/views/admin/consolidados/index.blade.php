@@ -53,7 +53,7 @@
               <td>{{$consolidado->firstname ?? '' }} {{ $consolidado->firstlastname ?? '' }}</td>
               <td>{{$consolidado->amount_packages ?? ''}}</td>
               <td>{{$consolidado->amount_for_pay ?? ''}}</td>
-              <td>{{$consolidado->office_name ?? ''}}</td>
+              <td>{{$consolidado->agency_name ?? ''}}</td>
               <td>{{$consolidado->agent_name ?? ''}}</td>
               <td>{{$consolidado->status ?? ''}}</td>
               <td></td>
