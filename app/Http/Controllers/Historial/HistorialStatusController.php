@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Historial;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mail\MailController;
 use App\Models\Historial\HistorialStatus;
 use App\Models\Package\Package;
 use Illuminate\Http\Request;
@@ -35,6 +36,10 @@ class HistorialStatusController extends Controller
 
         
         $package->save();
+
+        $mail_controller = new MailController();
+
+        $mail_controller->sendEmail($request,$package);
        
 
         return redirect('historial_status/viewPackage/'.$request->id_package.'')->withSuccess('Se ha registrado el historial exitosamente!');
