@@ -189,10 +189,9 @@
               </td>
             </tr>
             @endforeach
-
+            <tfoot>
             <tr>
               <td class="text-center">
-                
               </td>
               <td></td>
               <td></td>
@@ -210,6 +209,7 @@
               <td>
                </td>
             </tr>
+          </tfoot>
           @endisset
           
 

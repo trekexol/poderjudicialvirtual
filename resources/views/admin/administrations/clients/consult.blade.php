@@ -77,7 +77,8 @@
                 </tr>
               @endif
             @endforeach
-            <tr>
+            <tfoot>
+            <th>
               <td></td>
             <td></td>
             <td></td>
@@ -90,7 +91,8 @@
             <td></td>
             <td></td>
             <td></td>
-            </tr>
+            </th>
+            </tfoot>
           @endisset
         </table>
      
