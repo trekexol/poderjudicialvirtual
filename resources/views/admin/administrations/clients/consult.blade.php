@@ -55,8 +55,20 @@
             </tr>
           </thead>
           @isset($packages)
+              @php
+                $cubic_foot = 0;
+                $starting_weight = 0;
+                $volume = 0;
+              @endphp
+          
+            
             @foreach ($packages as $package)
               @if ($package->instruction == 'Aéreo')
+              @php
+                  $cubic_foot += $package->cubic_foot;
+                  $starting_weight += $package->starting_weight;
+                  $volume += $package->volume;
+              @endphp
                 <tr>
                   <td class="a-center ">
                     <input type="checkbox"  name="checkAerial{{$package->id}}" class="flat" value="{{ $package->id }}" id="flexCheckCheckedAerial">    
@@ -80,7 +92,6 @@
             <tfoot>
             <th>
               <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -142,8 +153,18 @@
             </tr>
           </thead>
           @isset($packages)
+            @php
+              $cubic_foot_maritimo = 0;
+              $starting_weight_maritimo = 0;
+              $volume_maritimo = 0;
+            @endphp
             @foreach ($packages as $package)
             @if ($package->instruction == 'Marítimo')
+              @php
+                  $cubic_foot_maritimo += $package->cubic_foot;
+                  $starting_weight_maritimo += $package->starting_weight;
+                  $volume_maritimo += $package->volume;
+              @endphp
               <tr>
                 <td class="a-center ">
                   <input type="checkbox"  name="checkMaritime{{$package->id}}" class="flat" value="{{ $package->id }}" id="flexCheckCheckedMaritime">    

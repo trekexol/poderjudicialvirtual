@@ -138,6 +138,7 @@
               <th>P</th>
               <th>PV</th>
               <th>Status</th>
+              <th>O</th>
               <th></th>
             </tr>
           </thead>
@@ -182,6 +183,7 @@
               <td>{{$package->starting_weight ?? 0}}</td>
               <td>{{$package->volume ?? 0}}</td>
               <td>{{$package->status ?? ''}}</td>
+              <td>{{$package->wharehouse_code ?? ''}}</td>
               <td>
                 <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
                 <a href="{{ route('historial_status.viewPackage',$package->id) }}"  title="Ver Historial de Status"><i class="fa fa-question"></i></a>
@@ -205,6 +207,7 @@
               <td>{{$cubic_foot ?? 0}}</td>
               <td>{{$starting_weight ?? 0}}</td>
               <td>{{$volume ?? 0}}</td>
+              <td></td>
               <td></td>
               <td>
                </td>
