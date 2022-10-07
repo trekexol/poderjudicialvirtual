@@ -112,7 +112,7 @@ class ClientController extends Controller
         
         $client->save();
 
-        $client->casillero =  $client->id.$client->countries['abbreviation'];
+        $client->casillero =  $client->countries['abbreviation'].$client->id;
         
         $client->save();
 
