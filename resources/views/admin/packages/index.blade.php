@@ -15,7 +15,12 @@
         <div class="col-sm-2">
           <h2>Listado de Paquetes</h2>
         </div>
-       
+        <div class="col-sm-1">
+          <a href="{{ route('package_exports.exportPackage') }}" title="Paquetes en Origen Todos"><img src="{{asset('img/excel.png')}}" /> </a>
+        </div>
+        <div class="col-sm-1">
+          <a href="{{ route('package_exports.exportPackage') }}" title="Paquetes en Origen AP"><img src="{{asset('img/excel.png')}}" /> </a>
+        </div>
         <ul class="col-sm-1 nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -116,7 +121,7 @@
                 <a href="#" onclick="searchIndex();" title="Buscar" ><i class="fa fa-search"></i></a>  
               </div>
               </form>
-        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+        <table  class="table table-striped table-bordered" style="width:100%" > 
           <thead>
             <tr>
               <th>N°</th>
@@ -125,7 +130,9 @@
               <th>Cliente</th>
               <th>Casillero</th>
               <th>Descripcion</th>
+              <th>$</th>
               <th>Tipo</th>
+              <th>Ins</th>
               <th>Oficina</th>
               <th>PC</th>
               <th>P</th>
@@ -136,14 +143,14 @@
           </thead>
           @php
                $cubic_foot = 0;
-               $final_weight = 0;
+               $starting_weight = 0;
                $volume = 0;
            @endphp
           @isset($packages)
             @foreach ($packages as $package)
            @php
                $cubic_foot += $package->cubic_foot;
-               $final_weight += $package->final_weight;
+               $starting_weight += $package->starting_weight;
                $volume += $package->volume;
            @endphp
             <tr>
@@ -154,11 +161,25 @@
               <td>{{$package->tracking ?? ''}}</td>
               <td>{{$package->firstname ?? ''}} {{$package->firstlastname ?? ''}}</td>
               <td>{{$package->casillero ?? ''}}</td>
-              <td>{{$package->description ?? ''}}</td>
+              <td>{{$package->description ?? ''}} </td>
+              <td>
+                @if (isset($package->date_payment) && $package->date_payment != null)
+                  <a href="{{ route('packages.payment',$package->id) }}"><img src="{{asset('img/ok.png')}}" /> </a>
+                @else
+                  <a href="{{ route('packages.payment',$package->id) }}"><img src="{{asset('img/pagar.png')}}" /></a>
+                @endif
+              </td>
               <td>{{$package->instruction ?? ''}}</td>
+              <td>
+                @if ($package->instruction == "Aéreo")
+                  <a href="{{ route('packages.tipoEnvio',$package->id) }}"><img src="{{asset('img/aereo.png')}}" /></a>
+                @else
+                  <a href="{{ route('packages.tipoEnvio',$package->id) }}"><img src="{{asset('img/maritimo.png')}}" /></a>
+                @endif
+              </td>
               <td>{{$package->agency ?? ''}}</td>
               <td>{{$package->cubic_foot ?? 0}}</td>
-              <td>{{$package->final_weight ?? 0}}</td>
+              <td>{{$package->starting_weight ?? 0}}</td>
               <td>{{$package->volume ?? 0}}</td>
               <td>{{$package->status ?? ''}}</td>
               <td>
@@ -180,8 +201,10 @@
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
+              <td>Total</td>
               <td>{{$cubic_foot ?? 0}}</td>
-              <td>{{$final_weight ?? 0}}</td>
+              <td>{{$starting_weight ?? 0}}</td>
               <td>{{$volume ?? 0}}</td>
               <td></td>
               <td>
@@ -244,15 +267,9 @@
          $('#id_package_modal').val(id_package);
      });
 
-     $('#datatable-buttons').dataTable({
-        ordering: true,
-        order: false,
-        aLengthMenu: [[50, 100, 150, -1], [50, 100, 150, "All"]],
-        paging: false,
-        searching: false
-    });
-   
   
+   
+    
 </script>
 @if(isset($shipping_type))
 <script>

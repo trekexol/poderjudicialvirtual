@@ -59,11 +59,11 @@ class PackageSearchController extends Controller
             ->where('instruction',$shipping_type)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }else if(isset($request->id_agency)  && $shipping_type != "Todos"){
             $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -75,11 +75,11 @@ class PackageSearchController extends Controller
             ->where('instruction',$shipping_type)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }else if(isset($request->id_wharehouse)  && $shipping_type != "Todos"){
             $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -91,11 +91,11 @@ class PackageSearchController extends Controller
             ->where('instruction',$shipping_type)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }else if($shipping_type != "Todos"){
             $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -106,11 +106,11 @@ class PackageSearchController extends Controller
             ->where('instruction',$shipping_type)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }else{
             $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -120,11 +120,11 @@ class PackageSearchController extends Controller
             ->where('id_paddle',null)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }
 
@@ -138,11 +138,11 @@ class PackageSearchController extends Controller
             ->where('id_wharehouse',$request->id_wharehouse)
             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-            'packages.description','packages.instruction','agencies.name',
+            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                    'packages.description','packages.instruction','agencies.name')
+                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
             ->get();
         }else{
 
@@ -155,11 +155,11 @@ class PackageSearchController extends Controller
                 ->where('id_agency_office_location',$request->id_agency)
                 ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name',
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
                 DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                 ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                        'packages.description','packages.instruction','agencies.name')
+                        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
                 ->get();
             }else if(isset($request->id_wharehouse)){
                 $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -170,11 +170,11 @@ class PackageSearchController extends Controller
                 ->where('id_wharehouse',$request->id_wharehouse)
                 ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name',
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
                 DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                 ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                        'packages.description','packages.instruction','agencies.name')
+                        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
                 ->get();
             }else if(isset($request->client) && ($request->client != "")){
                
@@ -186,11 +186,11 @@ class PackageSearchController extends Controller
                 ->where('clients.firstname','LIKE','%'.$request->client.'%')
                 ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name',
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
                 DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                 ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                        'packages.description','packages.instruction','agencies.name')
+                        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
                 ->get();
             }
 
@@ -209,11 +209,11 @@ class PackageSearchController extends Controller
         ->where('packages.status',$status)
         ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.instruction','agencies.name',
+        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
         DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
         ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name')
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
         ->get();
     }else if(isset($request->id_agency)  && $shipping_type != "Todos" && isset($status)){
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -226,11 +226,11 @@ class PackageSearchController extends Controller
         ->where('packages.status',$status)
         ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.instruction','agencies.name',
+        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
         DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
         ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name')
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
         ->get();
     }else if(isset($request->id_wharehouse)  && $shipping_type != "Todos"&& isset($status)){
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -243,11 +243,11 @@ class PackageSearchController extends Controller
         ->where('packages.status',$status)
         ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.instruction','agencies.name',
+        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
         DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
         ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name')
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
         ->get();
     }else if($shipping_type != "Todos"&& isset($status)){
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -259,11 +259,11 @@ class PackageSearchController extends Controller
         ->where('packages.status',$status)
         ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.instruction','agencies.name',
+        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
         DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
         ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name')
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
         ->get();
     }else if(isset($status)){
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
@@ -274,11 +274,11 @@ class PackageSearchController extends Controller
         ->where('packages.status','LIKE',"%".$status."%")
         ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
         'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.instruction','agencies.name',
+        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name',
         DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
         ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                 'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.instruction','agencies.name')
+                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot','packages.date_payment','packages.instruction','agencies.name')
         ->get(); 
     }
     }

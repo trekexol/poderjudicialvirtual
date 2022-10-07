@@ -46,6 +46,9 @@
               <th>Cliente</th>
               <th>Casillero</th>
               <th>Descripcion</th>
+              <th>PC</th>
+              <th>P</th>
+              <th>PV</th>
               <th>Tipo</th>
               <th>Agente</th>
               <th>Oficina</th>
@@ -65,12 +68,29 @@
                   <td>{{$package->clients['firstname'] ?? ''}} {{$package->clients['firstlastname'] ?? ''}}</td>
                   <td>{{$package->clients['casillero'] ?? ''}}</td>
                   <td>{{$package->description ?? ''}}</td>
+                  <td>{{$package->cubic_foot ?? 0}}</td>
+                  <td>{{$package->starting_weight ?? 0}}</td>
+                  <td>{{$package->volume ?? 0}}</td>
                   <td>{{$package->instruction ?? ''}}</td>
                   <td>{{$package->vendors['name'] ?? ''}}</td>
                   <td>{{$package->office_locations['direction'] ?? ''}}</td>
                 </tr>
               @endif
             @endforeach
+            <tr>
+              <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{$cubic_foot ?? 0}}</td>
+            <td>{{$starting_weight ?? 0}}</td>
+            <td>{{$volume ?? 0}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
           @endisset
         </table>
      

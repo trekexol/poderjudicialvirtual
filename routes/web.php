@@ -212,6 +212,8 @@ Route::group(["prefix"=>'packages'],function(){
 
     Route::get('print/{id_package}', [PackagePrintController::class, 'print'])->name('packages.print');
     Route::delete('delete', [PackageController::class, 'destroy'])->name('packages.delete');
+    Route::get('payment/{id}', [PackageController::class, 'payment'])->name('packages.payment');
+    Route::get('tipoEnvio/{id}', [PackageController::class, 'tipoEnvio'])->name('packages.tipoEnvio');
 });
 
 Route::group(["prefix"=>'packages_lumps'],function(){
@@ -334,6 +336,7 @@ Route::group(["prefix"=>'generals'],function(){
 
 Route::group(["prefix"=>'package_exports'],function(){
     Route::get('exportPackageTemplate', [PackageExportController::class, 'exportPackageTemplate'])->name('package_exports.exportPackageTemplate');
+    Route::get('exportPackage', [PackageExportController::class, 'exportPackage'])->name('package_exports.exportPackage');
 });
 
 Route::group(["prefix"=>'package_imports'],function(){

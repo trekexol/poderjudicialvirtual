@@ -18,6 +18,7 @@ use App\Models\Package\Package;
 use App\Models\Package\PackageCharge;
 use App\Models\Package\PackageLump;
 use App\Models\Package\PackageTypeOfGood;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,11 +39,13 @@ class PackageController extends Controller
                             ->where('id_paddle',null)
                             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                            'packages.description','packages.instruction','agencies.name',
+                            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
+                            ,'packages.date_payment','packages.instruction','agencies.name',
                             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                                    'packages.description','packages.instruction','agencies.name')
+                                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
+                                    ,'packages.date_payment','packages.instruction','agencies.name')
                             ->orderBy('packages.id','desc')
                             ->get();
 
@@ -249,6 +252,50 @@ class PackageController extends Controller
 
         return redirect('/packages/create/'.$package->id.'')->withSuccess('Se ha registrado exitosamente!');
        
+    }
+   
+    public function payment($id)
+    {
+        //VALIDACION PARA SABER SI EL TRACKING YA EXISTE, SI EXISTE SE ENVIA UN MENSAJE DE ALERTA
+        if(isset($id)){
+            $package = Package::findOrFail($id);
+        }
+        $date = Carbon::now();
+        $datenow = $date->format('Y-m-d'); 
+
+        if(empty($package->date_payment)){
+            $package->date_payment = $datenow;
+            $message = 'Se ha registrado el pago exitosamente!';
+        }else{
+            $package->date_payment = null;
+            $message = 'Se ha eliminado el pago exitosamente!';
+        }
+
+        $package->save();
+
+        return redirect('/packages/index')->withSuccess($message);
+    }
+
+    public function tipoEnvio($id)
+    {
+        //VALIDACION PARA SABER SI EL TRACKING YA EXISTE, SI EXISTE SE ENVIA UN MENSAJE DE ALERTA
+        if(isset($id)){
+            $package = Package::findOrFail($id);
+        }
+        $date = Carbon::now();
+        $datenow = $date->format('Y-m-d'); 
+
+        if($package->instruction == "Aéreo"){
+            $package->instruction = "Marítimo";
+            $message = 'Se ha cambiado a Marítimo exitosamente!';
+        }else{
+            $package->instruction = "Aéreo";
+            $message = 'Se ha cambiado a Aéreo exitosamente!';
+        }
+
+        $package->save();
+
+        return redirect('/packages/index')->withSuccess($message);
     }
 
     public function update(Request $request,$id)
