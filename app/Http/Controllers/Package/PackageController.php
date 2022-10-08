@@ -40,12 +40,12 @@ class PackageController extends Controller
                             ->where('id_paddle',null)
                             ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                             'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                            'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
-                            ,'packages.date_payment','packages.instruction','agencies.name','wharehouses.code as wharehouse_code',
+                            'packages.description','packages.starting_weight','packages.final_weight','packages.arrival_date','packages.volume','packages.cubic_foot'
+                            ,'packages.date_payment','packages.instruction','agencies.name as agency_name','wharehouses.code as wharehouse_code',
                             DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
                             ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
                                     'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                                    'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
+                                    'packages.description','packages.starting_weight','packages.final_weight','packages.arrival_date','packages.volume','packages.cubic_foot'
                                     ,'packages.date_payment','packages.instruction','agencies.name','wharehouses.code')
                             ->orderBy('packages.id','desc')
                             ->get();

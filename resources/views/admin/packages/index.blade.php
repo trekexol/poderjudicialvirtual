@@ -138,6 +138,7 @@
               <th>P</th>
               <th>PV</th>
               <th>Status</th>
+              <th>Fecha</th>
               <th>O</th>
               <th></th>
             </tr>
@@ -178,16 +179,18 @@
                   <a href="{{ route('packages.tipoEnvio',$package->id) }}"><img src="{{asset('img/maritimo.png')}}" /></a>
                 @endif
               </td>
-              <td>{{$package->agency ?? ''}}</td>
+              <td>{{$package->agency_name ?? ''}}</td>
               <td>{{$package->cubic_foot ?? 0}}</td>
               <td>{{$package->starting_weight ?? 0}}</td>
               <td>{{$package->volume ?? 0}}</td>
               <td>{{$package->status ?? ''}}</td>
+              <td>{{date_format(date_create($package->arrival_date ?? ''),"d-m-Y") }}</td>
               <td>{{$package->wharehouse_code ?? ''}}</td>
               <td>
                 <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
                 <a href="{{ route('historial_status.viewPackage',$package->id) }}"  title="Ver Historial de Status"><i class="fa fa-question"></i></a>
                 <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
+                <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#showModal" title="Mostrar"><i class="fa fa-trash text-danger"></i></a>  
               </td>
             </tr>
             @endforeach
@@ -207,6 +210,7 @@
               <td>{{$cubic_foot ?? 0}}</td>
               <td>{{$starting_weight ?? 0}}</td>
               <td>{{$volume ?? 0}}</td>
+              <td></td>
               <td></td>
               <td></td>
               <td>
@@ -250,6 +254,266 @@
           </div>
           </form>
       </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="showModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      @isset($package)
+      <div class="item form-group">
+      <div class="col-sm-6">
+        <h3>Número de Paquete: {{ str_pad($package->id ?? 0, 6, "0", STR_PAD_LEFT)}}</h3>
+      </div>
+      </div>
+    @endisset
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
+      <div class="col-sm-4">
+        <input type="text" id="tracking" name="tracking" required="required" class="form-control " value="{{ $tracking ?? $package->tracking ?? null }}">
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="id_agent_shipper">Shipper: </label>
+      <div class="col-sm-3">
+        <select class="select2_group form-control" name="id_agent_shipper" required>
+            @if (isset($package))
+              <option value="{{ $package->id_agent_shipper ?? null }}">{{ $package->shippers['name'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($agents))
+              @foreach ($agents as $agent)
+                <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control js-example-matcher" data-live-search="true" data-show-subtext="true" name="id_client" required>
+            @if (isset($package))
+              <option value="{{ $package->id_client ?? null }}">{{$package->clients['casillero'] ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($clients)) 
+              @foreach ($clients as $client)
+                <option value="{{ $client->id }}">{{$client->casillero ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
+              @endforeach
+            @endif
+           
+          </select>
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="first-name">Agente Vendedor:</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control" name="id_agent_vendor" required>
+            @if (isset($package))
+              <option value="{{ $package->id_agent_vendor ?? null }}">{{ $package->vendors['name'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($agents))
+              @foreach ($agents as $agent)
+                <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+    
+    </div>
+ 
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align">Fecha Llegada:
+      </label>
+      <div class="col-sm-4">
+        <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}">
+      </div>
+      <label class="col-form-label col-sm-3 label-align">Hora Llegada:
+      </label>
+      <div class="col-sm-3 ">
+        @if (isset($package->arrival_date))
+          <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  value="{{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}">        
+        @else
+          <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  >                   
+        @endif
+        </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control" name="id_agency_office_location" required>
+            @if (isset($package))
+              <option value="{{ $package->id_agency_office_location ?? null }}">{{ $package->office_locations['name'] ?? null }} - {{ $package->office_locations['direction'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($agencies))
+              @foreach ($agencies as $agency)
+                <option value="{{ $agency->id }}">{{ $agency->name ?? '' }} - {{ $agency->direction ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="id_wharehouse">Almacen:</label>
+      <div class="col-sm-3">
+          <select class="select2_group form-control" name="id_wharehouse" required>
+            @if (isset($package))
+              <option value="{{ $package->id_wharehouse ?? null }}">{{ $package->wharehouses['name'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($wharehouses))
+              @foreach ($wharehouses as $wharehouse)
+                <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="content">Contenido:</label>
+      <div class="col-sm-4">
+        <input type="text" id="content" name="content" required="required" class="form-control " value="{{ $package->content ?? null }}">
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="value">Valor:</label>
+      <div class="col-sm-3">
+        <input type="text" id="value" name="value" required="required" class="form-control" value="{{ number_format($package->value ?? 0, 2, ',', '.') }}">
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="id_origin_country">País de Origen:</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control" name="id_origin_country" required>
+            @if (isset($package))
+              <option value="{{ $package->id_origin_country ?? null }}">{{ $package->origin_countries['name'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($countries))
+              @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="id_destination_country">País de Destino:</label>
+      <div class="col-sm-3">
+          <select class="select2_group form-control" name="id_destination_country" required>
+            @if (isset($package))
+              <option value="{{ $package->id_destination_country ?? null }}">{{ $package->destination_countries['name'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($countries))
+              @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="id_delivery_company">Entregado por:</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control" name="id_delivery_company" required>
+            @if (isset($package))
+              <option value="{{ $package->id_delivery_company ?? null }}">{{ $package->delivery_companies['description'] ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            @if (isset($delivery_companies))
+              @foreach ($delivery_companies as $delivery_company)
+                <option value="{{ $delivery_company->id }}">{{ $delivery_company->description ?? '' }}</option>
+              @endforeach
+            @endif
+          </select>
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="number_transport_guide">N° Guía Transporte:</label>
+      <div class="col-sm-3">
+        <input type="text" id="number_transport_guide" name="number_transport_guide"  class="form-control" value="{{ $package->number_transport_guide ?? null }}">
+      </div>
+    </div>
+
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align " for="service_type">Tipo Servicio:</label>
+      <div class="col-sm-4">
+          <select class="select2_group form-control" name="service_type" required>
+            @if (isset($package))
+              <option value="{{ $package->service_type ?? null }}">{{ $package->service_type ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            <option value="Pre-Pagado">Pre-Pagado</option>
+            <option value="Collected">Collected</option>
+          </select>
+      </div>
+      <label class="col-form-label col-sm-3 label-align " for="instruction">Instrucciones:</label>
+      <div class="col-sm-2">
+          <select class="select2_group form-control" name="instruction" required>
+            @if (isset($package))
+              <option value="{{ $package->instruction ?? null }}">{{ $package->instruction ?? null }}</option>
+              <option value="">---------------------</option>
+            @else
+              <option value="">Seleccione una Opción</option>
+            @endif
+            <option value="Aéreo">Aéreo</option>
+            <option value="Marítimo">Marítimo</option>
+            <option value="Terrestre">Terrestre</option>
+            <option value="Marítimo Express">Marítimo Express</option>
+          </select>
+      </div>
+      <div class="col-sm-2">
+        <select class="select2_group form-control" name="instruction_type" required>
+              @if (isset($package))
+                <option value="{{ $package->instruction_type ?? null }}">{{ $package->instruction_type ?? null }}</option>
+                <option value="">---------------------</option>
+              @else
+                <option value="">Seleccione una Opción</option>
+              @endif
+            <option value="Directo">Directo</option>
+            <option value="Consolidado">Consolidado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="item form-group">
+      <label class="col-form-label col-sm-2 label-align " for="description">Descrip/Coment:</label>
+      <div class="col-sm-9">
+        <input type="text" id="description" name="description" required="required" class="form-control" value="{{ $package->description ?? null }}">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <div class="col-sm-2 offset-sm-1">
+        <input type="checkbox" name="checks[]"  id="myCheck"  value="high_value" onclick="myFunction();" >  Alto Valor: 
+      </div> 
+      <div class="col-sm-2">
+        <input type="checkbox" name="checks[]" id="dangerous_goods" value="dangerous_goods" data-parsley-mincheck="2" /> Merc. Peligrosa: 
+      </div> 
+      <div class="col-sm-2">
+        <input type="checkbox" name="checks[]" id="sed" value="sed" data-parsley-mincheck="2" /> SED: 
+      </div> 
+      <div class="col-sm-2">
+        <input type="checkbox" name="checks[]" id="document" value="document" data-parsley-mincheck="2" /> Documento: 
+      </div> 
+      <div class="col-sm-2">
+        <input type="checkbox" name="checks[]" id="fragile" value="fragile" data-parsley-mincheck="2" /> Fragil: 
+      </div> 
+    </div>
+
+    </div>
   </div>
 </div>
 
