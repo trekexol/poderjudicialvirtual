@@ -61,7 +61,7 @@
                   data-shipper="{{$package_tracking->shippers['name']}}" 
                   data-client="{{$package_tracking->clients['firstname']}}" 
                   data-agent_vendor="{{$package_tracking->vendors['name']}}" 
-                  data-arrival_date="{{date_format(date_create($package_tracking->arrival_date ?? null),"Y-m-d")}}" 
+                  data-arrival_date="{{ormat(date_create($package_tracking->arrival_date ?? null),"Y-m-d")}}" 
                   data-check_in="{{date_format(date_create($package_tracking->arrival_date ?? null),"H:i")}}" 
                   data-office_location="{{$package_tracking->office_locations['direction']}}" 
                   data-wharehouse="{{$package_tracking->wharehouses['name'] }}" 
