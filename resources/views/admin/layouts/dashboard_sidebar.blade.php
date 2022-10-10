@@ -47,11 +47,11 @@
             <li><a href="{{ route('trakings.index') }}">Ingresar Paquetes</a></li>
             <li><a href="{{ route('packages.index') }}">Listar Paquetes</a></li>
             <li><a href="{{ route('consolidados.index') }}">Listar Consolidados</a></li>
-            <li><a href="{{ route('tulas.create') }}">Tulas</a></li>
+            <li><a href="{{ route('tulas.create') }}">Crear Tula</a></li>
             <li><a href="{{ route('tulas.index') }}">Listar Tulas</a></li>
             <li><a href="{{ route('master_guides.create') }}">Guias</a></li>
             <li><a href="{{ route('master_guides.index') }}">Listar Guias</a></li>
-            <li><a href="{{ route('paddles.create') }}">Paletas</a></li>
+            <li><a href="{{ route('paddles.create') }}">Crear Paletas</a></li>
             <li><a href="{{ route('paddles.index') }}">Listar Paletas</a></li>
           </ul>
         </li>
