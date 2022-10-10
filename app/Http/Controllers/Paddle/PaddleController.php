@@ -30,7 +30,7 @@ class PaddleController extends Controller
     public function create($id = null)
     {
         if(isset($id)){
-            $paddle = Paddle::findOrFail($id);
+            $paddle = Paddle::find($id);
             $packages = Package::where('id_paddle',$id)->get();
         }else{
             $paddle = null;
@@ -42,6 +42,7 @@ class PaddleController extends Controller
         $agents = Agent::orderBy('id','desc')->get();
 
         $states = State::orderBy('id','desc')->get();
+
        
         return view('admin.paddles.create',compact('paddle','agencies','agents','states','packages'));
     

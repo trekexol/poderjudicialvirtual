@@ -187,10 +187,10 @@
               <td>{{date_format(date_create($package->arrival_date ?? ''),"d-m-Y") }}</td>
               <td>{{$package->wharehouse_code ?? ''}}</td>
               <td>
-                <a href="{{ route('packages.print',$package->id) }}"  title="Editar"><i class="fa fa-print"></i></a>
+                <a href="{{ route('packages.print',$package->id) }}"  title="Imprimir Etiquetas"><i class="fa fa-print"></i></a>
                 <a href="{{ route('historial_status.viewPackage',$package->id) }}"  title="Ver Historial de Status"><i class="fa fa-question"></i></a>
                 <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#deleteModal" title="Eliminar"><i class="fa fa-trash text-danger"></i></a>  
-                <a href="#" class="delete" data-id-package={{$package->id}} data-toggle="modal" data-target="#showModal" title="Mostrar"><i class="fa fa-trash text-danger"></i></a>  
+                <a href="#"  data-id-package={{$package->id}} data-toggle="modal" data-target="#showModal" title="Mostrar"><i class="fa fa-search"></i></a>  
               </td>
             </tr>
             @endforeach
@@ -263,133 +263,46 @@
       @isset($package)
       <div class="item form-group">
       <div class="col-sm-6">
-        <h3>Número de Paquete: {{ str_pad($package->id ?? 0, 6, "0", STR_PAD_LEFT)}}</h3>
+        <h6><strong>Identificación del paquete:</strong>  {{ str_pad($package->id ?? 0, 6, "0", STR_PAD_LEFT)}}</h6>
       </div>
       </div>
     @endisset
+  
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="tracking">Tracking </label>
-      <div class="col-sm-4">
-        <input type="text" id="tracking" name="tracking" required="required" class="form-control " value="{{ $tracking ?? $package->tracking ?? null }}">
-      </div>
-      <label class="col-form-label col-sm-3 label-align " for="id_agent_shipper">Shipper: </label>
-      <div class="col-sm-3">
-        <select class="select2_group form-control" name="id_agent_shipper" required>
-            @if (isset($package))
-              <option value="{{ $package->id_agent_shipper ?? null }}">{{ $package->shippers['name'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($agents))
-              @foreach ($agents as $agent)
-                <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
+      <label class="col-form-label col-sm-12 label-align-left " for="id_client"><strong>Cliente:</strong> {{ $package->casillero ?? '' }} - {{ $package->firstname ?? '' }} {{ $package->secondname ?? '' }} {{ $package->firstlastname ?? '' }} {{ $package->secondlastname ?? '' }}</label>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control js-example-matcher" data-live-search="true" data-show-subtext="true" name="id_client" required>
-            @if (isset($package))
-              <option value="{{ $package->id_client ?? null }}">{{$package->clients['casillero'] ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($clients)) 
-              @foreach ($clients as $client)
-                <option value="{{ $client->id }}">{{$client->casillero ?? ''}} - {{ $client->firstname ?? '' }} {{ $client->firstlastname ?? '' }}</option>
-              @endforeach
-            @endif
-           
-          </select>
-      </div>
+      <label class="col-form-label col-sm-12 label-align-left " for="id_direccion"><strong>Dirección:</strong>  {{ $package->direction ?? '' }}, {{ $package->street_received ?? '' }}, {{ $package->urbanization_received ?? '' }} </label>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="first-name">Agente Vendedor:</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control" name="id_agent_vendor" required>
-            @if (isset($package))
-              <option value="{{ $package->id_agent_vendor ?? null }}">{{ $package->vendors['name'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($agents))
-              @foreach ($agents as $agent)
-                <option value="{{ $agent->id }}">{{ $agent->name ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
-    
-    </div>
- 
-    <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align">Fecha Llegada:
-      </label>
-      <div class="col-sm-4">
-        <input id="arrival_date" name="arrival_date" class="date-picker form-control"  required="required" type="date" value="{{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}">
-      </div>
-      <label class="col-form-label col-sm-3 label-align">Hora Llegada:
-      </label>
-      <div class="col-sm-3 ">
-        @if (isset($package->arrival_date))
-          <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  value="{{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}">        
-        @else
-          <input id="check_in" name="check_in" class="date-picker form-control"  type="time"  >                   
-        @endif
-        </div>
+      <label class="col-form-label col-sm-12 label-align-left " for="id_direccion"><strong>Agencia:</strong>  {{ $package->name_agency_client ?? 'Recibe en su Dirección' }}</label>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="first-name">Ubicación Oficina:</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control" name="id_agency_office_location" required>
-            @if (isset($package))
-              <option value="{{ $package->id_agency_office_location ?? null }}">{{ $package->office_locations['name'] ?? null }} - {{ $package->office_locations['direction'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($agencies))
-              @foreach ($agencies as $agency)
-                <option value="{{ $agency->id }}">{{ $agency->name ?? '' }} - {{ $agency->direction ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
-      <label class="col-form-label col-sm-3 label-align " for="id_wharehouse">Almacen:</label>
-      <div class="col-sm-3">
-          <select class="select2_group form-control" name="id_wharehouse" required>
-            @if (isset($package))
-              <option value="{{ $package->id_wharehouse ?? null }}">{{ $package->wharehouses['name'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($wharehouses))
-              @foreach ($wharehouses as $wharehouse)
-                <option value="{{ $wharehouse->id }}">{{ $wharehouse->name ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
+      <label class="col-form-label col-sm-12 label-align-left" for="first-name"><strong>Agente Vendedor:</strong> {{ $package->agent_name ?? '' }}</label>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="content">Contenido:</label>
+      <label class="col-form-label col-sm-12 label-align-left" for="first-name"><strong>Vendedor:</strong> {{ $package->agent_shipper_name ?? '' }}</label>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-6 label-align-left">Fecha Llegada: {{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}</label>
+      <label class="col-form-label col-sm-6 label-align-left">Hora Llegada: {{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}</label>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-6 label-align-left " for="first-name">Ubicación Oficina: {{ $package->agency_name ?? ''}}</label>
+      <label class="col-form-label col-sm-6 label-align-left " for="id_wharehouse">Almacen: {{ $package->wharehouses_name ?? '' }}</label>
+    </div>
+    <div class="item form-group">
+      <label class="col-form-label col-sm-1 label-align-left " for="content">Contenido:</label>
       <div class="col-sm-4">
         <input type="text" id="content" name="content" required="required" class="form-control " value="{{ $package->content ?? null }}">
       </div>
-      <label class="col-form-label col-sm-3 label-align " for="value">Valor:</label>
+      <label class="col-form-label col-sm-3 label-align-left " for="value">Valor:</label>
       <div class="col-sm-3">
         <input type="text" id="value" name="value" required="required" class="form-control" value="{{ number_format($package->value ?? 0, 2, ',', '.') }}">
       </div>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="id_origin_country">País de Origen:</label>
+      <label class="col-form-label col-sm-1 label-align-left " for="id_origin_country">País de Origen:</label>
       <div class="col-sm-4">
           <select class="select2_group form-control" name="id_origin_country" required>
             @if (isset($package))
@@ -405,7 +318,7 @@
             @endif
           </select>
       </div>
-      <label class="col-form-label col-sm-3 label-align " for="id_destination_country">País de Destino:</label>
+      <label class="col-form-label col-sm-3 label-align-left " for="id_destination_country">País de Destino:</label>
       <div class="col-sm-3">
           <select class="select2_group form-control" name="id_destination_country" required>
             @if (isset($package))
@@ -423,7 +336,7 @@
       </div>
     </div>
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="id_delivery_company">Entregado por:</label>
+      <label class="col-form-label col-sm-1 label-align-left " for="id_delivery_company">Entregado por:</label>
       <div class="col-sm-4">
           <select class="select2_group form-control" name="id_delivery_company" required>
             @if (isset($package))
@@ -439,14 +352,14 @@
             @endif
           </select>
       </div>
-      <label class="col-form-label col-sm-3 label-align " for="number_transport_guide">N° Guía Transporte:</label>
+      <label class="col-form-label col-sm-3 label-align-left " for="number_transport_guide">N° Guía Transporte:</label>
       <div class="col-sm-3">
         <input type="text" id="number_transport_guide" name="number_transport_guide"  class="form-control" value="{{ $package->number_transport_guide ?? null }}">
       </div>
     </div>
 
     <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align " for="service_type">Tipo Servicio:</label>
+      <label class="col-form-label col-sm-1 label-align-left " for="service_type">Tipo Servicio:</label>
       <div class="col-sm-4">
           <select class="select2_group form-control" name="service_type" required>
             @if (isset($package))
@@ -459,7 +372,7 @@
             <option value="Collected">Collected</option>
           </select>
       </div>
-      <label class="col-form-label col-sm-3 label-align " for="instruction">Instrucciones:</label>
+      <label class="col-form-label col-sm-3 label-align-left " for="instruction">Instrucciones:</label>
       <div class="col-sm-2">
           <select class="select2_group form-control" name="instruction" required>
             @if (isset($package))
