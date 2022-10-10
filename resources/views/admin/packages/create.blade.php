@@ -88,7 +88,11 @@
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="id_client">Cliente</label>
                 <div class="col-sm-4">
-                    <select class="select2_group form-control js-example-matcher" data-live-search="true" data-show-subtext="true" name="id_client" required>
+             
+                  <input type="text" id="client_casillero" onblur="getClient();" name="client_casillero" required="required" class="form-control " value="{{$package->clients['casillero'] ?? $client->casillero ?? ''}}">
+             
+                  
+                  <!--    <select class="select2_group form-control js-example-matcher" data-live-search="true" data-show-subtext="true" name="id_client" required>
                       @if (isset($package))
                         <option value="{{ $package->id_client ?? null }}">{{$package->clients['casillero'] ?? ''}} - {{ $package->clients['firstname'] ?? null }} {{ $package->clients['firstlastname'] ?? null }}</option>
                         <option value="">---------------------</option>
@@ -101,8 +105,12 @@
                         @endforeach
                       @endif
                      
-                    </select>
+                    </select>-->
                 </div>
+                
+                  <a href="{{ route('clients.select') }}"  title="Buscar" ><i class="fa fa-search"></i></a>  
+               
+                <h5 id="label_client" class="col-form-label col-sm-3 justify-content-start" for="id_client">{{ $package->clients['firstname'] ?? $client->firstname ??  '' }} {{ $package->clients['firstlastname'] ?? $client->firstlastname ?? '' }}</h5>
               </div>
               <div class="item form-group">
                 <label class="col-form-label col-sm-1 label-align " for="first-name">Agente Vendedor:</label>
@@ -701,6 +709,41 @@
     }
 
    
+    
+    function getClient(){
+    
+        var client_casillero    = document.getElementById("client_casillero").value;
+        
+        $.ajax({
+            url:"{{ route('clients.search','') }}" + '/' + client_casillero,
+            beforSend:()=>{
+                alert('consultando datos');
+            },
+            success:(response)=>{
+               
+                // console.clear();
+                if(response.length > 0){
+                    response.forEach((item, index, object)=>{
+                        let {id,firstname,firstlastname} = item;
+                       
+                        if(firstlastname == null){
+                          document.getElementById("label_client").innerHTML = firstname; 
+                        }else{
+                          document.getElementById("label_client").innerHTML = firstname+" "+firstlastname; 
+                        }
+                        
+
+                    });
+                }
+                
+                
+            
+            },
+            error:(xhr)=>{
+              alert("No se Encontro el Cliente");
+            }
+        })
+    }
 
     $("#formTypeofGoods").hide();
 

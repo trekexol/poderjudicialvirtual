@@ -52,6 +52,8 @@ return new class extends Migration
             $table->boolean('document')->default(false);
             $table->boolean('fragile')->default(false);
 
+            $table->decimal('total_usd',64,2)->nullable();
+
             $table->string('status',20)->nullable();
             
            

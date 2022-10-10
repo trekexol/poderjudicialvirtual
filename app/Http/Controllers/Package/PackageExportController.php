@@ -36,25 +36,25 @@ class PackageExportController extends Controller
     {
          
         $packages = Package::leftJoin('package_lumps','package_lumps.id_package','packages.id')
+        ->leftJoin('type_of_packagings','type_of_packagings.id','package_lumps.id_type_of_packaging')
         ->leftJoin('clients','clients.id','packages.id_client')
         ->leftJoin('agencies','agencies.id','packages.id_agency_office_location')
+        ->leftJoin('agencies as ag','ag.id','packages.id_agency_destination')
+        ->leftJoin('agents','agents.id','packages.id_agent_shipper')
+        ->leftJoin('client_recipients','client_recipients.id','packages.id_client_recipient')
         ->where('id_tula',null)
         ->where('id_paddle',null)
-        ->select('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-        'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-        'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
-        ,'packages.date_payment','packages.instruction','agencies.name',
-        DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'))
-        ->groupBy('packages.id','packages.id_agent_shipper','packages.id_agent_vendor',
-                'packages.tracking','packages.status','clients.casillero','clients.firstname','clients.firstlastname','clients.type_cedula','clients.id_agency','clients.cedula',
-                'packages.description','packages.starting_weight','packages.final_weight','packages.volume','packages.cubic_foot'
-                ,'packages.date_payment','packages.instruction','agencies.name')
+        ->select('packages.id','agents.name as agent_name','agencies.name','ag.name as ag_name','packages.instruction',
+        'packages.arrival_date','client_recipients.name','packages.description','packages.total_usd',
+        DB::raw('COUNT(package_lumps.id_package) As count_package_lumps'),'type_of_packagings.description')
+        ->groupBy('packages.id','agents.name','agencies.name','ag.name','packages.instruction',
+        'packages.arrival_date','client_recipients.name','packages.description','packages.total_usd','type_of_packagings.description')
         ->orderBy('packages.id','desc')
         ->get();
 
          $export = new ArrayExport([
-             ['PAQUETE','AGENTE','OFICINA','ORIGEN',
-             'OFICINA','RECIBE','ENVIO','FECHA','DESTINATARIO','DESCRIPCIÓN'
+             ['PAQUETE','AGENTE','OFICINA_ORIGEN',
+             'OFICINA_RECIBE','ENVIO','FECHA','DESTINATARIO','DESCRIPCIÓN'
              ,'USD','PZS.','UNID.'
              ,'PESO.','PC','M3','DIRECCIÓN','TELEF','SHIPPER','PO'
              ,'INV','PAGAR','TRACKING'],		

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class ClientController extends Controller
 {
@@ -127,5 +128,27 @@ class ClientController extends Controller
     
         return redirect('/login')->withSuccess('Se ha registrado exitosamente, puede iniciar sesion con su correo y clave!');
        
+    }
+
+    public function select()
+    {
+        $clients = Client::all();
+
+        return view('admin.packages.selects.select_client',compact('clients'));
+    
+    }
+
+    public function search(Request $request, $casillero = null){
+        //validar si la peticion es asincrona
+        if($request->ajax()){
+            try{
+            
+                $client = Client::select('id','firstname','firstlastname')->where('casillero',$casillero)->get();
+                return response()->json($client,200);
+            }catch(Throwable $th){
+                return response()->json(false,500);
+            }
+        }
+        
     }
 }

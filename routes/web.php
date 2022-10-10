@@ -59,6 +59,9 @@ Route::group(["prefix"=>'clients'],function(){
     Route::get('/register', [ClientController::class, 'register'])->name('clients.create');
     Route::post('/store', [ClientController::class, 'store'])->name('clients.store');
     Route::get('/consult/{id_client}', [ClientController::class, 'consult'])->name('clients.consult');
+    Route::get('search/{casillero}', [ClientController::class, 'search'])->name('clients.search');
+
+    Route::get('select', [ClientController::class, 'select'])->name('clients.select');
 });
 
 Route::group(["prefix"=>'countries'],function(){

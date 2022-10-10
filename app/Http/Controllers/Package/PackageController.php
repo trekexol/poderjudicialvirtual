@@ -101,9 +101,10 @@ class PackageController extends Controller
 
         $clients = Client::orderBy('firstname','asc')->get();
 
-        
+        $date = Carbon::now();
+        $datenow = $date->format('Y-m-d'); 
        
-        return view('admin.packages.create',compact('agencies','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+        return view('admin.packages.create',compact('datenow','agencies','package_type_of_goods','package_lumps','package','clients','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }
 
@@ -144,9 +145,10 @@ class PackageController extends Controller
 
         $type_of_packagings = TypeOfPackaging::orderBy('description','asc')->get();
 
+        $date = Carbon::now();
+        $datenow = $date->format('Y-m-d'); 
        
-       
-        return view('admin.packages.create',compact('agencies','package_type_of_goods','package_lumps','package','client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
+        return view('admin.packages.create',compact('datenow','agencies','package_type_of_goods','package_lumps','package','client','agents','countries','wharehouses','delivery_companies','type_of_goods','type_of_packagings'));
     
     }
 
@@ -207,9 +209,19 @@ class PackageController extends Controller
             }
         }
 
+        if(isset($request->client_casillero)){
+            $client = Client::where('casillero',$request->client_casillero)->first();
+            if(empty($client)){
+                return redirect('/packages')->withDanger('El casillero del cliente no existe en la base de datos!');
+            }
+        }else{
+            return redirect('/packages')->withDanger('El casillero del cliente no existe en la base de datos!');
+        }
+        
+
         $package = new Package();
 
-        $package->id_client = $request->id_client;
+        $package->id_client = $client->id;
         $package->tracking = $request->tracking;
         $package->id_agent_shipper = $request->id_agent_shipper;
         $package->id_agent_vendor = $request->id_agent_vendor;
@@ -307,7 +319,16 @@ class PackageController extends Controller
             $package = Package::findOrFail($id);
         }
 
-        $package->id_client = $request->id_client;
+        if(isset($request->client_casillero)){
+            $client = Client::where('casillero',$request->client_casillero)->first();
+            if(empty($client)){
+                return redirect('/packages')->withDanger('El casillero del cliente no existe en la base de datos!');
+            }
+        }else{
+            return redirect('/packages')->withDanger('El casillero del cliente no existe en la base de datos!');
+        }
+
+        $package->id_client = $client->id;
         $package->tracking = $request->tracking;
         $package->id_agent_shipper = $request->id_agent_shipper;
         $package->id_agent_vendor = $request->id_agent_vendor;
