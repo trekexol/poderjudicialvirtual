@@ -261,169 +261,107 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       @isset($package)
-      <div class="item form-group">
-      <div class="col-sm-6">
+      <br>
+      <div class="row">
+      <div class="offset-sm-1 col-sm-6">
         <h6><strong>Identificación del paquete:</strong>  {{ str_pad($package->id ?? 0, 6, "0", STR_PAD_LEFT)}}</h6>
       </div>
       </div>
     @endisset
   
-    <div class="item form-group">
-      <label class="col-form-label col-sm-12 label-align-left " for="id_client"><strong>Cliente:</strong> {{ $package->casillero ?? '' }} - {{ $package->firstname ?? '' }} {{ $package->secondname ?? '' }} {{ $package->firstlastname ?? '' }} {{ $package->secondlastname ?? '' }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-11 label-align-left " style="font-size: x-small" for="id_client"><strong>Cliente:</strong> {{ $package->casillero ?? '' }} - {{ $package->firstname ?? '' }} {{ $package->secondname ?? '' }} {{ $package->firstlastname ?? '' }} {{ $package->secondlastname ?? '' }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-12 label-align-left " for="id_direccion"><strong>Dirección:</strong>  {{ $package->direction ?? '' }}, {{ $package->street_received ?? '' }}, {{ $package->urbanization_received ?? '' }} </label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-11 label-align-left"  style="font-size: x-small" for="id_direccion"><strong>Dirección:</strong>  {{ $package->direction ?? '' }}, {{ $package->street_received ?? '' }}, {{ $package->urbanization_received ?? '' }} </label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-12 label-align-left " for="id_direccion"><strong>Agencia:</strong>  {{ $package->name_agency_client ?? 'Recibe en su Dirección' }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-11 label-align-left"  style="font-size: x-small" for="id_direccion"><strong>Agencia:</strong>  {{ $package->name_agency_client ?? 'Recibe en su Dirección' }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-12 label-align-left" for="first-name"><strong>Agente Vendedor:</strong> {{ $package->agent_name ?? '' }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-11 label-align-left" style="font-size: x-small" for="first-name"><strong>Agente Vendedor:</strong> {{ $package->agent_name ?? '' }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-12 label-align-left" for="first-name"><strong>Vendedor:</strong> {{ $package->agent_shipper_name ?? '' }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-11 label-align-left" style="font-size: x-small" for="first-name"><strong>Vendedor:</strong> {{ $package->agent_shipper_name ?? '' }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-6 label-align-left">Fecha Llegada: {{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}</label>
-      <label class="col-form-label col-sm-6 label-align-left">Hora Llegada: {{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left" style="font-size: x-small"> <strong>Fecha Llegada:</strong> {{ date_format(date_create($package->arrival_date ?? $datenow ??null),"Y-m-d") }}</label>
+      <label class="col-form-label col-sm-5 label-align-left" style="font-size: x-small"> <strong>Hora Llegada:</strong> {{ date_format(date_create($package->arrival_date ?? $datenow  ?? null),"H:i") }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-6 label-align-left " for="first-name">Ubicación Oficina: {{ $package->agency_name ?? ''}}</label>
-      <label class="col-form-label col-sm-6 label-align-left " for="id_wharehouse">Almacen: {{ $package->wharehouses_name ?? '' }}</label>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="first-name"><strong>Ubicación Oficina:</strong> {{ $package->agency_name ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="id_wharehouse"><strong>Almacen:</strong> {{ $package->wharehouse_name ?? '' }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align-left " for="content">Contenido:</label>
-      <div class="col-sm-4">
-        <input type="text" id="content" name="content" required="required" class="form-control " value="{{ $package->content ?? null }}">
-      </div>
-      <label class="col-form-label col-sm-3 label-align-left " for="value">Valor:</label>
-      <div class="col-sm-3">
-        <input type="text" id="value" name="value" required="required" class="form-control" value="{{ number_format($package->value ?? 0, 2, ',', '.') }}">
-      </div>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="content"><strong>Contenido:</strong> {{$package->content ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="value"><strong>Valor:</strong> {{ number_format($package->value ?? 0, 2, ',', '.') }}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align-left " for="id_origin_country">País de Origen:</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control" name="id_origin_country" required>
-            @if (isset($package))
-              <option value="{{ $package->id_origin_country ?? null }}">{{ $package->origin_countries['name'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($countries))
-              @foreach ($countries as $country)
-                <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
-      <label class="col-form-label col-sm-3 label-align-left " for="id_destination_country">País de Destino:</label>
-      <div class="col-sm-3">
-          <select class="select2_group form-control" name="id_destination_country" required>
-            @if (isset($package))
-              <option value="{{ $package->id_destination_country ?? null }}">{{ $package->destination_countries['name'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($countries))
-              @foreach ($countries as $country)
-                <option value="{{ $country->id }}">{{ $country->name ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="id_origin_country"><strong>Origen:</strong> {{$package->country_name ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="id_destination_country"><strong>Destino:</strong> {{$package->destination_country_name ?? ''}}</label>
     </div>
-    <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align-left " for="id_delivery_company">Entregado por:</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control" name="id_delivery_company" required>
-            @if (isset($package))
-              <option value="{{ $package->id_delivery_company ?? null }}">{{ $package->delivery_companies['description'] ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            @if (isset($delivery_companies))
-              @foreach ($delivery_companies as $delivery_company)
-                <option value="{{ $delivery_company->id }}">{{ $delivery_company->description ?? '' }}</option>
-              @endforeach
-            @endif
-          </select>
-      </div>
-      <label class="col-form-label col-sm-3 label-align-left " for="number_transport_guide">N° Guía Transporte:</label>
-      <div class="col-sm-3">
-        <input type="text" id="number_transport_guide" name="number_transport_guide"  class="form-control" value="{{ $package->number_transport_guide ?? null }}">
-      </div>
+    <div class="row"> 
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="id_delivery_company"><strong>Tracking:</strong>{{$package->tracking ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="id_delivery_company"><strong>Entregado por:</strong>{{$package->delivery_company_name ?? ''}}</label>
+    </div>
+    <div class="row"> 
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="service_type"><strong>Tipo Servicio:</strong> {{$package->service_type ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="instruction"><strong>Instrucciones:</strong> {{ $package->instruction ?? '' }} - {{ $package->instruction_type ?? '' }}</label>
     </div>
 
-    <div class="item form-group">
-      <label class="col-form-label col-sm-1 label-align-left " for="service_type">Tipo Servicio:</label>
-      <div class="col-sm-4">
-          <select class="select2_group form-control" name="service_type" required>
-            @if (isset($package))
-              <option value="{{ $package->service_type ?? null }}">{{ $package->service_type ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            <option value="Pre-Pagado">Pre-Pagado</option>
-            <option value="Collected">Collected</option>
-          </select>
-      </div>
-      <label class="col-form-label col-sm-3 label-align-left " for="instruction">Instrucciones:</label>
-      <div class="col-sm-2">
-          <select class="select2_group form-control" name="instruction" required>
-            @if (isset($package))
-              <option value="{{ $package->instruction ?? null }}">{{ $package->instruction ?? null }}</option>
-              <option value="">---------------------</option>
-            @else
-              <option value="">Seleccione una Opción</option>
-            @endif
-            <option value="Aéreo">Aéreo</option>
-            <option value="Marítimo">Marítimo</option>
-            <option value="Terrestre">Terrestre</option>
-            <option value="Marítimo Express">Marítimo Express</option>
-          </select>
-      </div>
-      <div class="col-sm-2">
-        <select class="select2_group form-control" name="instruction_type" required>
-              @if (isset($package))
-                <option value="{{ $package->instruction_type ?? null }}">{{ $package->instruction_type ?? null }}</option>
-                <option value="">---------------------</option>
-              @else
-                <option value="">Seleccione una Opción</option>
-              @endif
-            <option value="Directo">Directo</option>
-            <option value="Consolidado">Consolidado</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="item form-group">
-      <label class="col-form-label col-sm-2 label-align " for="description">Descrip/Coment:</label>
-      <div class="col-sm-9">
-        <input type="text" id="description" name="description" required="required" class="form-control" value="{{ $package->description ?? null }}">
-      </div>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-6 label-align-left " style="font-size: x-small" for="description"><strong>Descrip/Coment:</strong> {{$package->description ?? ''}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" for="description"><strong>Estado:</strong> {{$package->status ?? ''}}</label>
+     
     </div>
     <br>
     <div class="form-group row">
-      <div class="col-sm-2 offset-sm-1">
-        <input type="checkbox" name="checks[]"  id="myCheck"  value="high_value" onclick="myFunction();" >  Alto Valor: 
+      <div class="offset-sm-1 col-sm-2">
+        @if ($package->dangerous_goods == true)
+          <input type="checkbox" style="font-size: x-small" disabled value="dangerous_goods" checked data-parsley-mincheck="2" /> Merc. Peligrosa:
+        @else
+          <input type="checkbox" style="font-size: x-small" disabled value="dangerous_goods" data-parsley-mincheck="2" /> Merc. Peligrosa:
+        @endif
+      </div> 
+      <div class="col-sm-1">
+        @if ($package->sed == true)
+          <input type="checkbox" style="font-size: x-small" disabled value="sed" checked data-parsley-mincheck="2" /> SED:
+        @else
+          <input type="checkbox" style="font-size: x-small" disabled value="sed" data-parsley-mincheck="2" /> SED:
+        @endif
       </div> 
       <div class="col-sm-2">
-        <input type="checkbox" name="checks[]" id="dangerous_goods" value="dangerous_goods" data-parsley-mincheck="2" /> Merc. Peligrosa: 
+        @if ($package->document == true)
+          <input type="checkbox" style="font-size: x-small"disabled  value="document" checked data-parsley-mincheck="2" /> Documento:
+        @else
+          <input type="checkbox" style="font-size: x-small" disabled value="document" data-parsley-mincheck="2" /> Documento:
+        @endif
       </div> 
       <div class="col-sm-2">
-        <input type="checkbox" name="checks[]" id="sed" value="sed" data-parsley-mincheck="2" /> SED: 
+        @if ($package->fragile == true)
+          <input type="checkbox" style="font-size: x-small" disabled value="fragile" checked data-parsley-mincheck="2" /> Fragil:
+        @else
+          <input type="checkbox" style="font-size: x-small" disabled value="fragile" data-parsley-mincheck="2" /> Fragil:
+        @endif
       </div> 
-      <div class="col-sm-2">
-        <input type="checkbox" name="checks[]" id="document" value="document" data-parsley-mincheck="2" /> Documento: 
-      </div> 
-      <div class="col-sm-2">
-        <input type="checkbox" name="checks[]" id="fragile" value="fragile" data-parsley-mincheck="2" /> Fragil: 
-      </div> 
+      <label class="col-form-label col-sm-4 label-align-left " style="font-size: x-small" for="number_transport_guide"><strong>N° Guía Transporte:</strong> {{$package->number_transport_guide ?? ''}}</label>
+    </div>
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-2 label-align-left " style="font-size: x-small" ><strong>Peso inicial:</strong> {{$package->starting_weight ?? 0}}</label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Peso Final:</strong> {{$package->final_weight ?? 0}}</label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Volumen:</strong> {{$package->volume ?? 0}}</label>
+      <label class="col-form-label col-sm-5 label-align-left " style="font-size: x-small" ><strong>Dimensiones:</strong> {{$package->length_weight ?? 0}} x {{$package->width_weight ?? 0}} x {{$package->high_weight ?? 0}}</label>
+    </div>
+    
+    <div class="row">
+      <label class="col-form-label offset-sm-1 col-sm-2 label-align-left " style="font-size: x-small" ><strong>Guía:</strong> {{$package->guide ?? ''}}</label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Tula:</strong> {{$package->id_tula ?? ''}}</label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Paleta:</strong> {{$package->id_paddle ?? ''}}</label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Ruta:</strong> </label>
+      <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Consolidado:</strong> </label>
+    </div>
+
+    <div class="row">
     </div>
 
     </div>
