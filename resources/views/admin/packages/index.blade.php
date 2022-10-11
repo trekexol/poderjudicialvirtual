@@ -361,7 +361,37 @@
       <label class="col-form-label col-sm-2 label-align-left " style="font-size: x-small" ><strong>Consolidado:</strong> </label>
     </div>
 
+    <table style="width: 50%;">
+      <tr>
+        <th style="text-align: center; font-weight: bold; width: 79%; border-bottom-color: white;">CONCEPTO	</th>
+        <th style="text-align: center; font-weight: bold; width: 21%;">MONTO</th>
+      </tr> 
+      <tr>
+        <th style="text-align: center; font-weight: bold; width: 79%; border-bottom-color: white;">ENVIO INTERNACIONAL</th>
+        <th style="text-align: center; font-weight: normal; width: 21%;"></th>
+      </tr> 
+      <tr>
+        <th style="text-align: center; font-weight: bold; width: 21%;">TARIFA NACIONAL</th>
+        <th style="text-align: center; font-weight: normal; width: 79%; border-bottom-color: white;"></th>
+      </tr> 
+      <tr>
+        <th style="text-align: center; font-weight: bold; width: 21%;">TOTAL CARGOS..</th>
+        <th style="text-align: center; font-weight: normal; width: 79%; border-bottom-color: white;"></th>
+      </tr> 
+
+
+    </table>
+    <br>
     <div class="row">
+      <div class="col-sm-2 offset-sm-1">
+        <a href="{{ route('packages.create',$package->id) }}" type="submit" class="btn btn-info offset-sm-1" >Mas info</a>
+      </div>
+      <div class="col-sm-2">
+        <a href="{{ route('packages.create',$package->id) }}" type="submit" class="btn btn-success offset-sm-1" >Editar</a>
+      </div>
+      <div class="col-sm-1">
+        <a href="{{ route('packages.create',$package->id) }}" type="submit" class="btn btn-danger offset-sm-1" >Regresar</a>
+      </div>
     </div>
 
     </div>
