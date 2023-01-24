@@ -99,9 +99,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-3">
-      <a href="{{ route('whatsapps.index') }}" type="button" class="btn btn-round btn-primary">Enviar Whatsapp</a>
-    </div>
+    
   </div>
 
 @endsection

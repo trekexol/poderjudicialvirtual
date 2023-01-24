@@ -83,7 +83,7 @@
 								</a>
 							</div>
 							<div class="col-sm-6">
-								<a class="txt2" href="{{ route('clients.create') }}">
+								<a class="txt2" href="{{ route('clientes.create') }}">
 									Registrate
 									<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 								</a>

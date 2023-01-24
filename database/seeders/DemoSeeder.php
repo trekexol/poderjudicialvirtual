@@ -17,170 +17,75 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
-        DB::/*connection('logins')->*/table('users')->insert([
+        
+        DB::table('users')->insert([
             'name' => 'Carlos',
-            'email' => 'cefreitas.16@gmail.com',
+            'email' => 'cefreitas.18@gmail.com',
             'password' => Hash::make('car123los'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-        DB::/*connection('logins')->*/table('agents')->insert([
-            'code' => '1',
-            'name' => 'Carlos',
-            'type' => 'Transportista',
-            'direction' => 'Ejemplo',
-            'phone' => '0424-1514152',
-            'email' => 'cefreitas.16@gmail.com',
-            'contact_person' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('agents')->insert([
-            'code' => '1',
-            'name' => 'Carlos Cargo',
-            'type' => 'Cargo',
-            'direction' => 'Ejemplo',
-            'phone' => '0424-1514152',
-            'email' => 'cefreitas.16@gmail.com',
-            'contact_person' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('agents')->insert([
-            'code' => '1',
-            'name' => 'Carlos Emisor',
-            'type' => 'Emisor',
-            'direction' => 'Ejemplo',
-            'phone' => '0424-1514152',
-            'email' => 'cefreitas.16@gmail.com',
-            'contact_person' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('agents')->insert([
-            'code' => '1',
-            'name' => 'Carlos Consignatario',
-            'type' => 'Consignatario',
-            'direction' => 'Ejemplo',
-            'phone' => '0424-1514152',
-            'email' => 'cefreitas.16@gmail.com',
-            'contact_person' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('airlines')->insert([
-            'code' => '1',
-            'name' => 'Carlos',
-            'type' => 'Peso Cargable',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('carriers')->insert([
-            'code' => '1',
-            'name' => 'Carlos',
-            'type' => 'Peso Cargable',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('countries')->insert([
-            'abbreviation' => 'VE',
-            'name' => 'Venezuela',
-            'code_phone' => '+58',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('delivery_companies')->insert([
-            'code' => '1',
-            'description' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('delivery_companies')->insert([
-            'code' => '1',
-            'description' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('states')->insert([
-            'id_country' => '1',
-            'name' => 'Caracas',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('type_of_goods')->insert([
-            'code' => '1',
-            'description' => 'Ejemplo',
-            'tariff_rate' => 10,
-            'tax_percentage' => 10,
-            'additional_charge' => 10,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('type_of_packagings')->insert([
-            'code' => '1',
-            'description' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('agencies')->insert([
-            'id_state' => 1,
-            'code' => '1',
-            'name' => 'Ejemplo',
-            'type' => 'Comercial',
-            'direction' => 'Ejemplo',
-            'phone' => '0424-1514152',
-            'contact_person' => 'Ejemplo',
-            'rate' => 10,
-            'virtual_payment' => 'yes',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('wharehouses')->insert([
-            'id_agency' => 1,
-            'code' => '1',
-            'name' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('making_codes')->insert([
-            'id_country' => 1,
-            'code' => '0424',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('making_codes')->insert([
-            'id_country' => 1,
-            'code' => '0414',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::/*connection('logins')->*/table('clients')->insert([
-            'id_country' => 1,
-            'id_state_received' => 1,
-            'id_agency' => 1,
-            'id_code_room' => 1,
-            'id_code_work' => 1,
-            'id_code_mobile' => 1,
-            'id_code_fax' => 1,
-            'type_cedula' => 'V-',
-            'cedula' => '27.661.899',
-            'firstname' => 'Ejemplo',
-            'firstlastname' => 'Ejemplo',
-            'secondname' => 'Ejemplo',
-            'secondlastname' => 'Ejemplo',
-            'direction' => 'Ejemplo',
-            'street_received' => 'Ejemplo',
-            'urbanization_received' => 'Ejemplo',
-            'type_direction_received' => 'Ejemplo',
-            'phone_room' => '0424-1514152',
-            'phone_work' => '0424-1514152',
-            'phone_mobile' => '0424-1514152',
-            'phone_fax' => '0424-1514152',
-            'company' => 'Ejemplo',
-            'rif' => 'Ejemplo',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
         
+        DB::table('clientes')->insert([
+            'primer_nombre' => 'Carlos',
+            'segundo_nombre' => 'Eduardo',
+            'primer_apellido' => 'Freitas',
+            'segundo_apellido' => 'Vicente',
+            'tipo_documento' => 'E-',
+            'documento_identidad' => '84.407.489',
+            'direccion' => 'Plaza',
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Carlos Cliente',
+            'email' => 'cefreitas.18@gmail.com',
+            'id_client' => 1,
+            'password' => Hash::make('car123los'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('productos')->insert([
+            'nombre' => 'Producto 1',
+            'precio' => 123.45,
+            'impuesto' => 5,
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('productos')->insert([
+            'nombre' => 'Producto 2',
+            'precio' => 45.65,
+            'impuesto' => 15,
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('productos')->insert([
+            'nombre' => 'Producto 3',
+            'precio' => 39.73,
+            'impuesto' => 12,
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('productos')->insert([
+            'nombre' => 'Producto 4',
+            'precio' => 250.00,
+            'impuesto' => 8,
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('productos')->insert([
+            'nombre' => 'Producto 5',
+            'precio' => 59.35,
+            'impuesto' => 10,
+            'estado' => 'Activo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+      
     }
 }

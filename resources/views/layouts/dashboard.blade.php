@@ -34,7 +34,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{ route('clients.create') }}">Registro para Clientes</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{ route('clientes.create') }}">Registro para Clientes</a></li>
                     </ul>
                     <a class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" href="{{ route('login')}}">
                         <span class="d-flex align-items-center">
